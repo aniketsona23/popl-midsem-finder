@@ -8,6 +8,8 @@ An offline search tool for the **Principles of Programming Languages** mid-sem (
 
 It works offline. Keep the folders as they are: the page images, fonts and PDF links are found by relative path.
 
+**On Windows,** if `git clone` says *Filename too long*, clone into a short folder such as `C:\popl`, or run `git config --global core.longpaths true` first. (You can also use the green **Code → Download ZIP** button.)
+
 ## What you get
 - **Search box** — type words from the question (typos are fine). Results are grouped: *Start here* (a topic with a plain explanation and the short answer to write), *the professor's slides*, *past papers and answer keys*.
 - **Topic pages** — "In plain words", "Short answer — what to write" (every line names its source and links to the page), "Same idea, different words" (the slides and the exam word things differently), and the full cheat sheet.
