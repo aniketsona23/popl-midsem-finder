@@ -1,0 +1,68 @@
+# source: _kb/topics/02-binding-times-and-names.md
+# Binding times and names
+
+## In plain words
+
+"Binding" means deciding what a name stands for or where it lives. This decision can be made at different moments: when the program is compiled, when it is linked, when it is loaded, when a function is called, or while it runs. Exam questions ask you to name the moment for each name in a program.
+
+**Example.** In `int main() { int x = 5; }`: that x is an int is decided at compile time. The memory for x is created every time main is called (this is "procedure activation time"). The value 5 is stored there at run time.
+
+
+## Short answer
+
+* The slide lists five moments: compile, linking, loading, procedure activation, run. The 2024 key also says "preprocessing time" for #define macros. *[slides p97; 2024 key A5]*
+* Type and member names: compile time. Global and function names shared between modules: linking time. *[2024 key A5]*
+* Parameters, locals and this: procedure-activation time. *[2024 key A5]*
+* In the assembly only global names survive; the rest become offsets. *[slides p125; 2024 key A5]*
+
+
+Slides: PDF p88 "Times of Linguia Programmia" (compile → link → load → execute), **p97 "The Lifetime of a Program"** (the five moments, definitions below), p99 (six features of a subroutine), p125 (lessons: which names survive in the symbol table).
+Past question: **2024 Mid-Sem Q5** (classify every identifier + which appear in assembly).
+
+## Same idea, different words
+
+The slides never define “binding time”; the exam question uses that word. In the slides the same idea is called “the times of a program” (pages 88 and 97): compile time, linking time, loading time, procedure activation time and run time. The exam asks, for each name, which of those moments fixes it.
+
+## The professor's times (slide p97 lists five; the 2024 key adds preprocessing for macros)
+
+| Time | Meaning (slide wording, shortened) | Typical things bound |
+|---|---|---|
+| **Preprocessing** (2024 key uses this for `#define`) | macro text substitution before compilation | macro names (`ClassSize`) |
+| **Compile time** | "interpreting and translating the intention of the programmer as expressed in the text" | type names, struct member names (→ offsets/sizes), global/static variable *declarations*, function prototypes, local-name → frame-offset mapping |
+| **Linking time** | "combining and composing the translated programmer's text with the standard environment and support" | **global function names and global variables across modules** (`Subroutine1`, `f`, `g`, `printf`) → addresses/relocations |
+| **Loading time** | "preparing execution, including the dynamic part of the linking" | absolute addresses, shared-library (dynamic) linking |
+| **Procedure activation time** | "each time a piece of code that can be executed recurrently and composed as a unit is to be executed from a specific entry point" (= each call) | **formal parameters, local (automatic) variables, `this`**, temporaries → real stack storage per call; sizes of by-value args come from the *declaration visible at the call* |
+| **Run time** | "each atomic imperative piece of code at the machine level" | values, heap addresses (`malloc`), array contents, which function pointer is called |
+
+Rule of thumb: *names of types & members* → compile time; *names of globals/functions shared across modules* → linking time; *parameters & locals* → procedure activation time; *values/pointers read through memory* → run time.
+
+## 2024 Mid-Sem Q5 – official table (PoPL2024MidSem1.pdf p4)
+
+| Identifier | Where | Binding time |
+|---|---|---|
+| `Abstract` (struct tag) | M1 l.2,6,8 ; M2 l.1 | Compile time |
+| `Class` (typedef) | M1 l.3 ; M2 l.2 | Compile time |
+| `abstractData` (member) | M1 l.7 | Compile time |
+| `abstractData` (parameter name in the function-pointer prototype) | M1 l.8 | Procedure activation time |
+| `abstractMethod` (member) | M1 l.9 | Compile time |
+| `this` (parameter) | M1 l.9 | Procedure activation time |
+| `ClassSize` (macro) | M1 l.11 | Preprocessing time |
+| `object1` global | M1 l.12 | Compile time |
+| `object1` locals (shadowing) | M1 l.22, 24, 28 | Procedure activation time |
+| `object2` (locals) | M1 l.21, 27 | Procedure activation time |
+| `Subroutine1`, `Subroutine2` (decl in M1, defn in M2) | M1 l.4,5 ; M2 l.3,4 | **Linking time** |
+| `c, s, i, n` (parameters) ; `f` as *float parameter* of Subroutine2 | M2 l.3–6 ; M2 l.4 | Procedure activation time |
+| `f`, `g` (functions) | M2 l.5, 6 | Linking time |
+
+Also asked: *which identifiers are seen in the assembly output?* → only **global/static-storage names that the linker needs**: `main`, `object1` (as `.comm`), `Subroutine1`, `Subroutine2`, `f`, `g`, plus external `malloc`. Type names, member names, parameter names, local variable names **disappear** (turned into offsets) unless compiled with `-g` (then they appear as debug-info strings; see slide p107 `.string "parama"`). Check live: `gcc -S file.c` and `nm file.o`.
+
+## Imperative code (2024 Q4)
+"Imperative code means code that is run in the course of a program's execution – if and when control reaches that code, e.g. `a=b+c;`". Type declarations, `typedef`, struct definitions, prototypes, `#define`, global *declarations without initialisers* produce **no** imperative code. Answer was: Module1 lines 13–28 and 31–33 (the body of `main`: statements/declarations with initialisers executing at activation), Module2 lines 3–6 (the four function bodies). Justify: "type declarations and static (compile time) object definitions produce no imperative action."
+(Lines 29,30 are just closing braces.)
+
+## 2024 Q3 – the `ClassSize` and `sizeof` answer
+`struct Abstract` has three pointer members (`void*`, function pointer, pointer-to-function-pointer) → `ClassSize = 3*sizeof(void*)` (assuming all pointers same size); `main` returns `sizeof(object1)` = `sizeof(Class)` = `sizeof(void*)`. State the unit (bytes or multiples of pointer size). Q3(b) rule: a space is needed after an identifier or literal constant unless followed by a non-space delimiter (punctuator/quote); i.e. between two adjacent tokens that would otherwise merge into one.
+
+## Using the tools
+* `python _kb/search.py -k slides binding time` · `search.py -k past-paper,solution "procedure activation time"`
+* `nm`, `objdump -t`, `gcc -S` for what the linker/assembler sees.

@@ -1,0 +1,19 @@
+# source: 02_Past-Papers/img/qb-java-vs-c-frames.svg
+Same frame layout; different thing inside it
+C  — struct passed by value
+return address
+saved base pointer
+struct S s
+the whole object is COPIED here
+(size/layout must be known)
+Java — object variable
+return address
+saved frame link
+reference s  →
+Heap object
+fields live here (made by new)
+shared by every holder of
+the reference
+Call mechanism is identical: caller prepares arguments, call pushes return address, callee builds the frame.
+Java passes the reference BY VALUE: callee can change the object's fields, but cannot re-point the caller's variable.
+C: passing a pointer gives the same effect; passing the struct itself gives the callee a private copy.

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+_kb/kb.db
+_kb/tmp/
+_kb/.last.json
+.playwright-mcp/

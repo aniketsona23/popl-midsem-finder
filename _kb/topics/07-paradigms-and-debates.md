@@ -1,0 +1,74 @@
+# Paradigms, structured programming, and the readings ("debates")
+
+## In plain words
+
+A paradigm is a style of programming: step-by-step instructions (imperative), objects that send each other messages (object-oriented), functions only (functional), or facts and rules (logic). The course also covers old arguments, for example Dijkstra's claim that goto statements make programs hard to follow.
+
+**Example.** Replace a goto jump with a while loop, and the program text reads top to bottom in the same order it runs. That is what Dijkstra wanted.
+
+
+## Short answer
+
+* Paradigms are discipline and habits, not syntax. Computer science is empirical, like physics. *[slides p44-45]*
+* Böhm–Jacopini: sequence, selection and iteration are enough to express any computable function. *[slides p61]*
+* Dijkstra: shorten the gap between the static program text and the dynamic process; goto widens it. *[Dijkstra 1968 letter]*
+* Language choice: name what the use case needs most (control, speed or convenience) and match it. *[Compre 2025 key A1]*
+
+
+Slides: PDF p7–48 (preliminaries, abstraction, language design, the Dijkstra/practitioner debate, four models → four paradigms), p49–68 (imperative: structured programming, control flow), p138–148 (MOP, CLOS). Folder: `06_Readings/Debates/`. Past: Compre 2025 Q1–Q3 (paradigm & language choice), Tutorial 1 Q4 (de-goto), questions of the "why" type.
+
+## Same idea, different words
+
+The slides cover this in “Programming Language Design” (pages 29–48) and “Structured Programming” (pages 49–68). The exam asks you to choose a paradigm and a language for a use case.
+
+## Abstraction and programmability (slides p7–27)
+* Higher-level language = closer to human intention: let me express *what*, toolchain supplies *how*, with fidelity.
+* Hierarchy of abstraction (p18): mathematical formulation (gcd identities) → algorithm (Euclid by subtraction/division) → C program(s) → binary. Subroutines/classes/types are abstractions: **names for computations** that hide the "how" (Scott ch. 3: abstraction of the machine; naming code).
+* Mechanical computation = von Neumann machine; **three essentials of programming**: elementary operations, sequencing (no timing), repetition. What's not finitely expressible isn't programmable (most reals, autonomous control in unbounded situations, captchas).
+* Statics vs dynamics: program is static, computation dynamic (shell example); the environment of a C program remains dynamic.
+
+## The debate (slides p33–48; `06_Readings/Debates/`)
+
+| Paper | Gist | Where |
+|---|---|---|
+| Dijkstra, *Go To Statement Considered Harmful* (1968; `Dijkstra - Go To Statement Considered Harmful (1968).pdf`, `Dijkstra - A Case against the GO TO Statement (EWD215).pdf`) | programmer quality inversely related to density of gotos; static program text should mirror dynamic process → structured control flow | slide p36–38 |
+| Rice & Dijkstra letters | gotos debate | slide p36 (`363567…` are unrelated corrections) |
+| Dijkstra, *The Humble Programmer* (Turing lecture 1972; `Dijkstra - The Humble Programmer (1972 Turing lecture).pdf`) | I/O interrupts, multi-level stores complicate reasoning; programs differ hugely in "intellectual manageability"; rules of 2 kinds (imposed by paradigm/compiler: no goto, ≤1 output param; and discipline from the programmer) | slides p36–37 |
+| Böhm & Jacopini 1966 ((the 1966 paper itself is no longer in the folder)) + Kozen–Tseng "…is False, Propositionally" (`Kozen and Tseng - The Bohm-Jacopini Theorem Is False, Propositionally.pdf`) | **sequence, selection, iteration** suffice for any computable function (with auxiliary variables); propositionally you need multi-level breaks | slide p61 |
+| Kandel (1972) CS education "vicious circle" (`Kandel - Computer Science, A Vicious Circle (1972).pdf`); Tompkins letter; Du Works & Smoliar "The arrogant programmer" (`Du Works and Smoliar - The Arrogant Programmer, Dijkstra and Wegner Considered Harmful (1972).pdf`); Carlson ACM President's letter (`Carlson - ACM Presidents Letter, The Answer Is Competence, Integrity and Productivity (1972).pdf`); "Can ACM Serve All?" (`ACM Forum - Can ACM Serve All (1972).pdf`) | what *is* computer science (craft, art, philosophy, engineering?) vs practitioners; observation precedes generalisation | slides p39–42 |
+| Glass, *The Practical Programmer* (`Glass - The Practical Programmer.pdf`) | "Reality is the murder of a beautiful theory by a gang of ugly facts" – defends practice | slide p43 |
+| Naur, *Computing versus Human Thinking* (`Naur - Computing versus Human Thinking (2005 Turing lecture).pdf`), HN thread "Naur's view of programming" | programming as theory building; contrast between computing and human thinking | slide p43–45 |
+| Nygaard, *Basic Concepts in OOP* (`Nygaard - Basic Concepts in Object Oriented Programming (1986).pdf`) | Simula 67: execution = joint execution of a collection of objects; classes | slides p77–78 |
+| Parnas 1972 (`Parnas - On the Criteria To Be Used in Decomposing Systems into Modules (1972).pdf`) | decompose by information hiding | slide p73 |
+| Chatelier *From C++ to Objective-C* (`Chatelier - From C++ to Objective-C (2009).pdf`) | methods vs functions; message passing | slide p85 |
+
+**The course's own conclusion (slides p43–45):** "paradigms are about discipline and habits that help us design and develop software efficiently without compromising conceptual integrity"; agree with Dijkstra on discipline; CS is **empirical like physics, not analytical like mathematics** (Newton defined gravity to explain apples; theory must explain practice).
+
+## Four model types → four paradigms (slide p48)
+
+| Model | Paradigm |
+|---|---|
+| von Neumann machine, flowcharts, algorithms, digital/relay logic | **Imperative** (procedural → modular → structured) |
+| simulation of evolving real-life systems of interacting entities | **Object-oriented** |
+| recursive function theory, lambda calculus | **Functional** |
+| state transformations, theorem proving as computation, relational databases | **Logic** |
+Procedural evolution (p46): macros/mnemonics → procedures with parameters → modular → structured → top-down design.
+
+## Structured programming essentials (slides p57–68)
+* **Syntax-directed control flow, not lexical**: structure (blocks, loops, functions) decides the flow; blocks have **single entry, multiple exits** (`break`, `return`; `continue` = jump to the single entry point).
+* `for(E1;E2;E3) S` ≡ `E1; L1: if(E2){ S; E3; goto L1; }` (p64).
+* Top-down *design* vs bottom-up *composition* (p62–65); `printf` call = data transfer + expression evaluation.
+* Scope rules are independent of control-flow mess (p60): gotos don't change name legitimacy.
+* Tutorial_1 Q4: de-goto by the dangling-else/loop restructure (see `Tutorial_1_Answers.md` L238+).
+
+## Paradigm/language choice (Compre 2025 Q1, official)
+
+| Use case | Paradigm | Languages | Reason (key word) |
+|---|---|---|---|
+| Flight management (speed, optimisation accuracy) | Modular-OO | C++, Fortran | reliable **control** of systems, computation efficiency, byte/clock-cycle precision |
+| Autopilot (mission-critical accuracy/timing/safety) | Modular-OO | C++, Fortran | same (Ada would be the real-world choice) |
+| Maintenance & diagnostics (predictive, sensor data) | Functional-OO | all five | not mission-critical; availability of system software and programmers' skills / convenience |
+REPL vs event-loop (Q2): REPL = CLI like Python/Jupyter/Lisp (pure functional or functional-OO); event-loop = GUI reactive (functional-OO); text-menu CLI with `main` in control = Modular-OO or procedural.
+Python vs C quicksort (Q3): C/C++/Java in-place → faster, O(1) extra space, not type-flexible; Python list-comprehension copy → more versatile (dynamic typing), stable if scans left→right, unsuitable for terabyte streams (copies).
+
+## Lisp/MOP/CLOS (slides p138–148) → see `09-lisp-functional.md`

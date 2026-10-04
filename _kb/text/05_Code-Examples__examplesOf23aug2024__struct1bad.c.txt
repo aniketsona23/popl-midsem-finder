@@ -1,0 +1,11 @@
+# source: 05_Code-Examples/examplesOf23aug2024/struct1bad.c
+#include <stdio.h>
+struct llbad {
+    struct llbad *next;
+    int key;
+    };
+
+void func(struct llbad *l)
+    {
+    printf("%d %d\n",l->key,l->next->key);
+    }

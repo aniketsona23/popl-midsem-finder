@@ -1,0 +1,1219 @@
+[
+ {
+  "path": "01_Slides/Slides_17Sept2026-TILL ENDSEM (HALF FOR MIDSEM - MOSTLY TILL PROCEDURE).pdf",
+  "kind": "slides",
+  "txt": "01_Slides__Slides_17Sept2026-TILL_ENDSEM_HALF_FOR_MIDSEM_-_MOSTLY_TILL_PROCEDURE_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 152,
+  "chars": 76121
+ },
+ {
+  "path": "02_Past-Papers/An Example Program for Q2 (2025) Solution-20260922/class1.hpp",
+  "kind": "code",
+  "txt": "02_Past-Papers__An_Example_Program_for_Q2_2025_Solution-20260922__class1.hpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 290
+ },
+ {
+  "path": "02_Past-Papers/An Example Program for Q2 (2025) Solution-20260922/Module1.cpp",
+  "kind": "code",
+  "txt": "02_Past-Papers__An_Example_Program_for_Q2_2025_Solution-20260922__Module1.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 128
+ },
+ {
+  "path": "02_Past-Papers/An Example Program for Q2 (2025) Solution-20260922/Module2.cpp",
+  "kind": "code",
+  "txt": "02_Past-Papers__An_Example_Program_for_Q2_2025_Solution-20260922__Module2.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 675
+ },
+ {
+  "path": "02_Past-Papers/compre-answer-key.pdf",
+  "kind": "solution",
+  "txt": "02_Past-Papers__compre-answer-key.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 10211
+ },
+ {
+  "path": "02_Past-Papers/img/qb-java-vs-c-frames.svg",
+  "kind": "other",
+  "txt": "02_Past-Papers__img__qb-java-vs-c-frames.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 660
+ },
+ {
+  "path": "02_Past-Papers/img/qb-memory-and-frame.svg",
+  "kind": "other",
+  "txt": "02_Past-Papers__img__qb-memory-and-frame.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 698
+ },
+ {
+  "path": "02_Past-Papers/midsem-solutions.pdf",
+  "kind": "solution",
+  "txt": "02_Past-Papers__midsem-solutions.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 3,
+  "chars": 5508
+ },
+ {
+  "path": "02_Past-Papers/PoPL Compre Solutions.pdf",
+  "kind": "solution",
+  "txt": "02_Past-Papers__PoPL_Compre_Solutions.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 8735
+ },
+ {
+  "path": "02_Past-Papers/PoPL-Question-Bank.md",
+  "kind": "past-paper",
+  "txt": "02_Past-Papers__PoPL-Question-Bank.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 9179
+ },
+ {
+  "path": "02_Past-Papers/PoPL2024MidSem1.pdf",
+  "kind": "past-paper",
+  "txt": "02_Past-Papers__PoPL2024MidSem1.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 8943
+ },
+ {
+  "path": "03_Quizzes-Assignments/img/oo-array-overflow.svg",
+  "kind": "other",
+  "txt": "03_Quizzes-Assignments__img__oo-array-overflow.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 517
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/compile.sh",
+  "kind": "code",
+  "txt": "03_Quizzes-Assignments__IndependentModules__compile.sh.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 299
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/Explanation.txt",
+  "kind": "tutorial",
+  "txt": "03_Quizzes-Assignments__IndependentModules__Explanation.txt.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1107
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/main.c",
+  "kind": "code",
+  "txt": "03_Quizzes-Assignments__IndependentModules__main.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 105
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/newmain.c",
+  "kind": "code",
+  "txt": "03_Quizzes-Assignments__IndependentModules__newmain.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 159
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/Quiz 1-1.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__IndependentModules__Quiz_1-1.pdf.txt",
+  "ocr_pages": [
+   1,
+   2
+  ],
+  "dup_of": null,
+  "pages": 2,
+  "chars": 754
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/Quiz 1-2.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__IndependentModules__Quiz_1-2.pdf.txt",
+  "ocr_pages": [
+   1,
+   2
+  ],
+  "dup_of": null,
+  "pages": 2,
+  "chars": 967
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/Quiz 1-3.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__IndependentModules__Quiz_1-3.pdf.txt",
+  "ocr_pages": [
+   1,
+   2,
+   3
+  ],
+  "dup_of": null,
+  "pages": 3,
+  "chars": 1174
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/Quiz-1-Answers.md",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__IndependentModules__Quiz-1-Answers.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6049
+ },
+ {
+  "path": "03_Quizzes-Assignments/IndependentModules/structure.c",
+  "kind": "code",
+  "txt": "03_Quizzes-Assignments__IndependentModules__structure.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 79
+ },
+ {
+  "path": "03_Quizzes-Assignments/midsem-assignment.pdf",
+  "kind": "past-paper",
+  "txt": "03_Quizzes-Assignments__midsem-assignment.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 8,
+  "chars": 14298
+ },
+ {
+  "path": "03_Quizzes-Assignments/OO-Language-Comparison-Tutorial.md",
+  "kind": "tutorial",
+  "txt": "03_Quizzes-Assignments__OO-Language-Comparison-Tutorial.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 5557
+ },
+ {
+  "path": "03_Quizzes-Assignments/POPL Eval Quiz.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__POPL_Eval_Quiz.pdf.txt",
+  "ocr_pages": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "dup_of": null,
+  "pages": 9,
+  "chars": 9165
+ },
+ {
+  "path": "03_Quizzes-Assignments/Quiz 1 - Procedural to OO _ Corrected Quiz_ Attempt review.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__Quiz_1_-_Procedural_to_OO___Corrected_Quiz__Attempt_review.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 5330
+ },
+ {
+  "path": "03_Quizzes-Assignments/Quiz 2 - Post-Mid-Sem Quiz_ Attempt review.pdf",
+  "kind": "quiz",
+  "txt": "03_Quizzes-Assignments__Quiz_2_-_Post-Mid-Sem_Quiz__Attempt_review.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 6,
+  "chars": 4828
+ },
+ {
+  "path": "04_Tutorials/Tutorial_1_Answers.md",
+  "kind": "tutorial",
+  "txt": "04_Tutorials__Tutorial_1_Answers.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 14719
+ },
+ {
+  "path": "04_Tutorials/Tutorial_2_Answers.md",
+  "kind": "tutorial",
+  "txt": "04_Tutorials__Tutorial_2_Answers.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 15854
+ },
+ {
+  "path": "04_Tutorials/Tutorial_3_Answers.md",
+  "kind": "tutorial",
+  "txt": "04_Tutorials__Tutorial_3_Answers.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 17382
+ },
+ {
+  "path": "04_Tutorials/Tutorial_3_class_hierarchy.svg",
+  "kind": "other",
+  "txt": "04_Tutorials__Tutorial_3_class_hierarchy.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2065
+ },
+ {
+  "path": "04_Tutorials/Tutorial_3_element_types.svg",
+  "kind": "other",
+  "txt": "04_Tutorials__Tutorial_3_element_types.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1341
+ },
+ {
+  "path": "05_Code-Examples/AbstractClassModules/Module1.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__AbstractClassModules__Module1.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1073
+ },
+ {
+  "path": "05_Code-Examples/AbstractClassModules/Module2.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__AbstractClassModules__Module2.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 303
+ },
+ {
+  "path": "05_Code-Examples/Code-Examples-Explained.md",
+  "kind": "tutorial",
+  "txt": "05_Code-Examples__Code-Examples-Explained.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 15821
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/AbstractRecord.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__AbstractRecord.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 193
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Comparison.java",
+  "kind": "reading",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Comparison.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 67
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/DictionaryApp.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__DictionaryApp.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 777
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/geninput.m",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__geninput.m.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 117
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/MyDictionary.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__MyDictionary.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1803
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Ordering.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Ordering.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 56
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Record.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Record.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 225
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__tempInput.txt.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__tempInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/AbstractRecord.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__AbstractRecord.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1720
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/Comparison.java",
+  "kind": "reading",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__Comparison.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Comparison.java",
+  "pages": 1,
+  "chars": 67
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/DictionaryApp.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__DictionaryApp.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2557
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/input0.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__input0.txt.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 13
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/MyDictionary.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__MyDictionary.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 3198
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/Ordering.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__Ordering.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Ordering.java",
+  "pages": 1,
+  "chars": 62
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/Record.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__Record.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 259
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/tempInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__tempInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/tempOutput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__tempOutput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/testInput.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__testInput.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/testInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary__Version2.0__testInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary-Explained.md",
+  "kind": "tutorial",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary-Explained.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 8413
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/AbstractRecord.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__AbstractRecord.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/AbstractRecord.java",
+  "pages": 1,
+  "chars": 193
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Comparison.java",
+  "kind": "reading",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Comparison.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Comparison.java",
+  "pages": 1,
+  "chars": 67
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/DictionaryApp.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__DictionaryApp.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/DictionaryApp.java",
+  "pages": 1,
+  "chars": 777
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/DictionaryApp2.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__DictionaryApp2.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2558
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/geninput.m",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__geninput.m.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/geninput.m",
+  "pages": 1,
+  "chars": 117
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/MyDictionary.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__MyDictionary.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/MyDictionary.java",
+  "pages": 1,
+  "chars": 1803
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Ordering.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Ordering.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Ordering.java",
+  "pages": 1,
+  "chars": 56
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Record.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Record.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 463
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/tempInput.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__tempInput.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/tempInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__tempInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/AbstractRecord.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__AbstractRecord.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/AbstractRecord.java",
+  "pages": 1,
+  "chars": 1720
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/Comparison.java",
+  "kind": "reading",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__Comparison.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Comparison.java",
+  "pages": 1,
+  "chars": 67
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/DictionaryApp.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__DictionaryApp.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/DictionaryApp.java",
+  "pages": 1,
+  "chars": 2557
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/input0.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__input0.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/input0.txt",
+  "pages": 1,
+  "chars": 13
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/MyDictionary.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__MyDictionary.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/MyDictionary.java",
+  "pages": 1,
+  "chars": 3198
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/Ordering.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__Ordering.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Ordering.java",
+  "pages": 1,
+  "chars": 62
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/Record.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__Record.java.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/Record.java",
+  "pages": 1,
+  "chars": 259
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/tempInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__tempInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/tempOutput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__tempOutput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/tempOutput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/testInput.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__testInput.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/Dictionary_ver2/Version2.0/testInput2.txt",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___Dictionary_ver2__Version2.0__testInput2.txt.txt",
+  "ocr_pages": [],
+  "dup_of": "05_Code-Examples/Dictionary (2)/Dictionary/tempInput2.txt",
+  "pages": 1,
+  "chars": 2035
+ },
+ {
+  "path": "05_Code-Examples/Dictionary (2)/img/dictionary-classes.svg",
+  "kind": "other",
+  "txt": "05_Code-Examples__Dictionary_2___img__dictionary-classes.svg.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 523
+ },
+ {
+  "path": "05_Code-Examples/dynamicBindingJava/Abstract1.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__dynamicBindingJava__Abstract1.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 191
+ },
+ {
+  "path": "05_Code-Examples/dynamicBindingJava/Concrete1.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__dynamicBindingJava__Concrete1.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 437
+ },
+ {
+  "path": "05_Code-Examples/dynamicBindingJava/Interface1.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__dynamicBindingJava__Interface1.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 67
+ },
+ {
+  "path": "05_Code-Examples/dynamicBindingJava/Main.java",
+  "kind": "code",
+  "txt": "05_Code-Examples__dynamicBindingJava__Main.java.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1824
+ },
+ {
+  "path": "05_Code-Examples/Example Program GCD.pdf",
+  "kind": "code",
+  "txt": "05_Code-Examples__Example_Program_GCD.pdf.txt",
+  "ocr_pages": [
+   1
+  ],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 512
+ },
+ {
+  "path": "05_Code-Examples/ExampleOf26-27-Sept/FullClass.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__ExampleOf26-27-Sept__FullClass.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1569
+ },
+ {
+  "path": "05_Code-Examples/ExampleOf26-27-Sept/FullClass.hpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__ExampleOf26-27-Sept__FullClass.hpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 215
+ },
+ {
+  "path": "05_Code-Examples/ExampleOf26-27-Sept/UserOfFullClass.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__ExampleOf26-27-Sept__UserOfFullClass.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 861
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/class1.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__class1.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 354
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/class1bad.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__class1bad.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 227
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/printf.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__printf.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 129
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/recurmain.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__recurmain.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 156
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/struct1.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__struct1.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 229
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/struct1bad.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__struct1bad.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 161
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/temp1.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__temp1.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 243
+ },
+ {
+  "path": "05_Code-Examples/examplesOf23aug2024/temp2.cpp",
+  "kind": "code",
+  "txt": "05_Code-Examples__examplesOf23aug2024__temp2.cpp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 233
+ },
+ {
+  "path": "05_Code-Examples/fghc.lisp",
+  "kind": "code",
+  "txt": "05_Code-Examples__fghc.lisp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2528
+ },
+ {
+  "path": "05_Code-Examples/mergesort-final.lisp",
+  "kind": "code",
+  "txt": "05_Code-Examples__mergesort-final.lisp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1687
+ },
+ {
+  "path": "05_Code-Examples/painting.lisp",
+  "kind": "code",
+  "txt": "05_Code-Examples__painting.lisp.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 912
+ },
+ {
+  "path": "05_Code-Examples/params/params.c",
+  "kind": "code",
+  "txt": "05_Code-Examples__params__params.c.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1413
+ },
+ {
+  "path": "05_Code-Examples/params/params.pdf",
+  "kind": "code",
+  "txt": "05_Code-Examples__params__params.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 9,
+  "chars": 10044
+ },
+ {
+  "path": "05_Code-Examples/params/params.s",
+  "kind": "code",
+  "txt": "05_Code-Examples__params__params.s.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6092
+ },
+ {
+  "path": "06_Readings/Bjarne Stroustrup On Abstract Classes.pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Bjarne_Stroustrup_On_Abstract_Classes.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 4,
+  "chars": 8832
+ },
+ {
+  "path": "06_Readings/Debates/ACM Forum - Can ACM Serve All (1972).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__ACM_Forum_-_Can_ACM_Serve_All_1972_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 5296
+ },
+ {
+  "path": "06_Readings/Debates/CACM - Corrections to Stone's Compiler Procedures (not part of the debate).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__CACM_-_Corrections_to_Stone_s_Compiler_Procedures_not_part_of_the_debate_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 2,
+  "chars": 12666
+ },
+ {
+  "path": "06_Readings/Debates/Carlson - ACM Presidents Letter, The Answer Is Competence, Integrity and Productivity (1972).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Carlson_-_ACM_Presidents_Letter_The_Answer_Is_Competence_Integrity_and_Productivity_1972_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 4853
+ },
+ {
+  "path": "06_Readings/Debates/Chatelier - From C++ to Objective-C (2009).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Chatelier_-_From_C_to_Objective-C_2009_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 71,
+  "chars": 146631
+ },
+ {
+  "path": "06_Readings/Debates/Dijkstra - A Case against the GO TO Statement (EWD215).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Dijkstra_-_A_Case_against_the_GO_TO_Statement_EWD215_.pdf.txt",
+  "ocr_pages": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 6695
+ },
+ {
+  "path": "06_Readings/Debates/Dijkstra - Go To Statement Considered Harmful (1968).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Dijkstra_-_Go_To_Statement_Considered_Harmful_1968_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 4,
+  "chars": 26575
+ },
+ {
+  "path": "06_Readings/Debates/Dijkstra - The Humble Programmer (1972 Turing lecture).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Dijkstra_-_The_Humble_Programmer_1972_Turing_lecture_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 8,
+  "chars": 44992
+ },
+ {
+  "path": "06_Readings/Debates/Du Works and Smoliar - The Arrogant Programmer, Dijkstra and Wegner Considered Harmful (1972).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Du_Works_and_Smoliar_-_The_Arrogant_Programmer_Dijkstra_and_Wegner_Considered_Harmful_1972_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 3,
+  "chars": 12055
+ },
+ {
+  "path": "06_Readings/Debates/Glass - The Practical Programmer.pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Glass_-_The_Practical_Programmer.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 3,
+  "chars": 11441
+ },
+ {
+  "path": "06_Readings/Debates/Hacker News - Peter Naur's view of programming (2021 thread).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Hacker_News_-_Peter_Naur_s_view_of_programming_2021_thread_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 33,
+  "chars": 90366
+ },
+ {
+  "path": "06_Readings/Debates/Kandel - Computer Science, A Vicious Circle (1972).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Kandel_-_Computer_Science_A_Vicious_Circle_1972_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 2,
+  "chars": 10406
+ },
+ {
+  "path": "06_Readings/Debates/Kozen and Tseng - The Bohm-Jacopini Theorem Is False, Propositionally.pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Kozen_and_Tseng_-_The_Bohm-Jacopini_Theorem_Is_False_Propositionally.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 16,
+  "chars": 36316
+ },
+ {
+  "path": "06_Readings/Debates/Naur - Computing versus Human Thinking (2005 Turing lecture).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Naur_-_Computing_versus_Human_Thinking_2005_Turing_lecture_.pdf.txt",
+  "ocr_pages": [
+   1
+  ],
+  "dup_of": null,
+  "pages": 11,
+  "chars": 50707
+ },
+ {
+  "path": "06_Readings/Debates/Nygaard - Basic Concepts in Object Oriented Programming (1986).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Nygaard_-_Basic_Concepts_in_Object_Oriented_Programming_1986_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 5,
+  "chars": 12017
+ },
+ {
+  "path": "06_Readings/Debates/Parnas - On the Criteria To Be Used in Decomposing Systems into Modules (1972).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Parnas_-_On_the_Criteria_To_Be_Used_in_Decomposing_Systems_into_Modules_1972_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 6,
+  "chars": 28674
+ },
+ {
+  "path": "06_Readings/Debates/Scalfani - Goodbye, Object Oriented Programming (2016).pdf",
+  "kind": "reading",
+  "txt": "06_Readings__Debates__Scalfani_-_Goodbye_Object_Oriented_Programming_2016_.pdf.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 15,
+  "chars": 14276
+ },
+ {
+  "path": "_kb/answers/TEMPLATE.md",
+  "kind": "notes",
+  "txt": "_kb__answers__TEMPLATE.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1718
+ },
+ {
+  "path": "_kb/answers/verified-experiments.md",
+  "kind": "notes",
+  "txt": "_kb__answers__verified-experiments.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2866
+ },
+ {
+  "path": "_kb/past-papers/catalog.md",
+  "kind": "notes",
+  "txt": "_kb__past-papers__catalog.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6733
+ },
+ {
+  "path": "_kb/topics/00-exam-patterns.md",
+  "kind": "notes",
+  "txt": "_kb__topics__00-exam-patterns.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 5679
+ },
+ {
+  "path": "_kb/topics/01-modules-linking-independence.md",
+  "kind": "notes",
+  "txt": "_kb__topics__01-modules-linking-independence.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 8056
+ },
+ {
+  "path": "_kb/topics/02-binding-times-and-names.md",
+  "kind": "notes",
+  "txt": "_kb__topics__02-binding-times-and-names.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6309
+ },
+ {
+  "path": "_kb/topics/03-procedure-activation-stack-frames.md",
+  "kind": "notes",
+  "txt": "_kb__topics__03-procedure-activation-stack-frames.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6441
+ },
+ {
+  "path": "_kb/topics/04-types-sizeof-layout.md",
+  "kind": "notes",
+  "txt": "_kb__topics__04-types-sizeof-layout.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 4257
+ },
+ {
+  "path": "_kb/topics/05-scope-lifetime-storage.md",
+  "kind": "notes",
+  "txt": "_kb__topics__05-scope-lifetime-storage.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 5930
+ },
+ {
+  "path": "_kb/topics/06-oo-design-java-cpp.md",
+  "kind": "notes",
+  "txt": "_kb__topics__06-oo-design-java-cpp.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 8684
+ },
+ {
+  "path": "_kb/topics/07-paradigms-and-debates.md",
+  "kind": "notes",
+  "txt": "_kb__topics__07-paradigms-and-debates.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 7907
+ },
+ {
+  "path": "_kb/topics/08-c-cpp-gotchas.md",
+  "kind": "notes",
+  "txt": "_kb__topics__08-c-cpp-gotchas.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 5831
+ },
+ {
+  "path": "_kb/topics/09-lisp-functional.md",
+  "kind": "notes",
+  "txt": "_kb__topics__09-lisp-functional.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 2936
+ },
+ {
+  "path": "AGENTS.md",
+  "kind": "notes",
+  "txt": "AGENTS.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 6257
+ },
+ {
+  "path": "EXAM-DAY.md",
+  "kind": "notes",
+  "txt": "EXAM-DAY.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 1839
+ },
+ {
+  "path": "INDEX.md",
+  "kind": "notes",
+  "txt": "INDEX.md.txt",
+  "ocr_pages": [],
+  "dup_of": null,
+  "pages": 1,
+  "chars": 7440
+ }
+]

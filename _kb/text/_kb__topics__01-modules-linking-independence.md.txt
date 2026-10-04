@@ -1,0 +1,84 @@
+# source: _kb/topics/01-modules-linking-independence.md
+# Modules, separate compilation, linking, independence
+
+## In plain words
+
+A big program is split into several files, called modules. The compiler translates each file separately. Then a second tool, the linker, joins the translated files into one program. The compiler only trusts what is written inside the file it is reading. The linker only looks at names (like main or f). It never checks whether the types match.
+
+**Example.** File A says `extern int f(int);` (`extern` = "this is defined in some other file") and calls `f(3)`. File B contains the real `int f(int n) { ... }`. The compiler is happy with A (it trusts the declaration) and with B. The linker finds the name `f` in B and connects the two. If nobody defines `f`, the linker stops with "undefined reference to f".
+
+
+## Short answer
+
+* Each module is compiled on its own; the compiler needs only the declarations inside that module. *[slides p56; 2024 key A1]*
+* The linker matches names only: C uses the plain name, C++ adds the parameter types. It never sees types, members or parameter names. *[slides p82-83; 2025 key A2]*
+* Undefined reference = declared but never defined. Multiple definition = defined twice, even if the text is identical. *[2024 key A2; 2025 key A2 (items 4, 5)]*
+* Principle to quote: many declarations, one unique definition. *[2025 Mid-Sem paper Q1]*
+
+
+**Professor's principle (2025 Q1):** *"many declarations, one unique definition — declarations allow different representations, and the definition fixes the imperative."*
+Slides: PDF p54–56 (Modular Programming I–III), p79–86 (OO on top of procedural is fraught; "Partially hidden class"; "The Lesson"). Search: `search.py -k slides modular independent`.
+
+## Same idea, different words
+
+The slides call this “modular programming” (pages 54–56): every compilation unit is independent. The exam words it as “compile independently”, “link together” and “many declarations, one unique definition”.
+
+## Who checks what
+
+| Stage | Sees | Checks | Typical message |
+|---|---|---|---|
+| Preprocessor | text | `#include`, `#define` (e.g. `ClassSize` → `sizeof(struct Abstract)`) | — |
+| **Compiler** (`gcc -c`, one module at a time) | only *this* translation unit | syntax, declared names, types *within the module*; needs **size+layout only where an object is created, copied/passed by value, or a member is dereferenced** | implicit declaration (warning in C), incomplete type, unknown field |
+| **Linker** (`ld`) | only **symbol names** of global functions/global variables in `.o` files | every referenced name has exactly one definition | `undefined reference to f` ; `multiple definition of f` |
+| Loader / run time | actual memory | nothing about types | wrong values, segfault |
+
+Consequences (all demonstrated in the course):
+* **A pointer to an incomplete type needs no layout.** Module2 of 2024 only passes `Class` (= `struct Abstract *`) around, so it needs no definition of `struct Abstract` (all pointers have the same size/layout). Layout is needed only when dereferenced or when the struct value is copied/passed.
+* **Types, parameter names, member names are *not* in the object-file symbol table.** Two modules can declare the "same" struct differently; compiler can't notice (separate TUs), linker never sees types → *compiles, links, runs wrongly* (slides p81–84; `05_Code-Examples/examplesOf23aug2024/struct1.c` vs `struct1bad.c`: member order swapped → silent garbage).
+* **C linking = names only** (`_f`, `_Subroutine1`). So `Subroutine2(Class,const char*,int)` declared in Module1 vs `Subroutine2(Class,const char*,float)` defined in Module2 (2024) **links fine**; call passes an `int` where the callee reads a `float` → semantic bug, no diagnostic. (Verified with `nm`: just `T _Subroutine2`.)
+* **C++ linking = mangled names** include parameter types (and class names for methods): `function(Class2)` → `_Z8function6Class2`. A declaration `extern void function(Class2)` can only be satisfied by a *definition with the same parameter types*. Return type is **not** mangled (non-template functions). Verified: body of `function(Class1)` + call of `function(Class2)` → `undefined reference to function(Class2)`.
+* **Method signature must match the definition exactly**, but the *layout/sizes of a class declared in a user module can differ* from the class module (procedure-activation-time declaration binding) – that is the "timebomb" in slide p80–84.
+* **Impossible without a body:** no definition anywhere → link error; alone `gcc Module1.c` fails at link (undefined `f,g,Subroutine1,Subroutine2` – the *four* errors of 2024 A2).
+* **Neither module needs the other's *text*** – only agreed prototypes. Independence (2025 / assignment definition): *as long as global and method function prototypes don't change, bodies in each module can change without affecting the other.*
+
+## 2024 Mid-Sem Q1/Q2 pattern (compile & link a pair)
+Official answer (PoPL2024MidSem1.pdf p3–4):
+* **Q1** – Each module compiles independently (`gcc -c`/`-S`): all static type info needed is in the module, except *implicit prototypes* (f, g) → warnings only. Module2 needs only "Class is a pointer to a type".
+* **Q2** – `gcc Module1.c` alone: **no executable** (linker: 4 undefined: f, g, Subroutine1, Subroutine2). Both `.o` together: **yes**, links.
+* Evidence: run the quick experiments listed below on `05_Code-Examples/AbstractClassModules/Module1.c` and `Module2.c`.
+
+## 2025 Mid-Sem Q1 (five 1-line answers) — official key
+
+| # | Independent? | Reason (professor's) |
+|---|---|---|
+| (i) size of storage of a data structure | **Yes** | sizes depend on *procedure-activation-time declaration bindings* (each module's own declaration decides) |
+| (ii) layout of members | **Yes** | same |
+| (iii) names & number of member functions | **No** | depend on the unique definitions (bodies); one-to-one exact matching |
+| (iv) signatures of member functions | **No** | same as (iii) |
+| (v) sequence of signatures & bodies | **Yes** (should be) | "what matters are unique signatures", the mechanism matches signatures with bodies, not sequence (caveat: some implementations may not allow it) |
+
+## 2025 Mid-Sem Q2 (C++, `function(Class1)` body vs `function(Class2)` call) — official key
+Image-verified table (text extraction scrambles columns – see `tools/pdfpage.py`):
+
+| No. | Necessary | Sufficient | Harmful |
+|---|---|---|---|
+| 1 body `function(Class2)` in Module1 | | ✓ | |
+| 2 body in Module2 | | ✓ | |
+| 3 body in exactly one of them | ✓ | ✓ | |
+| 4 body in each (different) | | | ✓ |
+| 5 identical body in each | | | ✓ |
+| 6–10 (`Class2` derived from `Class1`; `extern void function(Class1)` prototypes) | *Irrelevant* **if the `function(Class2)` declaration is not removed**; but: if Module2's top declaration is changed to `function(Class1)` (matching the given body) then `Class2 : Class1` is sufficient. | | |
+Why 4/5 harmful: two external definitions of `function(Class2)` → *multiple definition* (identical text doesn't help; linker compares names, not bodies). I reproduced all of this with g++ (see `_kb/answers/verified-experiments.md`).
+
+## Quick experiments (copy-paste)
+```
+gcc -c -Wall A.c B.c          # compile only
+nm A.o B.o                    # T/D/B defined, U undefined, C common
+gcc A.o B.o -o ab && ./ab     # link
+g++ -c X.cpp && nm -C X.o     # -C demangles C++
+gcc -S A.c                    # assembly; see which names survive (.globl/.comm)
+```
+`03_Quizzes-Assignments/IndependentModules/Explanation.txt` & `compile.sh` list the legal/illegal combinations of `main.c / newmain.c / structure.c` (e.g. `structure.o + main.o` → *multiple definition of f* since `main.c` `#include`s `structure.c`; `structure.o + newmain.o` links and prints garbage like `-1253039104` because `X` is uninitialised).
+
+## Typical wording that scores
+"Each module is compiled separately; the compiler needs only the declarations visible in that module (types, prototypes). The linker resolves only *names* of global functions/variables; it never sees types, member names or parameter names. Therefore …"

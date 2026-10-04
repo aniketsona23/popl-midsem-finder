@@ -1,0 +1,52 @@
+abstract class AbstractRecord {
+	abstract public Object getKey();
+	abstract public Object getValue();
+	public String toString() {
+		return "{Key: ["+getKey().toString()+"] Value: ["+getValue().toString()+"]}";
+	}
+	public void show() {
+		System.out.println(toString());
+	}
+	// abstract public Comparison compare(AbstractRecord another);
+	public Comparison compare(AbstractRecord another) {
+		Object thisKey=getKey();
+		Object otherKey=another.getKey();
+		ComparableClassNames thisKeyTypeName = ComparableClassNames.valueOf(thisKey.getClass().getSimpleName());
+		ComparableClassNames otherKeyTypeName = ComparableClassNames.valueOf(otherKey.getClass().getSimpleName());
+		if(thisKeyTypeName != otherKeyTypeName) return Comparison.INCOMPARABLE;
+		int comparisonResult;
+		switch(thisKeyTypeName) {
+			case Integer:
+						comparisonResult = Integer.class.cast(thisKey).compareTo(Integer.class.cast(otherKey));
+						break;
+			case Float:
+						comparisonResult = Float.class.cast(thisKey).compareTo(Float.class.cast(otherKey));
+						break;
+			case Long:
+						comparisonResult = Long.class.cast(thisKey).compareTo(Long.class.cast(otherKey));
+						break;
+			case Double:
+						comparisonResult = Double.class.cast(thisKey).compareTo(Double.class.cast(otherKey));
+						break;
+			case String:
+						comparisonResult = String.class.cast(thisKey).compareTo(String.class.cast(otherKey));
+						break;
+			default: return Comparison.INCOMPARABLE;
+		}
+		switch(comparisonResult) {
+			case 0: return Comparison.MATCHING;
+			case -1: return Comparison.PREDECESSOR;
+	  	case 1: return Comparison.SUCCESSOR;
+			default: return Comparison.INCOMPARABLE;
+		}
+	}
+}
+
+enum ComparableClassNames {
+	Integer,
+	Float,
+	Long,
+	Double,
+	String
+}
+

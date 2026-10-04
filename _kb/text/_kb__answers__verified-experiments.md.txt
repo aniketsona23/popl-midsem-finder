@@ -1,0 +1,30 @@
+# source: _kb/answers/verified-experiments.md
+# Experiments run on this laptop (gcc 6.3.0 mingw32, 32-bit; Java 17+/Python 3.10 present)
+
+Reproduce with `gcc -c -Wall`, `nm`, `gcc`, `gcc -S`, `gcc -fstack-usage`. Use these as *evidence lines* ("I compiled it; output was …") in answers.
+
+## E1 – 2024 Mid-Sem modules (`05_Code-Examples/AbstractClassModules/Module1.c`, `Module2.c`)
+* `gcc -c -Wall` each: **both compile**. Warnings only: Module1 – implicit declaration of `f` (l.23) and `g` (l.26), unused variable `object1` (l.28); Module2 – implicit declaration of `g` (l.5).
+* `nm Module1.o`: `T _main`, `C _object1` (common), **U** `_f _g _malloc _Subroutine1 _Subroutine2`. `nm Module2.o`: `T _f _g _Subroutine1 _Subroutine2`. (No type information anywhere.)
+* `gcc Module1.o` alone: **link error** – undefined reference to `Subroutine1`, `Subroutine2`, `f`, `g` (four names). `gcc Module2.o` alone: no `main` (here `WinMain@16` undefined; on Linux `_start → main`).
+* `gcc Module1.o Module2.o`: **links**.
+* Run (original `return 0`): **segmentation fault** (exit code 0xC0000005) → matches key (A6).
+* Run with `return 1` in both f and g: **still segfaults on this machine**, at Module1.c line 32: line 31 puts the garbage `%eax` left by `void Subroutine1` into `object1`, line 32 dereferences it. The key says it runs and returns `sizeof(void*)`; this depends on the leftover register value. Write the semantic reason, not "it ran".
+* `gcc -S`: names in the assembly: Module1 `.comm _object1`, `.globl _main`; Module2 `.globl _Subroutine1/_Subroutine2/_f/_g`. Types, members, params and locals do not appear (offsets only).
+* `-fstack-usage`: `f` and `g` = 32 bytes each, `main` = 64, `Subroutine1/2` = 8 (32-bit; excludes the return address).
+
+## E2 – 2025 Mid-Sem Q2 (C++, g++)
+
+| Setup | Result |
+|---|---|
+| M1 defines `function(Class1)`, M2 declares/calls `extern void function(Class2)` | `undefined reference to function(Class2)` (nm: `U __Z8function6Class2` vs `T __Z8function6Class1`) |
+| M1 defines `function(Class2)` | links and runs (**item 1/2/3 sufficient**) |
+| M1 defines `function(Class1)`, M2 declares `extern void function(Class1)` and `Class2 : Class1` is passed | links (sliced copy) – the "curious" case in the key |
+| `function(Class2)` defined in both M1 and M2 (identical text) | `multiple definition of function(Class2)` (**items 4, 5 harmful**) |
+
+## E3 – `fiboDP(5)` trace (`_kb/tools/trace_template.c`)
+Calls in order: 5, 3, 1, 2, 0, 4 → **6 calls**, **max 4 frames** (5>3>2>0), result 8. Frame-base addresses differ by 0x40 per level in this build. The official key shows 9 calls / 17 frames – see note in `topics/03-…`.
+
+## E4 – Not yet verified (do before relying on them)
+* Linux x86-64 pointer sizes/padding (this laptop is 32-bit; use WSL/Docker if you need x86-64 output).
+* Java snippets from `Tutorial_*_Answers.md` (they claim to be compiled; `javac` is available).

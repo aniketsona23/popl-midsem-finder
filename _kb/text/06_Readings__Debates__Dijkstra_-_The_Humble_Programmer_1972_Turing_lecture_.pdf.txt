@@ -1,0 +1,1337 @@
+# source: 06_Readings/Debates/Dijkstra - The Humble Programmer (1972 Turing lecture).pdf
+# ocr_pages: 
+=== PAGE 1 ===
+1972 ACM Tari~g 
+Award Led~re 
+[Extract from the Turing Award Ci- 
+tation read by M.D, McI[roy, chair- 
+man o/the A CM Tzer#eg A ward C'om- 
+mittee, at the preser~tatio~ of this 
+lecture on Aztgzcst 14, I972, at the 
+A CM A nnuaI Coe~ference in Bostoa.] 
+The working vocabulary of pro- 
+grammers everywhere is studded with 
+words originated or forcefully prom- 
+ulgated by E.W. Dijkstra-display, 
+deadly embrace, semaphore, go-to- 
+less programming, structured pro- 
+gramming. But his influence on pro- 
+gramming is more pervasive than any 
+glossary can possibly indicate. The 
+precious gift that this Turing Award 
+acknowledges is Dijkstra's style: his 
+approach to programming as a high, 
+intellectual challenge; his eloquent 
+insistence and practical demonstra- 
+tion that programs should be com- 
+posed correctly, not just debugged 
+into correctness; and his illuminating 
+perception of problems at the foun.- 
+dations of program design. He has 
+published about a dozen papers, both 
+technical and reflective, among which 
+are especially to be noted his philo- 
+sophical addresses at ~HP, ~ his al- 
+ready classic papers on cooperating 
+sequential processes/ and his mem- 
+orable indictment of the go-to state- 
+ment.:' An influential series of letters 
+by Dijkstra have recently surfaced as 
+a polished monograph on the art of 
+composing programs? 
+We have come to value good pro- 
+grams in much the same way as we 
+value good literature. And at the 
+center of this movement, creating and 
+reflecting patterns no less beautiful 
+than useful, stands E.W. Dijkstra. 
+The Humble 
+by Edsger W. Dijkstra 
+Programmer 
+59 
+As a result of a long sequence 
+of coincidences I entered the pro- 
+gramming profession officially on the 
+first spring morning of i952, and as 
+far as I have been abte to trace, i 
+was the first Dutchman to do so in 
+my country, tn retrospect the most 
+amazing thing is the slowness with 
+which, at least in my part of the 
+world, the programming profession 
+emerged, a slowness which is now 
+hard to believe. But I am grateful for 
+two vivid recollections from that 
+period that establish that slowness 
+beyond any doubt. 
+After having programmed for 
+some three years, i had a discussion 
+with van Wijngaarden, who was then 
+my boss at the Mathematical Centre 
+in Amsterdam-a discussion for 
+which I shall remain grateful to him 
+as long as I live. The point was that 
+Communications 
+of 
+the ACM 
+I was supposed to study theoretical 
+physics at the University of Leiden 
+simultaneously, and as I found the 
+two activities harder and harder ,to 
+combine, I had to make up my 
+mind, either to stop programming 
+and become a real, respectable theo- 
+retical physicist, or to carry my study 
+of physics to a formal completion 
+only, with a minimum of effort, and 
+to become..., 
+yes what? A pro- 
+grammer? But was that a respect- 
+able profession? After all, what was 
+programming? Where was the sound 
+body of knowledge that could sup- 
+Copyright © 1972, Association for 
+Computing Machinery, Inc. General per- 
+mission to republish, but not for profit, 
+all or part of this material is granted, 
+provided that reference is made to this 
+publication, to its date of issue, and to 
+the fact that reprinting privileges were 
+granted by permission of the Association 
+for Computing Machinery. 
+1,2,3,4 Footnotes are on page 866. 
+October 1972 
+Volume 15 
+Number 10
+=== PAGE 2 ===
+port tt as an mtellectuaJ!ly respectable 
+discipline? i remember quite vividly 
+how I envied my hardware col- 
+leagues, who, when asked about their 
+professional competence, could at 
+least point out that they knew every- 
+thing about vacuum tubes, ampliiiers 
+and the rest, whereas I felt that, 
+when faced with that question, I 
+would stand empty-handed. Full of 
+misgivings i knocked on van Wijn- 
+gaarden's office door, asking him 
+whether I couM speak to him for a 
+moment; when I left his office a 
+number of hours later, I was an- 
+other person. For after having lis- 
+tened to my problems patiently, he 
+agreed that up till that moment there 
+was not much of a programming 
+discipline, but then he went on to 
+explain quietly that automatic com- 
+puters were here to stay, that we 
+were just at the beginning and could 
+not I be one of the persons called 
+to make programming a respectable 
+discipline in the years to come? This 
+was a turning point in my life and 
+i completed my study of physics 
+formally as quickly as I could. One 
+moral of the above story is, of 
+course, that we must be very careful 
+when we give advice to younger 
+people: sometimes they follow it[ 
+Two years later, in 1957, I mar- 
+ried, and Dutch marriage rites re- 
+quire you to state your profession 
+and I stated that i was a program- 
+mer. But the municipal authorities 
+of the town of Amsterdam did not 
+accept it on the grounds that there 
+was no such profession. An.d, be- 
+lieve it or not, but under the head- 
+ing "profession" my marriage record 
+shows the ridiculous entry "theo- 
+retical physicist"! 
+So much for the slowness with 
+which l saw the programming pro- 
+fession emerge in my own country. 
+Since then 1 have seen more of the 
+world, and it is my general impres- 
+sion that in other countries, apart 
+from a possibIe shift of dates, the 
+growth pattern has been very much 
+the same. 
+Let me try to capture the situa- 
+tion in those old days in a little bit 
+more detail, in the hope of getting 
+a better understanding of the situa- 
+tion today. While we pursue our 
+analysis, we shall see how many 
+common misunderstandings about 
+the true nature of the programming 
+task can be traced back to that now 
+distant past. 
+The first automatic electronic 
+computers were all unique, single- 
+copy machines and they were att to 
+be found in an environment with 
+the exciting flavor of an experimental 
+laboratory. Once the vision of the 
+automatic computer was there, its 
+realization was a tremendous chab 
+lunge to the electronic technology 
+then available, and one thing is cer- 
+tain: we cannot deny the couraage 
+of the groups that decided to try to 
+build such a fantastic piece of equip- 
+ment. For fantastic pieces of equip- 
+ment they were: in retrospect one 
+can only wonder that those first ma- 
+chines worked at all, at least some- 
+times. The overwhelming problem 
+was to get and keep the machine in 
+working order. The preoccupation 
+with the physical aspects of auto- 
+matic computing is still reflected in 
+the narncs of the older scientific so- 
+cieties in the field, such as the Asso- 
+ciation for Computing Machinery or 
+the British Computer Society, namcs 
+in which explicit reference is made 
+to the physical equipment. 
+What about the poor program- 
+mer? Well, to tell the honest truth, 
+he was hardly noticed. For one thing, 
+the first machines were so bulky that 
+you could hardly move them and 
+besides that, they required such ex- 
+tensive maintenance that it was quite 
+natural that the place where people 
+tried to use the machine was the 
+same laboratory where the machine 
+had been developed. Secondly, the 
+programmer's somewhat invisible 
+work was without any glamour: you 
+could show the machine to visitors 
+and that was several orders of mag- 
+nitude more spectacular than some 
+sheets of coding. But most important 
+of all, the programmer himself had 
+a very modest view of his own work: 
+his work derived all its significance 
+from the existence of that wonderful 
+machine. Because that was a unique 
+machine, he knew only too well that 
+his programs had only local signifi- 
+cance, and also because it was pat- 
+ently obvious that this machine wouht 
+have a limited lifetime, he knew that 
+very little of his work would have 
+a lasting value. 
+Firlally~ there is 
+yet another circumstance that had a 
+profound influence on the program- 
+tour's attitude toward his work: ot~ 
+the one hand, besides being unre- 
+liable, his machine was us,mlty too 
+slow and its memory was usually 
+too small, i.e, he was faced with 
+a pinching shoe, while on the other 
+hand its usuaIty somewhat queer 
+order code would cater for the most 
+unexpected constructions. And in 
+those days many a .clever program- 
+mer derived an immense intellectual 
+satisfaction from the cunning tricks 
+by means of which he contrived to 
+squeeze the impossible into the con- 
+straints of his equipment. 
+Two opinions about program- 
+ruing date from those days. I men- 
+tion them now; I shall return to 
+them later. The one opinion was that 
+a really competent programmer 
+should be puzzle-minded and very 
+fond of clever tricks; the other opin- 
+ion was that programming was noth- 
+ing more than optimizing the effi- 
+ciency of the computational process, 
+in one direction or the other. 
+The latter opinion was the result 
+of the frequent circumstance that, 
+indeed, the awfllable equipment was 
+a painfully pinching shoe, and in 
+those clays one often encountered 
+tbe naive expectation that, once more 
+powerful machines were available, 
+programming would no longer be a 
+problem, for then the struggle to 
+push the machine to its limits would 
+no longer be necessary and that was 
+all that programming was about, 
+wasn't it? But in the next decades 
+something completely different hap- 
+pened: more powerful machines be- 
+came available, not just an order 
+of magnitude more powerful, even 
+several orders of magnitude more 
+powerful. But instead of finding our- 
+selves in a state of eternal bliss with 
+all programming problems solved, 
+we found ourselves up to our necks 
+in the software crisis! How come? 
+There is a minor cause: in one 
+or two respects modern machinery 
+:860 
+Communications 
+October 1972 
+of 
+Volume 15 
+the ACM 
+Number 10
+=== PAGE 3 ===
+is basically more difficult to handle 
+than the old machinery. Firstly, we 
+have got the ~/"o ir~terrupts, occur- 
+ring at unpredictable and irreproduc- 
+ible moments; compared with the old 
+sequential machine that pretended 
+to be a fully deterministic automaton, 
+this has been a dramatic change, 
+and many a systems programmer's 
+grey hair bears witness to ~he fact 
+that we should not talk lightly about 
+the logical problems created by that 
+feature. Secondly, we have got ma- 
+chines equipped with multilevel 
+stores, 
+presenting us problems of 
+mgmagement strategy that, in spite 
+of the extensive literature cm the 
+subject, still rcmaita rather elusive. 
+So much for the added complication 
+due to structural 
+changes of the 
+actual machines. 
+But I called this a minor cause; 
+tile major cause is... that the ma- 
+chines have become several orders 
+of' magnitude more powerful! To 
+put it quite bluntly: as tong as there 
+were no machines, programming was 
+no problem at all; when we had a 
+few weak computers, programmi~lg 
+became a mild problem, and now 
+we have gigantic cornputers, pro- 
+gramming has become an equally 
+gigantic problem. In tMs sense the 
+electronic industry has not solved a 
+single problem, it has only created 
+them--it has created the problem of 
+using its products. To put it in an- 
+other way: as the power of available 
+machines grew by a factor of more 
+than a thousand, society's ambition 
+to apply these machines grew in pro- 
+portion, and it was the poor pro- 
+grammer who found his job in this 
+exploded field of tension between 
+ends and means. The increased power 
+of the hardware, together with the 
+perhaps even more dramatic increase 
+in its reliability, made solutions fea- 
+sible that the programmer had not 
+dared to dream about a few years 
+before. And now, a few years later, 
+he had to dream about them and, 
+even worse, he had to transform 
+such dreams into reality[ Is it a 
+wonder that we found ourselves in 
+a software crisis? No, certainly not, 
+and as you may guess, it was even 
+predicted well in advance; but the 
+861 
+trouble with minor prophets, of 
+course,, is d:n.~t it is only /live years 
+later that you really know that they 
+had been right. 
+Then° in the mid sixties some- 
+thit~.g terdb!e happened: 
+the com- 
+puters of Lilt so-called third genera- 
+don made their appearance. 
+The 
+official literature tells us that their 
+price/performance 
+ratio has been 
+one of the major design ob cctives. 
+But if you take as "performance" 
+the duty cycle of the machine's vari- 
+ous components, little will prevent 
+you from ending up with a design 
+in which the major part of your per- 
+t!ormance goat is reached by internal 
+housekeeping activities of doubtful 
+necessity. And if your definition of 
+price is the price to be paid for 
+the hardware, little will prevent you 
+from ending up with a design that 
+is terribly hard to program for: for 
+instance the order code might be 
+such as to enforce, either upon the 
+programmer or upon the system, 
+early binding decisions presenting 
+conflicts that really cannot be re- 
+solved. And to a large extent these 
+unpleasant possibilities seem to have 
+become reality. 
+When these machines were an- 
+nounced and their functional speci- 
+fications 
+became 
+known, 
+many 
+among us must have become quite 
+miserable; at least I was. It was 
+only reasonable to expect that such 
+machines would flood the comput- 
+ing community, and it was therefore 
+all the more important that their de- 
+sign should be as sound as possible. 
+But the design embodied such seri- 
+ous flaws that I felt that with a 
+single stroke the progress of com- 
+puting science had been retarded by 
+at lent ten years; it was then that 
+I had the blackest week in the whole 
+of my p~o.fessional life. Perhaps the 
+most saddening thing now is that, 
+even filer all those years of frustrat- 
+ing experience, still so many people 
+honestly beEeve that some law of 
+natme tells us that machines have 
+to b:t that way. They silence their 
+douk;s by observing how many of 
+these machines have been sold, and 
+derive from that observation the false 
+sense of security that, after all, the 
+Communications 
+of 
+the ACM 
+design cannot have been that bad. 
+But upon closer inspection, that line 
+of defense has the same convincing 
+strength as the argument that cig- 
+arette smoking must be healthy be- 
+cause so many people do it. 
+It is in this connection that I 
+regret that it is not custonlary 
+for 
+scientific journals in the comp~ting 
+area to publish reviews of newly an- 
+nounced computers in much the same 
+way as we review scientific publica- 
+tions: to review machines would be 
+at least as important. And here I 
+have a confession to make: in the 
+early sixties 1 wrote such a review 
+with the intention of submitting it 
+to Communications, but in spite of 
+d~e fact that the few colleagues to 
+whom the text was sent for their aG 
+vice urged me to do so, I did not dare 
+to do it, fearing that the difficulties 
+either for myself or for the Editorial 
+Board would prove to be too great. 
+This suppression was an act of cow- 
+ardiec on my side for which t blame 
+myself more and more. The di:Ncul- 
+ties I foresaw were a consequence of 
+the absence of generally accepted 
+criteria, and although I was con- 
+vinced of the validity of the criteria 
+I had chosen to apply, I feared that 
+my review wouhI be refused or dis- 
+carded as "a matter of personal 
+taste." I still think that such reviews 
+would be extremely useful and i am 
+longing to see them appear, for their 
+accepted appearance 
+would be a 
+sure sign of maturity of the com- 
+puting community. 
+The reason that I have paid the 
+above attention to the hardware scene 
+is because I have the feeling that 
+one of the most important aspects 
+of any computing tool is its influence 
+on the thinking habits of those who 
+try to use it, and because I have 
+reasons to believe that that influence 
+is many times stronger than is com- 
+monly assumed, Let us now switch 
+our attention to the software scene. 
+Here the diversity has been so 
+large that I must confine myself to 
+a few stepping stones. I am painfully 
+aware of the arbitrariness of my 
+choice, and I beg you not to draw 
+any conclusions with regard to my 
+appreciation of the many efforts that 
+October 1972 
+Volume 15 
+Number 10
+=== PAGE 4 ===
+wilt have to remain unmentioned. 
+hi the beg>lining there was the 
+},;Dssc in Cambridge, Engtimd, and 
+t think it quite inlpressive that right 
+froth the start the notion of a sub- 
+routine library played a central role 
+in the design of that machine and 
+of the way in which it should be 
+used. It is now nearly 25 years later 
+and the computing scene has changed 
+dramatically, but the notion of basic 
+software is still with us, and the 
+notion of the closed subroutine is 
+still one of the key concepts in pro- 
+gramming. We should recognize the 
+closed subroutine as one of the great- 
+cst software il,vcntions; it has sur- 
+vivcd three generations of computers 
+and it will survive a few more, bc- 
+cause it caters for the implementa- 
+tion of one of our basic patterns of 
+abstraction. Regrettably enough, its 
+importance has been underestimated 
+in the design of the third generation 
+computers, in which the great nurn- 
+her of explicitly named registers of 
+the arithrnetic unit implies a large 
+overhead on the subroutine mecha- 
+~lism. But even that did not kill the 
+concept of the subroutine, and we 
+can only pray that the mutation 
+won't prove to be hereditary. 
+The second major development 
+on the software scene that I would 
+like to mention is the birth of 
+FO~WaAN. At that time this was a 
+project of great temerity, and the 
+people responsible for it deserve our 
+great admiration. It would be abso- 
+lutely unfair to blame them for short- 
+comings that only became apparent 
+after a decade or so of extensive 
+usage: groups with a successful look- 
+ahead of ten years are quite rare! 
+tn retrospect we must rate FORTRAN 
+~S at SUCCessful coding technique, 
+but with very few effective aids to 
+conception, aids which are now so 
+urgently needed that time has come 
+to consider it out of date. The sooner 
+we can forget that FORTRAN ever ex- 
+isted, the better, for as a vehicle of 
+thought it is no longer adequate: i.t 
+wastes our brainpower, and it is too 
+risky and therefore too expensive to 
+~ilse. FORTRAN'S tragic fate has been 
+its wide acceptance, mentally chain- 
+ing thousands and thousands of pro- 
+~62 
+grammers to our past mistakes. 
+pray daily that more of my fellow- 
+programmers may find the means of 
+freeing themselves from the curse of 
+compatibility. 
+The third project ~ would not 
+like to leave unmentioned is Lisp, 
+a fascinating enterprise of a con> 
+pletely cliffercnt nature. With a few 
+very basic principles at its founda- 
+tion, it has shown a remarkable sta- 
+bility. Besides that, L~sp has been 
+the carrier for a considerable nun> 
+bcr of, in a sense, our rnost so- 
+phisticated computer applications. 
+I,Isp has jokingly been described as 
+"the most intelligent way to misuse 
+a computer." t think that description 
+a great compliment because it trans- 
+mits the full flavor of liberation: it 
+hits assisted a number of our most 
+gifted fellow humans in thinking 
+previously impossible thoughts. 
+The fourth project to be men- 
+tioned is AI.C;OL 60. While up to the 
+present clay FORTRAN programmers 
+still tend to understand their pro- 
+gramming language in terms of the 
+specific implementation they are 
+working with-hence the prevalence 
+of octal or hexadecimal dumps- 
+while the definition of l.isp is still 
+a curious mixture of what the lan- 
+guage means and how the mecha- 
+nism works, the famous Report on 
+the Algorithmic Language ALGOL 60 
+is the fruit of a genuine effort to 
+carry abstraction a vital step further 
+and to define a programming lan- 
+guage in an implementation-inde- 
+pendent way. One could argue that 
+in this respect its authors have been 
+so successful that they have created 
+serious doubts as to whether it could 
+be implemented at all:! The report 
+gloriously demonstrated the power of 
+the formal method BNF, now fairly 
+known as Backus-Naur-Form, and 
+the power of carefully phrased Eng- 
+lish, at least when used by some- 
+one as brilliant as Peter Naut. I 
+think that it is fair to say that only 
+very few documents as short as this 
+have had an equally profound in- 
+fluence on the computing commu- 
+nity. The ease with which in later 
+years the names ALGOL and ALGOL- 
+like have been used, as an unpro- 
+Communications 
+of 
+the ACM 
+tected trademark, to lend glory to 
+a number of sometimes haldly re- 
+lated younger projects is a some. 
+what shocking compliment to ALooL's 
+statacling. The strength of ~Nir as a 
+defining device is responsible for 
+what ~ regard as one of the Weak. 
+nesses of the language: an over- 
+elaborate 
+and 
+not to(> systematic 
+syntax could now be crammed ittto 
+the confines of very few pages. With 
+a device as powerful as BNF, the 
+Report 
+on the Algorithmic Lan- 
+guage At.eel. 60 should have been 
+much shorter. Besides that, I am 
+getting very doubtful about AI.GOl. 
+60% parameter mechanism: it al- 
+lows the prograrnmcr so much con> 
+binatorial freedom that its conlident 
+use requhTes a strong discipline from 
+the programmer. Besides being ex- 
+pensive to implenaent, it seems dan- 
+gerous to use. 
+Finally, although the subject is 
+not a pleasant oilo, t must nlention 
+PL/t, a progranlming hmguage for 
+which the dctining documentation is 
+of a frightening size and complexity. 
+[)sing PL/~ mast be like flying a 
+piano with 7,000 buttons, switches. 
+and handles to manipulate in the 
+cockpit. I absolutely fail to see how 
+we can keep our growing programs 
+firmly within our intellectual grip 
+when by its sheer baroqueness the 
+programming language-our basic 
+tool, mincl you!-already escapes 
+our intellectual control. And if I 
+have to describe the influence eL/l 
+can have on its users, the closest 
+metaphor that comes to my mind 
+is that of a drug. I remember 
+from a symposium on higher level 
+programming languages a lecture 
+given in defense of eL/I by a man 
+who described himself as one of its 
+devoted users. But within a one-hour 
+lecture in praise of eL/L he man- 
+aged to ask for the addition of about 
+50 new "features," little supposing 
+that the main source of his problems 
+could very well be that it contained 
+already far too many "features." 
+The speaker displayed all the de- 
+pressing symptoms of addiction, re- 
+duced as he was to the state of 
+mental stagnation in which he could 
+only ask for more, more, more .... 
+October 1972 
+Volume 15 
+Number 10
+=== PAGE 5 ===
+When VOIZTRAN has been called an 
+i~fa~ltile disorder, 
+full >*JI, with 
+its growth characteristics of a dan- 
+gerous tt.tmor, 
+could 
+turn 
+oult to be 
+a fataI disease. 
+So much for the past. But there 
+is no point in making mistakes un- 
+less thereafter we are able to learn 
+front them. As a matter of fact, I 
+think that we have learned so much 
+that within a few years program- 
+ruing can be a~? activity vastly dif- 
+terent from what it has been up 
+tilt now, so dilt'erent that we had 
+better prepare ourselves for the 
+shock. I.et me sketch for you one of 
+the possible futures. At first sight, 
+this vision of programming in per- 
+haps already tile near future may 
+strike you as utterly fantastic. Let 
+me therefore also .add the considera- 
+tions that might lead one to the con- 
+clusion that this vision could be a 
+very real possibility. 
+Tile vision is that, well before 
+the seventies have run to comple- 
+tion, we shall be able to design and 
+implement the kind of systems that 
+are now straining our programming 
+ability at the expense of only a few 
+percent in man-years of what they 
+cost us now, and that besides that, 
+these systems will be virtually free of 
+bugs. These two improvements go 
+hand in hand. In the latter respect 
+software seems to be different from 
+many other products, where as a rule 
+a higher quality implies a higher 
+price. Those who want really reli- 
+able software will discover that they 
+must find means of avoiding the 
+majority of bugs to start with, and 
+as a result the programming process 
+will become cheaper. If you want 
+more effective programmers, you will 
+discover that they should not waste 
+their time debugging-they should 
+not introduce the bugs to start with. 
+In other words, both goals point to 
+the same change. 
+Such a drastic change in such 
+a short period of time would be a 
+revolution, and to all persons that 
+base their expectations for the future 
+on smooth extrapolation of the re- 
+cent past-appealing to some unwrit.- 
+ten laws of sociaI and cultural in- 
+ertia-the chance :that this drastic 
+cha~?ge will take place must seem 
+negligible. But we all 
+know that 
+sometimes revolutions do take place! 
+And what are tlle chances for this 
+one? 
+There seem to be three major 
+coHditions that must be fulfilled. The 
+world at large must recognize the 
+need for the change; secondly, the 
+economic need for it must be suf- 
+ficiently strong; and, thirdly, the 
+change must be technically feasible. 
+Let me discuss these three conditions 
+in the above order. 
+With respect to the recognition 
+of Ihe need for greater reliabilii:y of 
+software, I expect no disagreement 
+anymore. Only a few years ago this 
+was different: to talk about a soft- 
+ware crisis was blasphemy. The turn- 
+ing point was tile Conference on 
+Software Engineering in Garmisch, 
+October 
+1968, a conference that 
+created a sensation as there occurred 
+the first open admission of the soft- 
+ware crisis. And by now it is gen- 
+erally recognized that the design of 
+any large sophisticated system is go- 
+ing to be a very difficult job, and 
+whenever one meets people respon- 
+sine for such undertakings, one finds 
+them very much concerned about 
+the reliability issue, and rightly so. 
+In short, our first condition seems 
+to be satisfied. 
+Now for the economic need. 
+Nowadays one often encounters the 
+opinion that in the sixties program- 
+ruing has been an overpaid profes- 
+sion, and that in the coming years 
+programmer salaries may be expected 
+to go down. Usually this opinion is 
+expressed in connection with the re- 
+cession, but it could be a symptom 
+of something different and quite 
+healthy, viz. that perhaps the pro- 
+grammers of the past decade have 
+not done so good a job as they 
+should have done. Society is getting 
+dissatisfied with the performance of 
+programmers and of their products. 
+But there is another factor of much 
+greater weight. In the present situa- 
+tion it is quite usual that for a 
+specific system, the price to be paid 
+for the development of the software 
+is of the same order of magnitude 
+as the price of the hardware needed, 
+and society more or less accepts 
+that. But hardware manufacturers 
+tell us that in the next decade hard- 
+ware prices can be expected to drop 
+with a factor of ten. If software de- 
+velopment were to continue to be 
+the same clumsy and expensive 
+process as it is now, things would 
+get completely out of balance. You 
+cannot expect society to accept this, 
+and therefore we ~t,st learn to pro- 
+gram an order of magnitude more 
+effectively. To put it in another way: 
+as long as machines were the largest 
+item on the budget, the program- 
+ruing profession could get alway with 
+its clumsy techniques; but that um- 
+brella will fold very rapidly. In short, 
+also our second condition seems to 
+be satisfied. 
+And now the third condition: is 
+it technically feasible? I think it 
+might be, and I shall give you six ar- 
+guments ill support of that opinion. 
+A study of program structure 
+has revealed that programs-even al- 
+ternative programs for the same task 
+and with the same mathematical con- 
+tent-can differ tremendously in their 
+intellectual manageability. A num- 
+ber of rules have been discovered, 
+violation of which will either seri- 
+ously impair or totally destroy the 
+intellectual manageability of the pro- 
+gram. These rules are of two kinds. 
+Those of the first kind are easily 
+imposed mechanically, viz. by a 
+suitably chosen programming lan- 
+guage. Examples are the exclusion 
+of gore-statements and of procedures 
+with more than one output para- 
+meter. For those of the second kind, 
+I at least-but that may be due to 
+lack of competence on my side- 
+see no way of imposing them me- 
+chanically, as it seems to need some 
+sort of automatic 
+theorem prover 
+for which I have no existence proof. 
+Therefore, for the time being and 
+perhaps forever, the rules of the 
+second kind present themselves as 
+elements of discipline required from 
+the programmer. Some of the rules 
+I have in mind are so clear that they 
+can be taught and that there never 
+needs 
+to be an argument as to 
+whether a given program violates 
+them or not. Examples are the re- 
+863 
+Communications 
+of 
+the ACM 
+October 1972 
+Volume 15 
+Number 10
+=== PAGE 6 ===
+quirements that no loop should be 
+written down without providing a 
+proof for termination or without 
+stating the relation whose invariance 
+will not be destroyed by the execu.- 
+tion of the repeatable statement, 
+I now suggest that we confine 
+ourselves to the design and imple- 
+mentation of intellectually manage- 
+able programs. If someone fears that 
+this restriction is so severe that we 
+cannot live with it, I can reassure 
+him: the class of intellectually man- 
+ageable program.s is still sufficiently 
+rich to contain many very realistic 
+programs for any problem capable 
+of algorithmic solution, We must 
+not forget that it is ~ot our business 
+to make programs; it is our busmess 
+to design classes of computations 
+that will display a desired behavior. 
+The suggestion of confining ourselves 
+to intellectually manageable programs 
+is the basis for the first two of my 
+announced six arguments. 
+Argument one is that, as the 
+programmer only needs to consider 
+intellectually manageable programs, 
+the alternatives he is choosing from 
+are much, much easier to cope with. 
+Argument two is that, as soon 
+as we have decided to restrict our- 
+selves to the subset of the intellectu- 
+ally manageable programs, we have 
+achieved, once and for all, a drastic 
+reduction of the solution space to 
+be considered. And this argument is 
+distinct from argument one. 
+Argument three is based on the 
+constructive approach to the prob- 
+lena of program correctness. Today 
+a usual technique is to make a pro- 
+gram and then to test it. But: pro- 
+gram testing can be a very effective 
+way to show the presence of bugs, 
+but it is hopelessly inadequate for 
+showing their absence. The only ef- 
+fective way to raise the confidence 
+level of a program significantly is 
+to give a convincing proof of its cor- 
+rectness. But one should not first 
+make the program and then prove 
+its correctness, because then the re- 
+quirement of providing the proof 
+would only increase the poor pro- 
+grammer's burden. 
+On 
+the con- 
+trary: the programmer should let 
+correctness proof and program 
+864 
+grow .hand in hand. Argument three 
+is essentially based on the following 
+observation if one first asks oneself 
+what the str~cture of a convincing 
+proof would be and, having found 
+this, then constucts a program satis- 
+fying this proof's requirernents, then 
+these correctness concerns turn out 
+to be a very effective heuristic guid.. 
+ance. By definition this approach is 
+only applicable when we restrict our- 
+selves to intellectually manageable 
+programs, but it provides us with 
+effective means for finding a satis- 
+factory one among these. 
+Argument four has to do with 
+the way in which the amount of in- 
+tellectual effort needed to design a 
+program depends on the program 
+length. It has been suggested that 
+there is some law of nature telling us 
+that the amount of intellectual effort 
+needed grows with the square of 
+program length. But, thank good- 
+ness, no one has been able to prove 
+this law, And this is because it need 
+not be true. We all know that thc 
+only mental tool by means of which 
+a very finite piece of reasoning can 
+cover a myriad of cases is called 
+"abstraction"; as a result the effec- 
+tive exploitation of his powers of 
+abstraction must be regarded as one 
+of the most vital activities of a 
+competent programmer. In this con- 
+nection it might be worthwhile to 
+point out that the purpose of ab- 
+stracting is not to be vague, but to 
+create a new semantic level in which 
+one can be absolutely precise. Of 
+course I have tried to find a funda- 
+mental cause that would prevent our 
+abstraction mechanisms from being 
+sufficiently effective. But no matter 
+how hard I tried, I did not find such 
+a cause. As a result I tend to the 
+assumption--up till now not disproved 
+by experience-that by suitable ap- 
+plication of our powers of abstrac- 
+tion, the intellectual effort required 
+to conceive or to understand a pro- 
+gram need not grow more than pro- 
+portional to program length. A by- 
+product of these investigations may 
+be of much greater practical signifi- 
+cance, and is, in fact, the basis of 
+my fourth argument. The by-product 
+was the identification of a number 
+Communications 
+of 
+the ACM 
+of patterns of abstraction that play 
+a vital role in the whole process 
+of composing programs. Enough is 
+known about these patterns of ab- 
+straction that you could devote a 
+tecture to each of them. What the 
+familiarity and conscious knowledge 
+of these patterns of abstraeti<m irr> 
+ply dawned upon me when I realized 
+that, had they been common knowl-- 
+edge 15 years ago, the step from 
+~NF to syntax-directed compilers, for 
+instance, could have taken a few 
+minutes instead of a few years. There- 
+fore I prescott our recent knowledge 
+of vital abstraction patterns as the 
+fourth argument. 
+Now for the fifth argument. It 
+has to do with the b~fluence of the 
+tool we are trying to use upon our own 
+thinking habits. I observe a cultural 
+tradition, which in all probability 
+has its roots in the Renaissance, to 
+ignore this influence, to regard the 
+human mind as the supreme and 
+autonomous master of its artifacts. 
+But if I start to analyze the thinking 
+habits of myself and of my fel- 
+low human beings, I come, whether 
+I like it or not, to a completely dif- 
+ferent conclusion, wig. that the tools 
+we are trying to use and the lan- 
+guage or notation we are using to 
+express or record our thoughts arc 
+the major factors determining what 
+we can think or express at all! The 
+analysis of the influence that pro- 
+gramming languages have on the 
+thinking habits of their users, and 
+the recognition that, by now, brain- 
+power is by far our scarcest re- 
+source, these together give us a new 
+collection of yardsticks for compar- 
+ing the relative merits of various 
+programming languages. The com- 
+petent programmer is fully aware of 
+the strictly limited size of his own 
+skull; therefore he approaches the 
+programming task in full humility, 
+and among other things he avoids 
+clever tricks like the plague. In the 
+case of a well-known conversational 
+programming language I have been 
+told from various sides that as soon 
+as a programming community is 
+equipped with a terminal for it, a 
+specific phenomenon occurs that even 
+has a well-established name: it is 
+October 1972 
+Volume 15 
+Number t0
+=== PAGE 7 ===
+called "the one-liners." ;it takes o~e 
+of two different forms: one program- 
+me* plaices a one-line program on 
+the desk of another and Either he 
+proudly telis what it does and adds 
+Ihe question, "Can you code this in 
+less symbo!s?"-as if this were of 
+,sly conceptual rctcvance[--or he just 
+says, "'Guess what it does!" From 
+this observation we must conclude 
+that this language as a tool is an 
+open invitation for clever tricks; and 
+while exactly this may be the ex- 
+planation for some of its appeal, 
+i'ic. to those who like to show how 
+clever they are, 1 am sorry, but 
+I must regard this as one of the 
+most ctarnning things that can be 
+said about a programming lan- 
+guage. Another lesson we should 
+have learned from the recent past is 
+that the development of "richer" or 
+'more powerful" prograrnnling hm- 
+guages was a mistake in the sense 
+that these baroque monstrosities, 
+these conglomerations of idiosyn- 
+crasies, are really unmanageable, both 
+mechanically and mentally. I see a 
+great future :for very systematic and 
+very modest programming languages. 
+When I say "modest," I mean that, 
+for instance, not only ALGOL 60'S 
+"for clause," but even FORTRAN'S "DO 
+oop" may find themselves thrown 
+out as being too baroque. I have run 
+a little programming experiment with 
+really experienced volunteers, but 
+omething quite unintended and quite 
+unexpected turned up. None of my 
+volunteers found the obvious and 
+most elegant solution. Upon closer 
+analysis this turned out to have a 
+common source: their notion of rep- 
+tition was so tightly connected to 
+he idea of' an associated controlled 
+variable to be stepped up, that they 
+were mentally blocked from seeing 
+he obvious. Their solutions were 
+ess efficient, needlessly hard to un- 
+erstand, and it took them a very 
+ong time to find them. It was a re- 
+vealing, but also shocking experi- 
+nce for me. Finally, in one respect 
+ne hopes that tomorrow's program- 
+ming languages will differ greatly 
+rom what we are used to now: to 
+much greater extent than hitherto 
+hey should invite us to reflect in 
+65 
+the structure of what we write down 
+all abstractions needed to cope con- 
+ceptually whh the complexity of what 
+we are designing. So much for tile 
+greater adequacy of our future tools, 
+which was the basis of the fifth 
+argument. 
+As an aside I would like to in- 
+sert a warning to those who identify 
+the difficulty of the programming 
+task with the struggle against the 
+inadequacies of our current tools, 
+because they might conclude that, 
+once our tools will be nmch more 
+adequate, programming will no longer 
+be a problem. Programming will re- 
+main very difficult, because once we 
+have freed ourselves from tile cir- 
+cumstantial cumbersomeness, we will 
+find ourselves free to tackIe the 
+probIems that are now well beyond 
+our programming capacity. 
+You can quarrel with my sixth 
+argument, for it is not so easy to 
+collect experimental evidence for its 
+support, a fact that will not prevent 
+me from believing in its validity. Up 
+till now I have not mentioned the 
+word "hierarchy," but I think that 
+it is fair to say that this is a key 
+concept for all systems embodying a 
+nicely factored solution. 1 could ever, 
+go one step further and make an 
+article of faith out of it, >'iz. that 
+the only problems we can really 
+solve in a satisfactory manner are 
+those that finally admit a nicely fac- 
+tored solution. At first sight this 
+view of human limitations may strike 
+you as a rather" depressing view of 
+our predicament, but I don't feel it 
+that way. On the contrary, the best 
+way to learn to live with our limita- 
+tions is to know them. By the time 
+that we are sufficiently modest to try 
+factored solutions only, because the 
+other efforts escape our intellectual 
+grip, we shall do our utmost to avoid 
+all those interfaces impairing our abil- 
+ity to factor tile system in a helpful 
+way. And I can not but expect that 
+this will repeatedly lead to the dis- 
+covery that an initially untractable 
+problem can be factored after all. 
+Anyone who has seen how the ma- 
+jority of the troubles of the compil- 
+ing phase called "code generation" 
+can be tracked down to funny prop- 
+Communications 
+of 
+the ACM 
+erties of the order code will know 
+a simple example of the kind of 
+things I have in mind. The wider 
+applicability of nicely factored solu- 
+tions is my sixth and last argument 
+for the technical feasibility of the 
+revolution that might take place in 
+the current ciecacle, 
+In principle I leave it to you to 
+decide for yourself how nmch weight 
+you are going to give to my con- 
+siderations, knowing only too well 
+that i can force no one else to share 
+my beliefs. As in each serious revolu- 
+tion, it will provoke violent opposi- 
+tion and one can ask oneself where 
+to expect tile conservative forces 
+trying to counteract such a develop- 
+ment. I don't expect them primarily 
+in big business, not even in the com- 
+puter business; I expect them rather 
+in the educational institutions that 
+provide today's training and in those 
+conservative 
+groups 
+of computer 
+users that think their old programs 
+so important that they don't think it 
+worthwhile to rewrite and improve 
+them. In this connection it is sad 
+to observe that on many a university 
+campus the choice of the central 
+computing facility has too often been 
+deternfined by the demands of a few 
+estabIished but expensive applica- 
+tions with a disregarcl of the ques- 
+tion, how many thousands of "small 
+users" who are willing to write their 
+own programs are going to suffer 
+from this choice. Too often, for 
+instance, high-energy physics seems 
+to have blackmailed the scientific 
+community with the price of its re- 
+maining experimental equipment. 
+The easiest answer, of course, is a 
+fiat denial of the technical feasibility, 
+but I am afraid that you need pretty 
+strong arguments for that. No reas- 
+surance, alas, can be obtained from 
+the remark that the intellectual ceil- 
+ing of today's average programmer 
+will prevent the revolution from tak- 
+ing place: with others programming 
+so much more effectively, he is liable 
+to be edged out of the picture any- 
+way. 
+There ,nay also be political im- 
+pediments. Even if we know how 
+to educate tomorrow's professional 
+programmer, it is not certain that 
+Octobei 1972 
+Volume 1.5 
+Number 10 
+y
+!
+i
+.li~
+~;
+=== PAGE 8 ===
+the society we are living in will allow 
+us to do so. The first effect of teach- 
+ing a methodology-rather thm~ dis- 
+seminating knowledge-is that of en- 
+hancing tlne capacities of the already 
+capable, thus magnifyi~/g the differ- 
+once in intelligence, hl a society in 
+which the educational system is used 
+as an instrumcrtt for the establish- 
+ment of a homogeuized cnkure, in 
+which the cream is prevented from 
+rising to the top 
+the education of 
+competent programmers coukt be 
+politically unpalatable. 
+Let mc conclude. Automatic com- 
+puters have now been with us for 
+a quarter of a century. They have 
+had a great impact on our society 
+hi their capacity of tools, but in that 
+capacity their influence will be but 
+a ripple on the sttrface of our cul- 
+ture compared with the much more 
+profound intk~ence they wilt have in 
+their capacity of intdlectual chal- 
+lenge which will be without precc- 
+delqt in the ctt/tural history of man- 
+kind. Hierarchical systems seem to 
+have the property that something 
+considered as an undivided entity on 
+one level is considered as a con> 
+posito object on thc next lOWEr level 
+of greater detail; ;.is a result the 
+natural grain of' space or time that 
+is applicable at each level decreases 
+by an order of magnitude when we 
+shift out" attention fronl one level to 
+the next lower one. We mlderstand 
+walls in terms of bricks, bricks in 
+terms of crystals, crystals in terms 
+of molecules, etc. As a result the 
+number of levels that can be distin- 
+guished meaningfully in a hierarchical 
+system is kind of proportional to the 
+logarithm of the ratio between the 
+largest and the smallest grain, and 
+therefore, unless this ratio is very 
+large, we cannot expect many levels. 
+In computer programming our basic 
+building block lms an associated time 
+grain of less than a microsecond, 
+but our program may take hours of 
+computation time. t do not know 
+of any other technology covering a 
+ratio of 10" or more: the computer, 
+by virtue of its fantastic speed, seems 
+to be the lirst to provide us with an 
+environnlcnt where highly hierarch- 
+ical artifacts arc both possibte and 
+~lecessary. This challenge, yiz. the 
+confrontation with the program- 
+ruing task, is so unique chat this 
+novel experience can teach as a lot 
+about ourselves, tt should deepen 
+our understanding of the processes 
+of design and creation; it should give 
+us better control over the task of 
+organizing ore" thoughts. If it did 
+not do so, to my taste we should 
+not deserve the computer at all[ 
+It has already taught us a few 
+lessons, and the one I have chosen 
+to stress in this talk is the %llow- 
+ing. We shall do a much better pro- 
+gramming job, provicted that we 
+approach the task with a full appre- 
+ciation of its tremendous diflicuIty, 
+provided that we stick to modest 
+and elegant programming languages, 
+provided that we respect the intrhlsic 
+limitations of the human rnind and 
+approach the task as Very Humbb 
+Programmers. 
+[References to the following foot- 
+notes are found in the extract from the 
+Turing Award citation on page 859.] 
+aSome meditations on advanced program- 
+ruing, Proceedings of the IFIP Congress 
+1962, 535-538; Programming considered 
+as a human activity, Proceedings of the 
+IFIP Congress 1965, 213-217. 
+~Solution of a problem in concurrent pro- 
+866 
+gramming, control, CACM 8 (Sept. 1965), 
+569; The structure of the "THE" multi- 
+programming system, CACM l 1 (May, 
+1968), 341-346. 
+aGo to statement considered harmful, 
+CACM 11 (Mar. 1968), 147-148. 
+*A short introduction to the art of 
+computer programming, Technische Hoge- 
+school, Eindhoven, 1971. 
+Communications 
+of 
+the ACM 
+October 1972 
+Volume 15 
+Number 10

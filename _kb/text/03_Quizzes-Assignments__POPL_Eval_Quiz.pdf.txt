@@ -1,0 +1,232 @@
+# source: 03_Quizzes-Assignments/POPL Eval Quiz.pdf
+# ocr_pages: 1,2,3,4,5,6,7,8,9
+=== PAGE 1 ===
+9/28/26,10:42PM OOPQuiz:Attemptreview|BITSGoa
+Dashboard / My courses / CS F301 / Object Orientation: Abstract Data Types / OOP Quiz
+Status Finished
+Started Monday,28 September 2026, 10:02 PM
+Completed Monday,28 September 2026,10:42 PM
+Duration 40 mins
+Grade Not yet graded
+Question 1
+Complete
+Markedoutof 8.00
+For each stack, start at its top, form a string using successive top-down elements, and stop at
+the first null byte "\o'. What comparison keys are produced and what is the ascending order?
+Input/scenario data
+S1 top
+S2 top
+S3 top -> .P.
+Estimated time:2-3 minutes
+Each stack is read from the top, and characters are appended until the first null byte "o', which
+acts as thestring terminator.
+For Stack S1: string is formed as [c,a,t]. The element 'x' is not a part of the key and is never
+read because it appears after/below thestring terminator'\o'.
+For Stack S2: string is formed as [c,a,r].
+For Stack S3: string is formed as [d,o,g].
+Thus, keys produced:
+S1: "cat"
+S2: "car"
+S3: "dog"
+Comparing the keys produced lexicographically, ascending order: S2 ("car") < S1 ("cat") < S3
+("dog").
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 1/9
+=== PAGE 2 ===
+9/28/26,10:42PM OOPQuiz:Attemptreview|BITSGoa
+Question 2
+Complete
+Marked out of 4.00
+In the context of the professor's module-independence exercise, give one potential modularity
+advantageofDesignBoverDesignA.
+Code/relevantfragment
+//Design A
+class MyListextends Storage{
+//Design B
+class MyList {
+private Storage storage;
+Estimated time:2-3minutes
+The Design A suffers from the Fragile Base Class problem as mentioned in the "Goodbye,
+OOP" article. MyList is dependent on Storage's implementation. All public methods of
+Storage also become available in MyList, so users can access things that may not be
+intended for use. An internal change in Storage can break MyList without MyList's code
+changing.
+In Design B (private Storage storage), MyList uses composition. MyList contains a Storage
+object and uses its methods when needed. Users only see the methods provided by
+MyList. This means Storage can be changed or replaced more easily without affecting the
+users of MyList.
+Thus, the advantage is that Design B keeps the two modules separate by hiding Storage
+behind MyList's own interface.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 2/9
+=== PAGE 3 ===
+9/28/26,10:42PM OOPQuiz:Attemptreview|BITSGoa
+Question 3
+Complete
+Mark 2.00 out of 2.00
+What do size and count represent in the following MyDictionary state?
+Code / relevant fragment
+private Record[]records;
+private int size = 0;
+private int count = 0;
+MyDictionary(int initialSize）{
+records = new Record[initialSize];
+size = initialSize;
+count =0;
+Estimatedtime:30seconds
+Select one:
+A.size is occupied records; count is array capacity.
+B. Both always have the same value.
+C. size is maximum capacity; count is the current number of stored records.
+D.size is the key range; count is the number of comparisons.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 3/9
+=== PAGE 4 ===
+9/28/26,10:42 PM OOPQuiz:Attempt review|BITS Goa
+Question 4
+Complete
+Markedoutof 8.00
+Replace the switch logic below with code that obeys the actual Comparable.compareTo0
+contract.
+Code/relevantfragment
+switch(comparisonResult）{
+caseO:returnComparison.MATCHING;
+case -1: return Comparison.PREDECESSOR;
+case 1:return Comparison.SUccESSOR;
+default:returnComparison.INCOMPARABLE;
+Estimated time:2minutes
+if (comparisonResult == 0)
+return Comparison.MATCHING;
+else if (comparisonResult < 0)
+returnComparison.PREDECESSOR;
+else
+return Comparison.SUCCESSOR;
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 4/9
+=== PAGE 5 ===
+9/28/26,10:42PM OOPQuiz:Attempt review|BITSGoa
+Question 5
+Complete
+Marked out of 8.00
+The class exercise asks students to make a single instance of a class deviate in a call to a
+method from all other instances of the class. Without modifying every Stack, give one Java-
+oriented way of making only one created object use different removeO behavior. What OO
+mechanism is actually being used?
+Code / relevant fragment
+class Stack {
+public Object remove(）{...}
+Estimated time:3minutes
+Create that one object as an anonymous inner class that overrides removeO:
+Stack s = new Stack0 { @Override public Object remove0 {/* different behavior */}};
+This changes the behavior only for this particular object. The Stack class and other Stack
+objects remain unchanged.
+OOMechanism:Thisusesinheritanceandmethodoverriding.Javacreates ananonymous
+subclass of Stack, and dynamic dispatch makes the overridden removeO run for that object.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 5/9
+=== PAGE 6 ===
+9/28/26,10:42PM OOPQuiz:Attempt review|BITS Goa
+Question 6
+Complete
+Mark2.00 out of2.00
+Which statements correctly characterize the fragile-base-class example in the article?
+Estimated time:1minute
+Select all correct answers. Each correct selection earns one-third of the marks; selecting the
+incorrect option deducts all available marks. The minimum score is zero.
+Select one ormore:
+A.The subclass may break even though its own source code was not modified.
+B.A base-class internal implementation change can alter which overridden method gets
+called.
+C.The public behavior of the base class itself must necessarily become incorrect.
+D. The subclass may depend on implementation details of the superclass.
+Question 7
+Complete
+Mark 2.00 out of 2.00
+What does the current implementation actually do with ordering?
+Code / relevant fragment
+private Ordering ordering = Ordering.NoNE;
+enum Ordering{
+NONE，ASC，DESC，PRIQASC，PRIQDESC，BST
+Estimatedtime:30seconds
+Select one:
+O A.It sorts all inserts automatically.
+B. It selects a binary search tree.
+It changes the implementation of geto.
+D.Nothing beyond initializing the field.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 6/9
+=== PAGE 7 ===
+9/28/26,10:42PM OOPQuiz:Attempt review|BITS Goa
+Question 8
+Complete
+Marked out of 2.00
+Explain"Contain-and-Delegate" in one or two sentences using the article's Copier, Scanner,
+and Printer example.
+Estimated time:1minute
+Contain-and-Delegate means reusing behavior by containing other objects instead of
+inheriting from them. From the Goodbye, OOP article, Copier contains a Scanner and a Printer,
+and its startO method delegates the work to printer.startO, avoiding the problem of choosing
+between the two inherited startO methods. This makes the code more flexible because Copier
+can choosewhich object'sbehavior touse.
+Question 9
+Complete
+Marked out of 4.00
+Assume the missing brace has been repaired but the method remains as shown. The array
+begins with keys [5, 9, 12]. What does get(9) return?
+Code/relevantfragment
+public Record get(int key）{
+for（Record record : records）{
+if(record.key == key)
+return record;
+return null;
+return null;
+Estimated time: 1 minute
+get(9) returns null.
+The return null is inside the for loop. The method exits after checking only the first record (key
+5 not equal to 9), and returns null. The record with key 9 is never checked.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 7/9
+=== PAGE 8 ===
+9/28/26,10:42 PM OOPQuiz:Attempt review|BITS Goa
+Question 10
+Complete
+Mark 2.00 out of 2.00
+Which statement most closely describes the Banana-Monkey-Jungle problem as discussed in
+the supplied article?
+Estimated time:45seconds
+Select one:
+OA.Every subclass must contain a monkey object.
+Reusing one desired class may force us to bring along its parent hierarchy and other
+B.
+dependencies.
+Composition always creates cyclic dependencies.
+D. Interfaces require every implementation class to be copied.
+Question 11
+Complete
+Marked out of 4.00
+True or False: Because AbstractRecord exists, this Dictionary can already store arbitrary
+subclasses of AbstractRecord. Justify your answer.
+Code/relevantfragment
+private Record[]records;
+publicvoidput(Record record）{
+Estimated time:1 minute
+FALSE.
+The dictionary uses Record[] and put(Record record), so it only accepts objects that are Record
+(or subclasses of Record). A different subclass of AbstractRecord cannot be passed to put()
+unlessthedictionaryischanged touseAbstractRecordinstead.
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 8/9
+=== PAGE 9 ===
+9/28/26,10:42PM OOPQuiz:Attemptreview|BITSGoa
+Question 12
+Complete
+Marked out of 4.00
+The original statement is changed from records[count++] = record; to records[++count] =
+record;. Assume count initially equals 0 and the array has length 3. What immediately changes
+if nothing else is modified?
+Code / relevant fragment
+// Original
+records[count++]=record;
+// Changed
+records[++count] = record;
+Estimated time:2 minutes
+With ++count, count increases before it is used as the array index. So the first record is stored
+at records[1] instead of records[0]. This means the third insert tries to use records[3], which is
+outside the array and causes an ArraylndexOutOfBoundsException. Therefore, only 2 records
+canbe stored in the array of size 3.
+TasksfortheEndoftheOOModule
+Jump to activity
+The Dictionary bundle with some modifications ...
+https://quanta.bits-pilani.ac.in/mod/quiz/review.php?attempt=8424&cmid=5360 6/6

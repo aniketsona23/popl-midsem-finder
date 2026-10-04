@@ -1,0 +1,23 @@
+# source: 02_Past-Papers/img/qb-memory-and-frame.svg
+A C program's memory: who allocates what
+Code (text)
+compiled functions
+Static storage
+globals, static locals · fixed at compile/link time
+Heap
+malloc / free · library, run time ↓ grows up
+(free space)
+Stack
+one frame per call (automatic storage)
+grows toward lower addresses ↓
+Compiler's role: static → lays out; stack → emits sub %esp / offsets;
+heap → only sizes and types (malloc itself is a library call).
+One frame of  f(n)  with  int array[n];
+parameter n
+return address
+saved base pointer (caller's frame)
+other locals / temporaries
+array[0 … n-1]  (VLA)
+size known only when f is activated:
+%esp is lowered by n·sizeof(int) at that moment
+So frame size is NOT a compile-time constant here.

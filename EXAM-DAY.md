@@ -1,0 +1,25 @@
+# Exam-day checklist
+
+## Night before / morning (with internet is fine)
+- [ ] `python _kb\tools\selftest.py` → ALL GOOD
+- [ ] `start.cmd` opens the POPL Finder; search "binding time" → hits
+- [ ] Read `_kb/topics/00-exam-patterns.md` and `INDEX.md §4` (the ten sentences)
+- [ ] Skim cheat sheets 01, 02, 03 once more (these cover ~70 % of past marks)
+- [ ] Laptop charged + charger; folder copied to USB; no pending updates; Wi-Fi off is OK (nothing needs it)
+- [ ] Confirm with the invigilator what is allowed (notes, own code, local tools). Use only what is permitted.
+
+## First 5 minutes of the paper
+1. Read every question; note marks and the **exact answer format** (table / one line / sentences / units).
+2. If code is printed: type or paste it into files **immediately**, preserving the printed line numbers (needed for "which lines…" questions). Compile and run it with gcc in a spare terminal while reading on.
+3. Order: cheap 1-line questions → code-analysis questions (run lab while writing) → essay (OO design) → format check.
+
+## Per question (≈ 1 minute per mark)
+a few keywords in the Finder → open the cheat sheet → run evidence → fill `_kb/answers/TEMPLATE.md` → paste.
+Words that score: *compile time, linking time, procedure-activation time, run time; declaration vs definition; type information (size, layout); symbol table; many declarations one unique definition; information hiding; contain-and-delegate; fragile base class.*
+
+## Last 5 minutes
+- [ ] Every sub-part answered (a/b, i–v, rows 1–10)
+- [ ] Format exactly as instructed; no cross-outs in tables; "necessary" never together with "harmful"
+- [ ] Units on sizes ("bytes" or "multiples of sizeof(void*)"); symbolic where machine-dependent
+- [ ] Line numbers refer to the printed listing, module by module
+- [ ] Nothing claimed that you did not run or derive

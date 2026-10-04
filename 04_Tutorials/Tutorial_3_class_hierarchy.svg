@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <style>
+    .box   { fill:#f7f9fc; stroke:#2c3e50; stroke-width:1.6; }
+    .abs   { fill:#fff6e0; stroke:#8a5a00; stroke-width:1.8; }
+    .store { fill:#e9f7ef; stroke:#1e6b3c; stroke-width:1.8; }
+    .sep   { stroke:#2c3e50; stroke-width:1; }
+    .t     { font-weight:700; font-size:14px; fill:#1b2733; }
+    .ti    { font-weight:700; font-size:14px; font-style:italic; fill:#5c3b00; }
+    .m     { fill:#1b2733; font-size:12px; font-family:Consolas, 'Courier New', monospace; }
+    .n     { fill:#44546a; font-size:12px; font-style:italic; }
+    .line  { stroke:#2c3e50; stroke-width:1.6; fill:none; }
+    .tri   { fill:#ffffff; stroke:#2c3e50; stroke-width:1.6; }
+    .dia   { fill:#2c3e50; stroke:#2c3e50; stroke-width:1.6; }
+    .title { font-size:17px; font-weight:700; fill:#1b2733; }
+  </style>
+
+  <text x="450" y="14" text-anchor="middle" class="title" dy="0">Tutorial 3 – Container class hierarchy</text>
+
+  <!-- ===== Container<T> (abstract) ===== -->
+  <rect class="abs" x="300" y="26" width="300" height="140" rx="4"/>
+  <text x="450" y="45" text-anchor="middle" class="ti">«abstract»  Container&lt;T&gt;</text>
+  <line class="sep" x1="300" y1="54" x2="600" y2="54"/>
+  <text class="m" x="310" y="72">+ put(const T&amp;) = 0</text>
+  <text class="m" x="310" y="88">+ get() : T = 0</text>
+  <text class="m" x="310" y="104">+ peek() const : const T&amp; = 0</text>
+  <text class="m" x="310" y="120">+ size() const : size_t = 0</text>
+  <text class="m" x="310" y="136">+ empty() : bool</text>
+  <text class="m" x="310" y="152">+ virtual ~Container()</text>
+
+  <!-- inheritance: hollow triangle at Container, bus, 4 verticals -->
+  <polygon class="tri" points="450,166 441,184 459,184"/>
+  <line class="line" x1="450" y1="184" x2="450" y2="212"/>
+  <line class="line" x1="120" y1="212" x2="765" y2="212"/>
+  <line class="line" x1="120" y1="212" x2="120" y2="240"/>
+  <line class="line" x1="335" y1="212" x2="335" y2="240"/>
+  <line class="line" x1="550" y1="212" x2="550" y2="240"/>
+  <line class="line" x1="765" y1="212" x2="765" y2="240"/>
+  <text x="458" y="200" class="n">is-a (public inheritance, overrides put/get/peek/size)</text>
+
+  <!-- ===== Stack ===== -->
+  <rect class="box" x="20" y="240" width="200" height="125" rx="4"/>
+  <text x="120" y="259" text-anchor="middle" class="t">Stack&lt;T&gt;</text>
+  <line class="sep" x1="20" y1="268" x2="220" y2="268"/>
+  <text class="n" x="30" y="284">LIFO</text>
+  <text class="m" x="30" y="302">- items_ : List&lt;T&gt;</text>
+  <text class="m" x="30" y="320">+ put  → pushFront</text>
+  <text class="m" x="30" y="336">+ get  → popFront</text>
+  <text class="m" x="30" y="352">+ peek → front</text>
+
+  <!-- ===== Queue ===== -->
+  <rect class="box" x="235" y="240" width="200" height="125" rx="4"/>
+  <text x="335" y="259" text-anchor="middle" class="t">Queue&lt;T&gt;</text>
+  <line class="sep" x1="235" y1="268" x2="435" y2="268"/>
+  <text class="n" x="245" y="284">FIFO</text>
+  <text class="m" x="245" y="302">- items_ : List&lt;T&gt;</text>
+  <text class="m" x="245" y="320">+ put  → pushBack</text>
+  <text class="m" x="245" y="336">+ get  → popFront</text>
+  <text class="m" x="245" y="352">+ peek → front</text>
+
+  <!-- ===== Deque ===== -->
+  <rect class="box" x="450" y="240" width="200" height="125" rx="4"/>
+  <text x="550" y="259" text-anchor="middle" class="t">Deque&lt;T&gt;</text>
+  <line class="sep" x1="450" y1="268" x2="650" y2="268"/>
+  <text class="n" x="460" y="284">both ends, no middle access</text>
+  <text class="m" x="460" y="302">- items_ : List&lt;T&gt;</text>
+  <text class="m" x="460" y="320">+ putFront / putBack</text>
+  <text class="m" x="460" y="336">+ getFront / getBack</text>
+  <text class="m" x="460" y="352">+ peekFront / peekBack</text>
+
+  <!-- ===== PriorityQueue ===== -->
+  <rect class="box" x="665" y="240" width="200" height="125" rx="4"/>
+  <text x="765" y="259" text-anchor="middle" class="t">PriorityQueue&lt;T,Less&gt;</text>
+  <line class="sep" x1="665" y1="268" x2="865" y2="268"/>
+  <text class="n" x="675" y="284">binary heap (max / min)</text>
+  <text class="m" x="675" y="302">- heap_ : vector&lt;T&gt;</text>
+  <text class="m" x="675" y="318">- siftUp / siftDown</text>
+  <text class="m" x="675" y="334">+ put / get  O(log n)</text>
+  <text class="m" x="675" y="350">+ PriorityQueue(List&lt;T&gt;)</text>
+
+  <!-- ===== composition: diamond at owner (bottom of Stack/Queue/Deque) ===== -->
+  <polygon class="dia" points="120,365 127,375 120,385 113,375"/>
+  <polygon class="dia" points="335,365 342,375 335,385 328,375"/>
+  <polygon class="dia" points="550,365 557,375 550,385 543,375"/>
+  <line class="line" x1="120" y1="385" x2="120" y2="432"/>
+  <line class="line" x1="335" y1="385" x2="335" y2="432"/>
+  <line class="line" x1="550" y1="385" x2="550" y2="432"/>
+  <text x="126" y="426" class="n">1</text>
+  <text x="341" y="426" class="n">1</text>
+  <text x="556" y="426" class="n">1</text>
+  <text x="140" y="410" class="n">has-a (private member, owns)</text>
+
+  <!-- ===== List<T> storage structure ===== -->
+  <rect class="store" x="50" y="432" width="560" height="152" rx="4"/>
+  <text x="330" y="452" text-anchor="middle" class="t">List&lt;T&gt;   – concrete storage structure</text>
+  <line class="sep" x1="50" y1="461" x2="610" y2="461"/>
+  <text class="n" x="60" y="477">circular doubly-linked list with sentinel header (Scott 10.1); Node : Link { T val }</text>
+  <text class="m" x="60" y="496">- header_ : Link,  n_ : size_t</text>
+  <text class="m" x="60" y="513">+ add:      pushFront / pushBack / insertAt(i, v)</text>
+  <text class="m" x="60" y="529">+ delete:   popFront / popBack / removeAt(i)</text>
+  <text class="m" x="60" y="545">+ read/upd: at(i) / update(i, v) / front / back</text>
+  <text class="m" x="60" y="561">+ rearrange: reverse / sort(cmp) / swapPositions / rotateLeft</text>
+  <text class="m" x="60" y="577">+ size / empty / clear / forEach</text>
+
+  <!-- ===== PriorityQueue has-a vector ===== -->
+  <polygon class="dia" points="765,365 772,375 765,385 758,375"/>
+  <line class="line" x1="765" y1="385" x2="765" y2="432"/>
+  <text x="771" y="426" class="n">1</text>
+  <rect class="box" x="665" y="432" width="200" height="72" rx="4"/>
+  <text x="765" y="451" text-anchor="middle" class="t">std::vector&lt;T&gt;</text>
+  <line class="sep" x1="665" y1="460" x2="865" y2="460"/>
+  <text class="n" x="675" y="477">array storage of the heap</text>
+  <text class="m" x="675" y="495">parent(i) = (i-1)/2</text>
+
+  <!-- ===== legend ===== -->
+  <rect x="665" y="520" width="200" height="64" fill="#ffffff" stroke="#9aa5b1" stroke-width="1" rx="4"/>
+  <polygon class="tri" points="680,532 673,546 687,546"/>
+  <text x="698" y="544" class="n">inheritance (is-a)</text>
+  <polygon class="dia" points="680,555 686,563 680,571 674,563"/>
+  <text x="698" y="567" class="n">composition (has-a)</text>
+</svg>

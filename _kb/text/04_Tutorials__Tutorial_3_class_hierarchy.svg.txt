@@ -1,0 +1,64 @@
+# source: 04_Tutorials/Tutorial_3_class_hierarchy.svg
+.box   { fill:#f7f9fc; stroke:#2c3e50; stroke-width:1.6; }
+    .abs   { fill:#fff6e0; stroke:#8a5a00; stroke-width:1.8; }
+    .store { fill:#e9f7ef; stroke:#1e6b3c; stroke-width:1.8; }
+    .sep   { stroke:#2c3e50; stroke-width:1; }
+    .t     { font-weight:700; font-size:14px; fill:#1b2733; }
+    .ti    { font-weight:700; font-size:14px; font-style:italic; fill:#5c3b00; }
+    .m     { fill:#1b2733; font-size:12px; font-family:Consolas, 'Courier New', monospace; }
+    .n     { fill:#44546a; font-size:12px; font-style:italic; }
+    .line  { stroke:#2c3e50; stroke-width:1.6; fill:none; }
+    .tri   { fill:#ffffff; stroke:#2c3e50; stroke-width:1.6; }
+    .dia   { fill:#2c3e50; stroke:#2c3e50; stroke-width:1.6; }
+    .title { font-size:17px; font-weight:700; fill:#1b2733; }
+Tutorial 3 – Container class hierarchy
+«abstract»  Container&lt;T&gt;
++ put(const T&amp;) = 0
++ get() : T = 0
++ peek() const : const T&amp; = 0
++ size() const : size_t = 0
++ empty() : bool
++ virtual ~Container()
+is-a (public inheritance, overrides put/get/peek/size)
+Stack&lt;T&gt;
+LIFO
+- items_ : List&lt;T&gt;
++ put  → pushFront
++ get  → popFront
++ peek → front
+Queue&lt;T&gt;
+FIFO
+- items_ : List&lt;T&gt;
++ put  → pushBack
++ get  → popFront
++ peek → front
+Deque&lt;T&gt;
+both ends, no middle access
+- items_ : List&lt;T&gt;
++ putFront / putBack
++ getFront / getBack
++ peekFront / peekBack
+PriorityQueue&lt;T,Less&gt;
+binary heap (max / min)
+- heap_ : vector&lt;T&gt;
+- siftUp / siftDown
++ put / get  O(log n)
++ PriorityQueue(List&lt;T&gt;)
+1
+1
+1
+has-a (private member, owns)
+List&lt;T&gt;   – concrete storage structure
+circular doubly-linked list with sentinel header (Scott 10.1); Node : Link { T val }
+- header_ : Link,  n_ : size_t
++ add:      pushFront / pushBack / insertAt(i, v)
++ delete:   popFront / popBack / removeAt(i)
++ read/upd: at(i) / update(i, v) / front / back
++ rearrange: reverse / sort(cmp) / swapPositions / rotateLeft
++ size / empty / clear / forEach
+1
+std::vector&lt;T&gt;
+array storage of the heap
+parent(i) = (i-1)/2
+inheritance (is-a)
+composition (has-a)

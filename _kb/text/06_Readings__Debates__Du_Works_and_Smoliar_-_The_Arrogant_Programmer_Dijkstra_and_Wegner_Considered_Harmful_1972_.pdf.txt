@@ -1,0 +1,219 @@
+# source: 06_Readings/Debates/Du Works and Smoliar - The Arrogant Programmer, Dijkstra and Wegner Considered Harmful (1972).pdf
+# ocr_pages: 
+=== PAGE 1 ===
+I 
+THE ARROGANT PROGRAMMER: 
+DIJKSTRAAND] 
+ZEGNER CONSIDERED HA~4FUL 
+by 
+Robert J. Du Works 
+Stephen W. Smoliar 
+TECHNION 
+Haifa-Israel 
+(kid.: 
+I Lhi~ik this article should definitely sgur further comments on the Kandel-Wegner "debate" on the 
+~r0per oath for Computer Science Education to follow. 
+(Comm. of ACM, June, 1972.) 
+This debate has led to 
+a great deal of discussion of many aspects of Computer Science Education. 
+I think this is a sign that 
+0ethaps we are maturi~ig as a discipline. 
+I hope this article adds more "fuel to the fire," and that many 
+of you wi]] r~,act to the comments in this pager. 
+The more debate we have, the better are our chances to 
+sift out what we feel are the most immortant aspects of Computer Science Education. 
+Though agreement on 
+these "basic pri<~ciples" might not be forthcoming for awhile, I think articles and discussions on this 
+topic are ccucial to our development. 
+So please take the time to write me a letter elaborating on your 
+~articu.[ar philosophy.) 
+The first snows are beginning to fall in the winter of our discontent. 
+Peter Wegner's ACM election 
+statement (ACM) stresses the current crisis of identity in the com~uting profession. 
+A recent symptom of 
+this crisis has been the rising proclivity of computer professionals for great debates on such issues as 
+the virtues of the ~oto (Leavenworth) and, perhaos, the number of angels which may dance on the head of a 
+chip. Abraham Kandel's ~ 
+bono statement in the June, 1972 CACM (Kandel) neatly summarizes the crisis -- 
+to whose good is the current educational approach to commuter science? 
+Ka~de] advocates an educational emphasis on computer engineering, as opposed to computer science. 
+The mathematical foundations of the latter, he bemoans, have become ends in themselves; and the practical 
+values of the computer are in danger of being totaIly ignored. 
+In a rebuttal statement Wegner asserts 
+that these practical values essentially involve "'good' ~rogramming habits" which, at the ~resent time, 
+we really do not know how to teach. 
+He admits that we may be teaching "the wrong kind of theory", but 
+that we should be seeking out the "right kind of theory" rather than decrying the formal a~proach. 
+One thing is certain: 
+science has arisen from man's quest to formulate terse generalizations of his 
+myriad observations. 
+~at is important is that observation precedes generalization--preferably by as great 
+a distance as ~ossible. 
+As Suzanne (Langer) has written: 
+General theories should be constructed ~_ generalization from the ~rinciples of a special 
+field, known and understood in full detail. 
+Where no such systematic order exists to 
+serve as a pattern, a general theory is more likely to consist of vague generalities than of 
+valid generalizations. 
+Now, has the 25-year history of the ACM really given us adequate time to formulate valid generalizations? 
+Curiously enough, if existing theories are not adequate to explain the behavior of com~uters, they 
+may possibly be employed to explain the behavior of comnuter professionals. 
+Kandel and Wegner demonstrate 
+a standard "metasituation": 
+each admits that "some" of the other's attitude is necessary; but each, in 
+the standard manners of academic ritual, remains sceptical that "some" may degenerate to "too much". 
+Now 
+if we really want to fire up the available theoretical machinery, we may regard academic computer science 
+as three parallel processes with limited cooperation: 
+process]: 
+formal mathematics, automata, formal languages, etc. 
+process2: 
+applied mathematics, numerical analysis, applications program~ning 
+process3: 
+software development, operating systems, compiler-writing techniques, process control, etc. 
+Unlike ~'cooperating sequential processes", however, these processes demonstrate two malignancies which we 
+may call "greed" and "interference". 
+"Greed" arises when in theoretical terms, one ~rocess performs so 
+H 
+" 
+• 
+i 
+many P-operations (Dijkstra) on the 
+crltzca 
+areas" of computer science that the other processes are 
+"frozen out ~'. 
+"Interference", on the other hand arises when, in defiance of all semaphores, several pro- 
+cesses jump into critical areas at the same time, turning the common data base into a nebulous inter- 
+disciplinary muddle. 
+Needless to say, the road to interference is usually paved with good intentions... 
+but so is anoti~er famous road. 
+Theory is helpg~gus to better formulate our problems. 
+Now what about solutions? 
+Can we, ~erhaps, 
+harness our knowledge of, say, priority structures? 
+Needless to say, if we try to be fair, we shall prob- 
+ably arrive at three hierarchies of "rings of power". 
+In terms of the model of (Graham), we may represent 
+an assignment of priorities suitable to processl as follows: 
+-19-
+=== PAGE 2 ===
+In other words~ the formal mathematicians tend to disnd.ss the software %}roeess }~s worthless "hackery". 
+process2 would prefer the following structure: 
+Software is at least close to the heart of the applications programmer while formal mathematics tends to be 
+too arcane. 
+Finally, process3 takes the following view: 
+The affinity with process2 is still recognized; but the priorities are, of course, reversed~ 
+Thus, it is unlikely that we may arrive at a ~fair" ~riority strueture~ 
+Furthermore~ whethe{: they 
+like it or not, all three processes must interrelate; certainly, we cannot e×r}ect any of them to !ust go 
+away. 
+Thus, the trick is to attempt-To-cut do~m on ~greed ~' and such m~anifestatians as ~j~to deb~it~s~ 
+which are essentially priority quibbles (in this particular case between proeessl and ~r~%z~s~O ~ 
+If 
+"greed ~' is suitably curtailed 
+then ~i ~ 
+~ 
+, 
+n.erferenee 
+may possibly be converted into i~terdisci~li~ary coopera- 
+tion. 
+~ " 
+Actually, such priority considerations might well be avoided altogether if we remember that computer 
+seiente does not exist in a vacuum. 
+Formal mathematics may, after all~ be relegated to '~formal ~ mathematics 
+departm~ents--probably with little hard feelings. 
+Likewise, orocess2 ~y readily [:~se to it~ desir~d level 
+of priority in an applied mathematics or engineering department~ 
+This leaves software whleh~ when all is 
+-20-
+=== PAGE 3 ===
+said and done, wou]d probably be much happier with an apprenticeship program than with an academic depart- 
+ment (were it not for the fact that "Professor" is a far more desirable title than "Master Programmer"). 
+Indeed, going back to Wegner's argument, until we have more observations upon which to generalize, is there 
+any better way than apprenticeship to teach "'good' programming habits"? 
+God forbid, if we don't watch out, 
+process2 may also find itself happier in the environment of apprenticeship, leaving Drocessl alone in 
+academe except for those rare (at ].east nowadays) occasions when it has something tenable to offer. 
+Lest we have distorted our view of the situation, we should emphasize that good software techniques 
+require a firm grasp of formal mathematics which should not be underrated, not only for its ideas but for 
+its Hway of thinking '~. Indeed, any aspect of computer science above the programming level must be able to 
+formulate itself clearly and concisely--a task with which formal mathematics is quite familiar. 
+Thus as 
+K~ndel has observed, mathematics can provide us with viable models. 
+Our caveat is to make sure that the 
+modeled object does not become dominated by the model itself. 
+In conclusion, we may draw on the "case study" approach (which (Kandel) seems to advocate) to observe 
+some of the unfortunate effects of interference. ALGOL 60, for example, is a clear-cut case of interference 
+between proeessl and process3. 
+The conflict between a desire for mathematical purity and a need for "'good' 
+progranwting habits" could only yield a rather anomalous specimen of the second-generation-programming- 
+language genus. 
+Indeed, the very conflict from which ALGOL 60 emerged was but the first presage of the 
+controversy--a debate in which only an ALGOL programmer would dare to get involved. 
+On the other hand, PL/I, notwithstanding IBM's implementation or the Viennese attempt at a formal des- 
+cription (Rosen), provides a far superior language, complete with what (Langer) would call the "generative 
+ideas" of third-generation computers. 
+The fact is that purity (i.e., mathematical "elegance") is not the 
+solution to the world's problems; and "formal overkill" may even cause some good ideas to be "aborted" or 
+"still born"~ 
+Here, our caveat must extend to attempts at formal descriptions of opelating systems. 
+What 
+we lack most of all is the demand for "system elegance", which is independent of, without necessarily ex- 
+cluding, mathematical "elegance". 
+This distinction was clearly manifested at a Technion colloquium in 
+which (Wegner) made the comment that operating systems do not halt "nicely". 
+We would like to believe that 
+operating systems will behave "nicely" in Wegner's "right kind of theory", although it is quite obvious that 
+they have a hard time conforming to his current notions of information structures. 
+As a final example, Dijkstra's "formal" foundations of parallel-process theory constitute a clear-cut 
+cart-before~the-horse case of observation-generalization inversion. The funny thing is that Dijkstra ap- 
+pears to be totally oblivious to the fact that the ENQ and DEQ system macros in (IBM) OS/360 together with 
+the POST and WAIT macros, constitute the essential elements of the P- and V-operations. 
+The ENQ macro is 
+actually more closely related to the TSL (test and set lock) operation presented by (Lampson), who's own 
+approach is thoroughly geared to the real world of third-generation computers, while Dijkstra's so-called 
+"style" leaves him hopelessly entrenched in second-generation ALGOL. 
+This whole issue of style is, in fact, really too potentially dangerous to be overlooked. 
+Dijkstra 
+makes a predominant issue out of the "provability", or "formal verification", of programs. 
+This is, indeed, 
+a key issue in the goto controversy; and (Manna) and Vuillemin present but one piece of evidence that it is 
+harder to prove properties of programs with $0t° statements. However, just how applicable are these formal 
+verification techniques to third-generation programming systems? Once again, we find "the wrong kind of 
+theory" in ascendance; and, in the words of John von Neumann (Revens), "the general situation has not yet 
+matured sufficiently" to nurture the development of "the right kind of theory". 
+To recapitulate, software would probably fare best if freed from its academic shackles. 
+Until we have 
+a substantial corpus of material upon which to theorize, we would do better to take a "seat of the pants" 
+approach. 
+Barring this, we would support Kandel's argument for computer engineering. 
+While the current 
+theories provide us with many useful tools, for now, at least, we remain "information grease monkeys" at 
+heart who, by our very nature, throw all sorts of "monkey wrenches" into the elegant world of mathematics, 
+our "reluctant parent"...but such is life. 
+REFERENCES 
+(ACM) 
+(Dij ks tra) 
+(Graham) 
+(IBM) 
+(Kandel) 
+(LamDson) 
+(Langer) 
+(Le avenwor th) 
+1972 ACM Election: 
+Candidates, Comm. ACM 15, 4 (April, 1972), 286-292. 
+Dijkstra, E.W., Cooperating Sequential Processes, Programming Languages, F. Genays, ed., 
+Academic Press, New York, New York, 1968, 43-112. 
+Graham, R.M., Protection in an Information Processing Utility, Comm. ACM ii, 5, (May, 1968), 
+365-369. 
+IBM Systems Reference Library, IBM System/360 Operating System Supervisor Services and Macro 
+Instructions, GC28-6646-6, 1972. 
+Kandel, A., Computer Science--A Vicious Circle, C_omm. ACM !5, 6, (June, 1972), 470-471. 
+Lampson, B.W., A Scheduling Philosophy for Multiprocessing Systems, Comm. ACM ii, 5 (May, 
+1968), 347-360. 
+Langer, S.K., Philosophy in a New Key, The New American Library, New York, New York, 1951. 
+Leavenworth, B.M., Programming With(out) the GOTO, Proceedings of the ACM Annual Conference, 
+August 
+1972 
+782-786. 
+-21-

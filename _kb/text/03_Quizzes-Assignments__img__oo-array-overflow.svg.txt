@@ -1,0 +1,11 @@
+# source: 03_Quizzes-Assignments/img/oo-array-overflow.svg
+int a[11][3]  is 33 ints in a row; a[12][1] lands at flat index 37
+1
+index 0
+32 (last valid)
+33 34 35 36
+37 = 12·3 + 1
+Rows 0…10 are valid. Row 12 = 12·3 = 36 ints from the start, +1 → element 37: four ints past the end.
+C / C++: no compile error, undefined behaviour — it silently overwrites whatever sits there (in my test: the 5th int after the array).
+Java: the first index is checked against its own length (11) → ArrayIndexOutOfBoundsException at run time.
+valid storage (blue)  ·  memory beyond the array (red)

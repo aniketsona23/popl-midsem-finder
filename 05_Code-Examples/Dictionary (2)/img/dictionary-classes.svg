@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="Segoe UI, Arial, sans-serif" font-size="14">
+  <rect width="800" height="400" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="700" fill="#1b1f24">Final version (Dictionary/Version2.0): who uses whom</text>
+  <defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#3a6ea5"/></marker>
+        <marker id="h" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto"><path d="M0 0 L11 5 L0 10 z" fill="#ffffff" stroke="#3a6ea5" stroke-width="1.5"/></marker></defs>
+  <g stroke="#5f6773" stroke-width="1.5">
+    <rect x="30" y="60" width="190" height="70" rx="8" fill="#eaf1f8"/>
+    <rect x="300" y="60" width="210" height="70" rx="8" fill="#eaf1f8"/>
+    <rect x="300" y="190" width="210" height="62" rx="8" fill="#f1f6ee"/>
+    <rect x="300" y="300" width="210" height="62" rx="8" fill="#f1f6ee"/>
+    <rect x="580" y="190" width="190" height="62" rx="8" fill="#fff6e0"/>
+    <rect x="580" y="300" width="190" height="62" rx="8" fill="#fff6e0" stroke-dasharray="5 4"/>
+    <rect x="580" y="60" width="190" height="70" rx="8" fill="#fff6e0"/>
+  </g>
+  <g fill="#1b1f24">
+    <text x="45" y="86" font-weight="700">DictionaryApp</text><text x="45" y="106" font-size="13">main: reads numbers, then</text><text x="45" y="122" font-size="13">random search / remove</text>
+    <text x="315" y="86" font-weight="700">MyDictionary</text><text x="315" y="106" font-size="13">array of Records + size + count</text><text x="315" y="122" font-size="13">put · get · remove · show</text>
+    <text x="315" y="216" font-weight="700">Record</text><text x="315" y="236" font-size="13">holds one key and one value</text>
+    <text x="315" y="326" font-weight="700">AbstractRecord</text><text x="315" y="346" font-size="13">compare(): checks the key types</text>
+    <text x="595" y="216" font-weight="700">Comparison (enum)</text><text x="595" y="236" font-size="13">PREDECESSOR · MATCHING ·</text>
+    <text x="595" y="326" font-weight="700">ComparableClassNames</text><text x="595" y="346" font-size="13">Integer Float Long Double String</text>
+    <text x="595" y="86" font-weight="700">Ordering (enum)</text><text x="595" y="106" font-size="13">NONE ASC DESC PRIQ… BST</text><text x="595" y="122" font-size="13">stored but never used</text>
+  </g>
+  <g stroke="#3a6ea5" stroke-width="2" fill="none">
+    <path d="M220 95 L298 95" marker-end="url(#a)"/>
+    <path d="M405 130 L405 188" marker-end="url(#a)"/>
+    <path d="M405 252 L405 298" marker-end="url(#h)"/>
+    <path d="M510 95 L578 95" marker-end="url(#a)" stroke-dasharray="5 4"/>
+    <path d="M510 331 L578 331" marker-end="url(#a)"/>
+    <path d="M510 320 C560 300 560 280 580 252" marker-end="url(#a)"/>
+  </g>
+  <g fill="#5f6773" font-size="12">
+    <text x="230" y="88">creates, calls</text><text x="412" y="165">holds many</text><text x="412" y="282">Record extends AbstractRecord</text>
+    <text x="520" y="88">field, unused</text><text x="518" y="350">looks up key type</text><text x="535" y="280">returns</text>
+  </g>
+</svg>

@@ -1,0 +1,2675 @@
+# source: 01_Slides/Slides_17Sept2026-TILL ENDSEM (HALF FOR MIDSEM - MOSTLY TILL PROCEDURE).pdf
+# ocr_pages: 
+=== PAGE 1 ===
+Principles of Programming Languages
+PoPL: Preparing for Compiler Construction
+Ramprasad S. Joshi
+Department of Computer Science and Information Systems,
+BITS Pilani, K K Birla Goa Campus
+=== PAGE 2 ===
+The Beginning of the Beginning
+Q. How to write a functional program in OCaml?
+A. let output = ”a functional program” ;;
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+1/118
+=== PAGE 3 ===
+The Course Content I
+As described in https://www.bits-pilani.ac.in/
+wp-content/uploads/Bulletin-2023-24.pdf page VI-38, the
+course covers features of programming languages and introduces
+the main programming paradigms. It covers, at various levels of
+detail,
+▶Semantics and features of programming languages :-
+▶Control Abstraction,
+▶Data Types and Data Abstraction,
+▶Scope and Parameter passing and
+▶Concurrency related features.
+▶Various aspects of runtime environments like
+▶global and local data,
+▶code,
+▶function call stacks,
+▶dynamically allocated data,
+▶runtime features for exceptions and
+▶threads.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+2/118
+=== PAGE 4 ===
+The Course Content II
+▶Introduction to programming paradigms :-
+▶Functional paradigm – formal elements of lambda calculus,
+▶introduction to syntax of common functional programming
+languages
+▶programming exercises that explore the functional paradigm
+▶Logic programming paradigm :- formal elements of logic
+programming and programming tasks that explore the logic
+paradigm.
+▶Scripting as a paradigm.
+▶Domain specific languages.
+▶Applications of the principles of programming languages –
+program verification, software testing and security.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+3/118
+=== PAGE 5 ===
+Presentation ToC I
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+4/118
+=== PAGE 6 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 7 ===
+All Computation Is ...
+▶Built on few primitives
+▶From a static foundation (can be small or large, but finite)
+▶Using few elementary operations composed into infinite
+permutations and combinations
+▶The von Neumann Machine
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 5/118
+=== PAGE 8 ===
+Higher Level Languages as Abstractions
+▶The “height” of a language is its closeness to human
+“level”—that means, its expressive power.
+▶The language should let us express our intention;
+▶and provide a toolchain to turn that intention into
+computation;
+▶with the least burden on the programmer for the “how” part;
+▶and with as much fidelity—actual computation effected
+should realise the original intention—as possible.
+This view calls natural-language-like abstraction as the highest
+level and machine code as the lowest.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 6/118
+=== PAGE 9 ===
+Formal and Natural Languages
+▶Formal languages are mathematical constructions (sets of
+strings, defined by some structure)
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 7/118
+=== PAGE 10 ===
+Formal and Natural Languages
+▶Formal languages are mathematical constructions (sets of
+strings, defined by some structure)
+▶Infinite universes of logical expressions (propositions,
+predicates) make formal languages
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 7/118
+=== PAGE 11 ===
+Formal and Natural Languages
+▶Formal languages are mathematical constructions (sets of
+strings, defined by some structure)
+▶Infinite universes of logical expressions (propositions,
+predicates) make formal languages
+▶Discrete structures, number systems (N, Q, Z and groups and
+rings and fields and algebras over them) are more such
+examples.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 7/118
+=== PAGE 12 ===
+Formal and Natural Languages
+▶Formal languages are mathematical constructions (sets of
+strings, defined by some structure)
+▶Infinite universes of logical expressions (propositions,
+predicates) make formal languages
+▶Discrete structures, number systems (N, Q, Z and groups and
+rings and fields and algebras over them) are more such
+examples.
+▶If we take only the set of “valid” programs in a programming
+language as a language, it is a formal language
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 7/118
+=== PAGE 13 ===
+Formal and Natural Languages
+▶Formal languages are mathematical constructions (sets of
+strings, defined by some structure)
+▶Infinite universes of logical expressions (propositions,
+predicates) make formal languages
+▶Discrete structures, number systems (N, Q, Z and groups and
+rings and fields and algebras over them) are more such
+examples.
+▶If we take only the set of “valid” programs in a programming
+language as a language, it is a formal language
+▶However, with its semantics, a programming language is much
+more than a formal language.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 7/118
+=== PAGE 14 ===
+Programming Languages Are As Human as English
+▶Most languages are discrete and linear (1-D)
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 8/118
+=== PAGE 15 ===
+Programming Languages Are As Human as English
+▶Most languages are discrete and linear (1-D)
+▶But the universe that they model (and we otherwise perceive)
+is neither discrete nor finite dimensional
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 8/118
+=== PAGE 16 ===
+Programming Languages Are As Human as English
+▶Most languages are discrete and linear (1-D)
+▶But the universe that they model (and we otherwise perceive)
+is neither discrete nor finite dimensional
+▶Thus, we use languages (formal, natural, programming) to
+condense the unfathomable possibilities of the universe into
+reproducible, verifiable and uniquely identifiable
+representations.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 8/118
+=== PAGE 17 ===
+Abstraction Concretised
+It is not our wont to characterise abstraction in abstract
+terms. We can only give concrete examples of abstraction of
+ideas from concrete experience.
+Content is concrete, form is abstract. That’s why, though we find
+scarcely a perfect circle or ball, we call everything from a cylinder to a
+rectangle with angular corners “round”—even persons with shoulder
+width comparable to their height are called “round”.
+▶The name of a library function, or its signature; a class in a standard
+library, etc. are abstractions of the computations they promise.
+▶Real numbers are abstract, floating point computations are concrete.
+▶Placement tests and interviews on OOP are abstract, an OO program
+designed and developed by a real programmer is concrete.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 9/118
+=== PAGE 18 ===
+Abstraction in Programming Languages
+▶The following hierachy of abstractions is obvious:
+αβγ P Mathematical formulation of GCD of any two members of a
+ring equipped with unique factorization
+= The identities
+gcd(a, b) = gcd(b, a) = gcd(|a −b|, b) = gcd(a, |a −b|)
+A 3-column matrix or table of two arguments and their GCD
+in each row.
+−Euclid’s algorithm using substraction
+% Euclid’s algorithm using division-remainder
+C One or more C program(s) to compute the GCD of integers,
+or polynomials, or quadratic integers, etc.
+▶A binary executable of such a program
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 10/118
+=== PAGE 19 ===
+Abstraction in our textbook
+Scott [2015, Chapter 3] says:
+We call programming languages (except assembly langauges) as
+“higher” level in two senses of the word abstraction:
+▶Abstraction of the programmable machine. A microprocessor
+with the OS, a JVM or JRE, etc. are examples of the concrete
+machines that are abstracted by C/C++/Java/Python etc.
+▶Naming pieces of code to express the purpose or function or
+role (the “what”) of that piece, hiding the details of the
+“how” part.
+Thus,
+▶Subroutines (functions in C/C++, methods in Java, callable
+procedures in general) are control abstractions.
+▶Classes are data abstractions.
+On these ideas, we further dissect the concrete from its abstract
+representation in the rest of this section.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 11/118
+=== PAGE 20 ===
+The Mechanics of Computation
+▶The von Neumann machine is mechanical computation. Mechanical
+computation means something we can emulate exactly (albeit extremely
+slowly) using coarse, macro level devices like flipping switches: clearly
+discernible elements of the interaction of which is broken into steps that
+we can carry out without using any discretion or horse sense.
+▶For example, we can demonstrate any sorting algorithm on a bunch of
+books as if the bunch is an array. We can use graph algorithms for the
+treasure hunt game in the Campus. If we switch lamps on doors in a
+maze selectively on and off, we can guide a live mouse trained with those
+lights to follow a maze navigation algorithm exactly.
+▶Industrial robots doing repetitive tasks by limbs with limited degree of
+freedom are based on mechanical computation – controlled by
+Programmable Logic Controllers programmed using Ladder Diagrams.
+▶Quantum computation is not mechanical in this classical sense.
+Semi-autonomous robots are examples of a combination of mechanical
+computation and human discretion.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 12/118
+=== PAGE 21 ===
+What is Not Programmable?
+▶What is not finitely expressible is not programmable. Like,
+irrational numbers that are not roots of polynomials with
+integer coefficients. Thus, most reals are not programmable.
+Equality of arbitrary reals is not decidable.
+▶When all the possible situations are not finitely expressible,
+autonomous control is not programmable. Like, the
+angle-of-attack control during flight take-off.
+▶Captchas
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 13/118
+=== PAGE 22 ===
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 14/118
+=== PAGE 23 ===
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 15/118
+=== PAGE 24 ===
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 16/118
+=== PAGE 25 ===
+Not “programmable” like bakes in a microwave?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 17/118
+=== PAGE 26 ===
+How come this is readily “programmable”?
+Hint: Can you model the operation of a tea/coffee vending
+machine by a finite automaton?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 18/118
+=== PAGE 27 ===
+Can this handle the uncertainty, reversibility and diversity in the biosphere?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Preliminaries 19/118
+=== PAGE 28 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 29 ===
+Linguistics of Programming
+Reading, Speaking, Writing, Listening skills in a Programming
+Language
+Remember: Programming langauges (or, languages, of any kind)
+are for humans, not for machines.
+Again, Scott [2015, Chapter 3] says that ease of programming is a
+stronger motivation that has come to replace portability (“machine
+independence”) in programming langauge design. (If we see
+closely, the desire for independence of programming from hardware
+and system–machine–characteristics also arises from the desire for
+ease of use.)
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 20/118
+=== PAGE 30 ===
+Ease of Use
+Ease of use includes
+▶Ease of designing, developing, testing programs
+▶Ease of modelling, simulation and formal verification of
+programs
+▶Ease of deployment of programs
+▶Ease of validation of programs in application settings
+▶Ease of maintenance, troubleshooting, system-level repairs,
+updates and upgradation
+▶Ease of documentation and training in deployment of
+programs
+▶Ease of delegation, sharing, arguments and explanations about
+programs
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 21/118
+=== PAGE 31 ===
+What is Programming?
+Programmability
+▶What is programmable?
+▶In which ways is it programmable?
+▶In which ways is it not programmable?
+Three Essentials
+Elementary Operations Arithmetic, Logical operations. Or, Move
+the cursor, point to an icon, click, etc.
+Sequencing (Note: No timing) Which operations follow which
+other operations, when, how. Click or double click?
+Cursor pointer or hand tool?
+Complication: Even callbacks are real time?
+Repetition Recursion, iteration, cycling (okay, what about
+sustained keypresses?), etc.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 22/118
+=== PAGE 32 ===
+Statics and Dynamics
+▶In a shell, we type commands and (using readline)
+sometimes reuse them: each program is static and
+computation dynamic. e.g. Running the same command again
+after a cd change of directory may give different results.
+▶We can program the shell using a script. But the dynamism in
+the computation remains.
+▶We can pass arguments to the shell script to handle this
+dynamism.
+▶Still, the environment in a shell remains dynamic, whatever we
+do to program it.
+▶What is the environment of a C program?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 23/118
+=== PAGE 33 ===
+Dijkstra Denounced
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 24/118
+=== PAGE 34 ===
+Dijkstra Awarded
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 25/118
+=== PAGE 35 ===
+Dijkstra Awarded
+▶
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 25/118
+=== PAGE 36 ===
+What’s the Debate About? I
+Long before he got the Turing Award, Dijkstra decried the use of
+gotos in structured programming in Dijkstra [1968] and Rice and
+Dijkstra [1968]. In his Turing Award acceptance speech, Dijkstra
+said, inter alia, that
+▶I/O interrupts, occuring at unpredictable and irreproducible
+moments, compared with the old sequential machine that
+pretended to be a fully deterministic automaton, has been a
+dramatic change, creating grave logical problems.
+▶Secondly, multilevel stores require extensive documentation
+that still cannot solve the elusive complications of managing
+them.
+▶Above all, the inncreased power of hardware, together with
+the perhaps even more dramatic increase in its reliability,
+made solutions feasible that the programmer had not dared to
+dream about a few years before.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 26/118
+=== PAGE 37 ===
+What’s the Debate About? II
+▶Programs–even alternative programs for the same task and
+with the same mathematical content–can differ tremendously
+in their intellectual manageability.
+▶A number of rules have been discovered, necessary for
+sustaining intellectual manageability of programs.
+▶These rules are of two kinds. Those of the first kind are easily
+imposed by the choice of a programming paradigm and a
+compiler. Examples are the exclusion of goto-statements and
+of procedures with more than one output parameter.
+▶The second kind are elements of discipline required from the
+programmer. Algol-60 was [to be] designed so as to enforce
+this discipline at the outset.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 27/118
+=== PAGE 38 ===
+What’s the Debate About? III
+The last point in the summary of Dijkstra’s speech we cited above
+is the take-off point for Dijkstra’s book Dijkstra [1976]
+(https://seriouscomputerist.atariverse.com/media/pdf/
+book/Discipline%20of%20Programming.pdf). Though Dijkstra
+titled the book with “A” Discipline, Prof. David GriesGries [1981]
+completed his “project” by offering “The” Science
+(https://seriouscomputerist.atariverse.com/media/pdf/
+book/Science%20of%20Programming.pdf).
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 28/118
+=== PAGE 39 ===
+Pedagogy and Academic Content I
+▶Computer science, as a “discipline”–as in, ‘What are
+computer scientists like? Craftspeople, artistes, or
+philosophers? What if their services or products result in a
+disaster for those who depend on them?’–was ill-defined in
+1972, troubling the administrators, academicians, and
+professionals (like the ACM) alike.
+▶Prof. Kandel, in the CS Dept of New Mexico Institute of
+Mining and Technology, proposed this:
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 29/118
+=== PAGE 40 ===
+Pedagogy and Academic Content II
+▶His recommendation was based on
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 30/118
+=== PAGE 41 ===
+Another Academician ...
+Prof. Howard Tompkins of CS Dept in Indiana University of
+Pennsylvania said (letter to editor, Lynn [1972]):
+A Computer Science major today, whether at bachelor or master
+level, is being prepared not just to program, or to analyze real world
+problems in preparation for programming, but rather:
+• to improve the tools that programmers and systems analysts
+use,
+• to develop better machine systems, better software systems,
+better languages for communicating with the machines, and
+better methods for solving intractable problems,
+• to manage activities that are strongly computer dependent,
+• to teach about computers at college level, or
+• to advance the fundamental theory of digital information
+processors.
+Some graduates of Computer Science programs may be programmers
+or systems analysts, but they will have changed direction, or missed
+their aim, or simply still be in their learning phase.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 31/118
+=== PAGE 42 ===
+Okay, “Practitioners” Respond
+DuWorks and Smoliar [1972]:
+One thing is certain: science has arisen from man’s quest to formulate terse generalizations of his myriad
+observations. What is important is that observation precedes generalization–preferably by as great a distance as
+possible. As Suzanne (Langer) has written:
+General theories should be constructed by generalization from the principles of a special field, known
+and understood in full detail. Where no such systematic order exists to serve as a pattern, a general
+theory is more likely to consist of vague generalities than of valid generalizations.
+▶“Cart before the Horse” : Du Works and Smoliar thought (in 1972) that
+Dijkstra’s “formal” foundations of theory constitute a clear-cut
+cart-before the-horse case of observation-generalization inversion.
+▶ALGOL-60 v/s PL/I : ALGOL-60’s designers’ insistence on mathematical purity
+was “formal overkill” causing some good ideas to be “aborted” or “still born”.
+That conflict between a desire for mathematical purity and a need for “good
+progranwting habits” could only yield a rather anomalous specimen such as
+ALGOL-60. On the other hand, PL/I, provided a far superior language,
+complete with the “generative ideas” of third-generation computers.
+▶What their generation lacked most of all, in their opinion, was the demand for
+“system elegance”, which is independent of, without necessarily excluding,
+mathematical “elegance”.
+▶So their caveat to make sure that the modeled object does not become
+dominated by the model itself.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 32/118
+=== PAGE 43 ===
+What is in it for us?
+▶This debate, half a century old, has continued relevance for us
+because of the continued dissonance between theoretical
+computer science and practical computer and software
+engineering.
+▶In design, development and usage of programming languages
+it is most influential.
+▶Most commonly used programming languages come to most
+programmers through habits of programming observed and
+replicated from practitioners.
+▶However, courses designed around particular programming
+languages focus neither on habits nor on usage: they typically
+focus on syntax–like the third language courses in highschool.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 33/118
+=== PAGE 44 ===
+Paradigms v/s Syntax
+▶The foregoing is most likely to be interpreted as an argument
+against paradigmatic discipline in programming and in
+software design.
+▶Exactly the opposite is true. The syncretic inference we
+distilled from the debate (and continued dissonance) between
+theory and practice in computer science and engineering is as
+follows.
+▶We think that programming paradigms are about discipline
+and habits that help us design and develop software systems
+efficiently without compromising on conceptual integrity.
+▶We agree to Dijkstra’s “points” (Slide 26) about discipline
+(that we expressed in our words). But following Brooks
+[1982], discipline for us is conceptual integrity at human
+level, not the mathematical purity that Dijkstra sought.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 34/118
+=== PAGE 45 ===
+Empirical, not Analytical
+Thus, we see computer science
+and engineering, programming
+paradigms, programming
+langauges, and the conceptual
+integrity and discipline required
+of programmers and computer
+scientists and engineers as
+empirical, like physics, and not
+analytical, like mathematics.
+It is not that apples fall because Newton defined gravity that way; rather,
+Newton defined gravity that way such that it can consistently explain
+apples falling.
+Moreover, Newton’s Law of Gravitation does not preclude rockets
+escaping the earth’s gravitational pull. In fact it predicts such a
+possibility and offers exact calculations to make it happen.
+We should look at programming language paradigms and syntax in an
+analogous manner: they are enablers and provide a scaffolding for (not
+fetters against) building software systems.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 35/118
+=== PAGE 46 ===
+Applying to Programming Paradigms ... I
+* Procedural :
+▶Historically programmers identified repeatedly useful pieces of
+code and bundled them as “macros” with meaningful
+code-names (“mnemonics”) to be shared and quickly placed
+wherever applicable. Gradually, these developed hair and
+limbs: parameters and adaptive input-output relationships.
+* Procedural, modular, structured :
+▶Still, this was strictly procedural or imperative. But moving
+beyond mnemonics and formula translation (ForTran),
+structured programming langauges arose and facilitated
+top-down design.
+* Procedural to OO :
+▶Proliferation of adaptive structured programs using common
+operations repetitively revealed the underlying unity of types
+and operations, leading to Object-oriented programming
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 36/118
+=== PAGE 47 ===
+Applying to Programming Paradigms ... II
+* Functional :
+▶An alternative view of operations as transformations led to the
+functional paradigm.
+* Logic :
+▶Another alternative model of computation, that of relations
+(predicates) rather than functions, led to logic programming.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 37/118
+=== PAGE 48 ===
+Four Model Types, Four Paradigms
+The (ALU) von Neumann
+Machine, Flow-charts,
+Algorithms, Digital Logic,
+Relay Logic, Ladder
+Diagrams
+Imperative Programming
+Simulation of evolving
+real-life systems of
+interacting entities
+Object-oriented
+Programming
+Recursive Function
+Theory, Lambda Calculus
+Functional Programming
+State Transformations,
+Theorem Proving as
+computation; Relational
+Databases
+Logic Programming
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Programming Language Design 38/118
+=== PAGE 49 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 50 ===
+Content Note
+▶This set of slides is based on my notes of 2019 and the
+reference book Sethi [1996, Chapter 3].
+▶The main purposes are
+1. to characterize structured programming,
+2. to explain modular programming and its various avtars,
+3. and to expose the main ideology of the C language (to be
+contrasted with other forms of procedural programming).
+... and of course to augment the textbook material (which, in my
+opinion, is deficient in some aspects).
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 39/118
+=== PAGE 51 ===
+Program Structure
+Programs are made up of global functions and objects. The
+objects as components of a program can be static and optionally
+“global” in scope1.
+1Scope: To be discussed later
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 40/118
+=== PAGE 52 ===
+Program Structure
+Programs are made up of global functions and objects. The
+objects as components of a program can be static and optionally
+“global” in scope1.
+▶Programs are static, computations dynamic.
+Data types, sizes, layouts, modules, global functions
+1Scope: To be discussed later
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 40/118
+=== PAGE 53 ===
+Program Structure
+Programs are made up of global functions and objects. The
+objects as components of a program can be static and optionally
+“global” in scope1.
+▶Programs are static, computations dynamic.
+Data types, sizes, layouts, modules, global functions
+▶Control Flow is syntax-directed.
+Functions, blocks, loops, conditionals, switch-cases
+break, continue, goto
+1Scope: To be discussed later
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 40/118
+=== PAGE 54 ===
+Modular Programming I
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 41/118
+=== PAGE 55 ===
+Modular Programming II
+Compiling:
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 42/118
+=== PAGE 56 ===
+Modular Programming III
+Lessons:
+1. Each compilation unit is independent in terms of type names,
+variable names and function names. These names (and
+structures, for types) have to be supplied to each compilation
+unit afresh.
+2. It is possible to create inconsistencies in data structures using
+this independence.
+3. We can make use of this flexibility to create data structures
+with due information hiding for system security.
+4. But it can lead to logical bugs as well. To avoid that, header
+(*.h) files are used as common includes in various source
+(*.c) files.
+Among the course materials are more programs that exemplify
+these points and explain them rigorously.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 43/118
+=== PAGE 57 ===
+Control Flow I
+Syntax-directed flow: easy to state. Does this mean the following
+is syntactically incorrect?
+Figure: Control Flow: Example 1
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 44/118
+=== PAGE 58 ===
+Control Flow II
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 45/118
+=== PAGE 59 ===
+Syntax-Directed Control Flow
+In effect, it means:
+▶Not lexical : thus, we cannot assume that the flow will be a
+straight line like
+→→↓
+→→
+▶The structure (i.e., syntax, interrelationships and
+correspondences, with some lexical flow as well, all together)
+decides the flow, including branches, back-and-forth jumps,
+etc.
+▶Also that basic building blocks, like functions, control blocks
+(if-else, while, for, swith-case, etc.) are always structured with
+single entry, one or more exits.
+▶As Parnas [1972] explains, this means a formal flow chart
+models the program adequately.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 46/118
+=== PAGE 60 ===
+Scope Rules
+In the example 1, we can see that the control flow – made
+topsy-turvy by the gotos – does not affect the legitimacy of
+variable and label names.
+What is Scope?
+By legitimacy of names, we mean whether a program piece can
+refer to a name meaningfully and consistently according to the
+symbolic, algorithmic scheme that the programmer intends. In
+strict compiler parlance, scope means the contextual part, the
+textual extent (the part of the source program) in which a
+particular name can be used and refers to an object unique to that
+context.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 47/118
+=== PAGE 61 ===
+The Theoretical Basis of Structured Programming
+The B ohm and Jacopini [1966] provides the theoretical basis of
+structured programming. It states that three ways of combining
+programs—sequencing, selection, and iteration—are sufficient to
+express any computable function. This observation did not
+originate with the structured programming movement; these
+structures are sufficient to describe the instruction cycle of a
+central processing unit, as well as the operation of a Turing
+machine. Therefore, a processor is always executing a ”structured
+program” in this sense, even if the instructions it reads from
+memory are not part of a structured program.
+The CPU mentioned above is our von Neumann machine.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 48/118
+=== PAGE 62 ===
+Bottom-up Composition
+▶The von-Neumann machine computes through unit-duration
+steps specified in unit-sized instructions.
+▶Each unit operation is either data or control transfer, or an
+ALU op.
+▶Each such unit operation is an imperative operation.
+▶These elementary unit operations are grouped into composite
+units.
+▶Recursively, the composite units of one order can be
+composed together to make higher order composites.
+▶Computation proceeds by executing the bottom level (i,e,
+elementary) operations in a predetermined sequence, possibly
+with repetition.
+▶This sequencing is directly expressed unambiguously in the
+program units at each level.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 49/118
+=== PAGE 63 ===
+Top-Down Design I
+▶The design development of these units proceeds in the
+opposite direction.
+▶The highest level composites are expressed first.
+▶Each higher level is expressed before its elaboration at the
+lower level.
+▶The bottom-most level is, of course, the elementary
+operations (data and control transfer and ALU operations).
+▶However, the compositions of units at every higher level also
+need to be expressed in terms of the same elementary
+operations. The units are composite at higher levels, but the
+operations are not.
+▶For example, a “printf(format,...)” call can be read as:
+o
+Transfer the string representation of each of the actual parameters in place of the
+ellipsis in the places indicated by the respective format flags in the format string ...
+o
+and transfer the resulting string to an stdout buffer.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 50/118
+=== PAGE 64 ===
+Top-Down Design II
+▶Thus a printf call just entails data transfer (and
+expression evaluation, if any parameters need it).
+▶A “for(E1; E2; E3) { .S. }” loop is equivalent to
+“E1; L1:
+if(E2) { .S. E3; goto L1 }”
+▶E1 is evaluated once, followed by E2; depending on E2’s
+value, either the statements .S. are executed followed by
+evaluation of E3 and looping back to “if(E2) .S. E3, or
+else the loop ends.
+▶This clearly indicates that the control flow
+(sequencing–flow–of imperative–control–operations)
+depends on the Syntax–structural relationships between
+various components.
+▶The last idea is expressed as “Syntax-Directed Control
+Flow”.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 51/118
+=== PAGE 65 ===
+Top-Down Design III
+▶Contrast Syntax-Directed Control Flow with lexical
+(textual) flow: someone not familiar with the C/C++/Java
+for loop syntax would interpret the foregoing as execution
+of E1, E2, E3, .S. in this sequence repeatedly until
+something related to E1, E2, E3 together happens.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 52/118
+=== PAGE 66 ===
+Single Entry, Multiple Exits
+The following is true of all programming languages (procedural,
+OO, functional, logic):
+▶Each of the loops and blocks (if, while, for, switch)
+has a single point at which control enters it. We can say it is
+“hooked at the top”.
+▶But each can have multiple, unbounded (but finite) exits. Not
+just gotos, but we have break too. Of course, continue is
+just like goto with a label at the single entry point.
+▶Similarly, functions (as also methods in all OO languages)
+have only single entry points (calls) and multiple exits
+(returns).
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 53/118
+=== PAGE 67 ===
+Tutorial: Challenges for Mid August 2026 I
+1. Implement recursion on the main function in any programming
+language you are comfortable with among C/C++/Java.
+2. Using this, print the command line arguments to a program in
+the reverse order.
+3. Write a set of functions (procedures) that call one another in
+such recursive cycles that one cannot predict just by reading
+the program whether recursion will end and whether a certain
+function will be called for a given input.
+4. Provide a body for the printf function and use that function
+instead of the std libc function with the same name in your C
+program.
+5. Implement a type that can only be used by calling the
+procedures you provide to use it, and even its contents cannot
+be accessed or displayed by the user programmer.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 54/118
+=== PAGE 68 ===
+Tutorial: Challenges for Mid August 2026 II
+6. Using only math.h or numpy function calls and arithmetic
+expressions but no assignment statement, generate and print
+an input integer.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 55/118
+=== PAGE 69 ===
+Types as just a Set of Values
+A “class hierarchy view” of some of the well-known sets of
+numbers:
+▶Can we say that
+“natural numbers
+have all the properties
+of real numbers, and
+also some additional
+special properties”?
+▶For a method call in
+Java, can we pass a
+complex number as
+an actual parameter
+in a place wherein a
+natural number is
+expected as a formal
+parameter?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Imperative Paradigm 56/118
+=== PAGE 70 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 71 ===
+Separation of the What and the How
+▶We want to name what is programmable by meaningful names
+that help us recall what they stand for.
+▶Naming a list such that the name tells us that it is a list and
+it remains sorted is easy: name it SortedList
+▶It doesn’t matter whether the SortedList is implemented as
+an array or any other storage structure, or how it is kept
+sorted, by InsertionSort or any other algorithm.
+▶All we need is a data structure that offers methods to put
+elements in and remove from, and give them out in a sorted
+manner (i.e., a method to get the “nth element”, the element
+that has rank n in the sorted order.
+▶Naming a procedure that sorts by recursively partitioning the
+input list around a pivot until the partitions are smaller than 3
+elements—the one we know as QuickSort—is not easy. [But
+then, a procedure’s process (i.e. the how part), once programmed, is not
+further “programmable” anyway.]
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedural to OO 57/118
+=== PAGE 72 ===
+Why Encapsulation?
+▶If a procedure’s identity is its algorithm that doesn’t change, and a data
+structure’s identity is not dependent on the algorithms that maintain its
+characteristics, then where is the incentive to encapsulate data and
+operations together?
+▶“The benefits expected of modular programming are: (1)
+managerial—development time should be shortened because separate
+groups would work on each module with little need for communication:
+(2) product flexibility—it should be possible to make drastic changes to
+one module without a need to change others; (3) comprehensibility—it
+should be possible to study the system one module at a time. The whole
+system can therefore be better designed because it is better understood.”
+Parnas [1972]
+▶In this, a module indicates responsibility delegation, not just division of
+labour.
+▶Modularization involves system (top) level design decision that must be
+made before the detailing (bottom-level) work on modules begins.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedural to OO 58/118
+=== PAGE 73 ===
+Procedural Modular v/s OO
+Parnas [1972] presents two modularizations for a small text
+processor (called an “example system” in it). One modularization
+is of the “conventional type” in the sense meant by all proponents
+of modular programming: The system is divided into a number of
+modules with well-defined interfaces; each one is small enough and
+simple enough to be thoroughly understood and well programmed.
+The other modularization or decomposition was made using
+“information hiding” as a criterion. The modules no longer
+correspond to steps in the processing. Every module in the second
+decomposition is characterized by its knowledge of a design
+decision which it hides from all others. Its interface or definition
+was chosen to reveal as little as possible about its inner workings.
+We can call this (rudimentary) OO decomposition.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedural to OO 59/118
+=== PAGE 74 ===
+A Teaser
+▶BubbleSort gets its name from its process: “lighter
+elements bubble up”.
+▶Similarly MergeSort, InsertionSort, etc. get their
+names from their process or the sequence of transformations
+in sorting.
+▶What about QuickSort? Can you make a name that
+captures its process like those names of the other sorting
+algorithms?
+* Exercise: Design (at the top level) a dictionary that guarantees O(log n) operations
+for insertion, removal, key-based retrieval, “kth rank element” retrieval;
+also guarantees O(n) listing of elements by sorted order (n is the size). It
+must also guarantee stability: if two elements are at the same rank, they
+should appear in their relative FIFO sequence in a sorted retrieval, and
+the element inserted earlier should be retrieved for a single element
+key-based search.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedural to OO 60/118
+=== PAGE 75 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 76 ===
+More than just a division of labour
+▶So far we have seen separation of the what (specifications of
+data types and operations) and the how (storage layouts,
+sizes, procedures) within the procedural paradigm.
+▶Sethi [Sethi, 1996, p.197, 6.8] says that considerations of
+efficiency and implementation led to the (criticised) design
+that private members of a class appear in a class declaration.
+▶Following Parnas Parnas [1972], we see that object-orientation
+involved “information hiding”—meaning, not just separation
+for modularity but also specialisation and independence.
+▶Thus, Booch [Booch, 2007, pp.51–52] defines encapsulation
+as “the process of compartmentalizing the elements of an
+abstraction that constitute its structure and behavior;
+encapsulation serves to separate the contractual interface of
+an abstraction and its implementation.” In this sense,
+encapsulation is the concrete way to implement the abstract
+idea of independence.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 61/118
+=== PAGE 77 ===
+Execution v/s Simulation
+Imperative
+Procedural programming involves giving a complete step-by-step
+break-up of the execution of a full solution to a computational
+problem. The break-up may be modularised, but ultimately it is
+compiled and assembled into a sequential program.
+Emergent
+In OO programming an information process is regarded as a system
+evolving through transformations of its state. The essence
+(substance) of the information process is organized as the system
+components, called objects. A measurable property of the essence
+is a computational property of some objects. Transformations of
+state are regarded as actions by objects.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 62/118
+=== PAGE 78 ===
+Simulation means OO Programming
+In OO programming an information process is regarded as a system evolving
+through transformations of its state. The essence (substance) of the
+information process is organized as the system components, called objects. A
+measurable property of the essence is a computational property of some
+objects. Transformations of state are regarded as actions by objects.
+This is paraphrasing Nygaard Nygaard [1986], who pioneered—with Ole-Johan
+Dahl—Simula, the first ever OO programming language, that started off as a
+simulation language. He describes it thus: “Simula I, designed in 1962-64 and
+available in 1965, was immediately used outside simulation, as a general
+programming language: The computing process could by Simula be organized
+as system of interacting program execution components, and this approach
+proved to be fruitful in a wide range of application areas. This, and some new
+ideas (e.g. subclasses and virtuals) resulted in the current Simula language,
+Simula 67, which is a general programming language, also used as a simulation
+language.”
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 63/118
+=== PAGE 79 ===
+OO on top of Procedural is Fraught
+We see a limitation of C++: Not only that a class declaration (or
+type definition) must be fully available (including private members)
+to each module that uses that class, the procedural details of its
+storage structure must be fully laid out; moreover, keeping the
+integrity and consistency of that structure is left to each
+module—unless special care is taken by the class module that
+implements the class. There is no direct and enforceable support in
+the syntax of C++ for this.
+The next slides show one example of this shortcoming (and how it
+can create timebombs in code written by benign but less carefull
+programmers).
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 64/118
+=== PAGE 80 ===
+A “Partially Hidden” Class
+Suppose there are two modules that use two declarations for the
+same named class:
+The Class Module
+∥The User Module
+.
+∥
+All the member functions (methods) of the class are in the class
+module. The user module is developed independently, without
+regard to the implementation of the class module. (That’s the
+purpose in all the information hiding, isn’t it?)
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 65/118
+=== PAGE 81 ===
+Does it work? I
+To understand this, we need to understand three important points;
+one is a general principle of programming languages, and the
+others are features of modular (structured) imperative languages.
+1. Procedure activation records: Calls to methods of a class are
+no different from calls to global functions, except that “this”
+object is a default and implicit (first) parameter. Parameter
+passing and return mechanisms are exactly the same. These
+mechanisms operate via procedure activation records on a
+stack, with stack frames separated for each call (regardless of
+which function it is). We will see this in more detail and
+depth in the next section. But for the current purpose, it
+suffices to note that the “this” object must be passed as a
+storage struture, that means, its data members are to be
+passed onto the stack. This is the semantics of call-by-value
+situations in all programming languages.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 66/118
+=== PAGE 82 ===
+Does it work? II
+2. Each object (of a primitive type like int, float etc. or a
+composite, like an array or a struct or a class instance)
+that is to be passed onto the stack, or allocated space
+automatically, uses the size and layout information of that
+object available in the scope of the function call. That means,
+the type declaration available in the scope of the module
+and/or the block in which the call is enclosed. For imperative
+languages, this is a static, compile-time piece of information,
+and it is interpreted in the procedure activation time (call)
+translation.
+3. For structured (modular procedural) languages like C (and
+thereby C++ that has C as a subset, with the same program
+structure), each module must be independent in static typing.
+That means, each module has its own type information, and
+that information is processed and converted into some
+quantitative machine level data, losing the human level
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 67/118
+=== PAGE 83 ===
+Does it work? III
+symbolic names. The linker does not see the type names, the
+names of variables, parameters and data members, etc. except
+for global variables, static variables, and global function
+names. The names of the class methods (member functions)
+are also mangled with the class name incorporated in the new
+names. Thus, if two modules access different data
+declarations in class declarations, the compiler does not see
+the incongruity and the linker has no access to (and no
+business with) that information at all after compilation.
+Thus, two modules using incongruent, differing type declarations is usually
+passed over by the compiler, and the linker does not see the incongruity unless
+it appears in function prototypes (or method signatures). Hence the programs
+will compile, link together, and run partially. However, there will be semantic
+errors leading to runtime exceptions and program crashes. The programs
+uploaded on the course page can be used (and debugged) to understand this in
+more depth.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 68/118
+=== PAGE 84 ===
+The Lesson
+Simply put, the foregoing means objects are not the principal
+components of a C/C++ program. This is true of every imperative
+language that has the program composed of modules and global
+functions, and class definitions, types are also implemented as
+such. There is encapsulation but modules and functions are
+indivisible and independent, whereas objects and types are not.
+The rigorous definition of OO programming by Nygaard Nygaard
+[1986], that, object-oriented programming regards an information
+process as a system evolving through transformations of its state
+that is composed of the states of indepdently interacting evolving
+objects, is not truly realised in such a programming language.
+This is the most important difference between C++ and similar
+languages (e.g. the modern Fortran with added object orientation)
+on the one hand and Java, Simula, SmallTalk, and functional-OO
+languages like Python etc. on the other hand.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 69/118
+=== PAGE 85 ===
+An aside: Objective-C
+Objective-C and its more
+advanced derivatives differ
+from C++ in this important
+aspect: they treat methods of
+a class in a different way from
+ordinary, global functions.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 70/118
+=== PAGE 86 ===
+Section Conclusion
+Going from procedural to OO, the most important
+aspects are
+1. Scope of type expressions
+2. Object independence
+3. Treatment of class member functions
+Java has no global functions (i.e., no functions outside classes),
+and type linkages are all global (except for specifically local types
+within classes). Type information necessary for bindings is present
+throughout the program’s execution. Thus, Java is “purely” OO.
+In the next section, we see the aspects of type and function
+parameter bindings common to all paradigms and languages.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Object-Orientation 71/118
+=== PAGE 87 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 88 ===
+Times of Linguia Programmia
+A typical division of labour in a compiled program’s production and
+application process is:
+Compilation from source to assembly or byte-code or
+machine-code
+Linking various modules and static libraries together
+Loading in the runtime environment: e.g. the main
+memory of a CPU or a virtual machine
+Execution
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 72/118
+=== PAGE 89 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 90 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 91 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 92 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 93 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+Compile Time Interpreting and translating the intention of the prorgammer as
+expressed in the text.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 94 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+Compile Time Interpreting and translating the intention of the prorgammer as
+expressed in the text.
+Linking Time Combining and composing the translated programmer’s text
+with the ”standard environment and support”.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 95 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+Compile Time Interpreting and translating the intention of the prorgammer as
+expressed in the text.
+Linking Time Combining and composing the translated programmer’s text
+with the ”standard environment and support”.
+Loading Time Preparing execution, including the dynamic part of the linking.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 96 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+Compile Time Interpreting and translating the intention of the prorgammer as
+expressed in the text.
+Linking Time Combining and composing the translated programmer’s text
+with the ”standard environment and support”.
+Loading Time Preparing execution, including the dynamic part of the linking.
+Procedure Activation Time Each time a piece of code that can be executed
+recurrently and composed as a unit, is to be executed from a
+specific entry point.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 97 ===
+The Lifetime of a Program
+Development Design, write, test, pickle.
+Loading May include linking and spawning other programs.
+Execution May include human-interactive interpretation and
+interaction with other programs running on the same
+host or other hosts.
+Finer Distinctions
+Compile Time Interpreting and translating the intention of the prorgammer as
+expressed in the text.
+Linking Time Combining and composing the translated programmer’s text
+with the ”standard environment and support”.
+Loading Time Preparing execution, including the dynamic part of the linking.
+Procedure Activation Time Each time a piece of code that can be executed
+recurrently and composed as a unit, is to be executed from a
+specific entry point.
+Run Time Each atomic imperative piece of code at the machine level.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 73/118
+=== PAGE 98 ===
+What is in name-calling?
+▶The first abstractions in programming were macros. The
+expressive power of functions with parameters and return
+values was realised much later. Till now, the power of
+recursion (and composition) of functions is scarcely
+understood and appreciated by programmers involved in
+software engineering on scale.
+▶There are functions that compute the value of a mapping of
+parameters onto a domain of values. And there are pure
+procedures that only encapsulate some long winding process
+into a neatly named subroutine. Instead of distinguishing, let
+us call all “callable”s as subroutines. And a call as “Procedure
+Activation”, following Sethi [1996].
+The treatment here is mainly following Sethi [1996, Chapter 5].
+However, we have tried to supplement the material with insights
+from Scott [2015, Chapter 3, Chapter 8], especially 3.8.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 74/118
+=== PAGE 99 ===
+Procedure Activation
+There are six main features (including components) to a
+subroutine:
+1. The name and the signature (or prototype)
+2. Parameter passing and access (preparation to call and
+subroutine preamble)
+3. Allocation and access to local (including temporary) objects,
+access to non-local objects
+4. The imperative action procedure (translation of the source
+code body of the subroutine)
+5. Preparation to return (return values, winding up operations
+such as C++ destructor calls for objects created locally at
+procedure activation, etc.)
+6. Restoration of the program state at return
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 75/118
+=== PAGE 100 ===
+euclid.c
+We demonstrate the six elements of subroutines listed above in a
+recursive function. Observe the source code and its translation into
+assembly language with debugging info.
+int
+gcd ( int
+parama ,
+int
+paramb ) {
+s t a t i c
+int
+x s t a t i c = 0;
+x s t a t i c = parama−paramb ;
+i f ( parama>0 && paramb>0) {
+i f ( x s t a t i c <0)
+return
+gcd ( parama ,−x s t a t i c ) ;
+else
+i f ( x s t a t i c >0)
+return
+gcd ( paramb , x s t a t i c ) ;
+else
+return parama ;
+}
+else
+return
+−1;
+}
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 76/118
+=== PAGE 101 ===
+euclid.s I
+The output of gcc -g -S euclid.c. The .loc assembler
+directives correspond to the line numbers in the source code.
+Before the first such directive is the preamble. Call preparation
+(parameter passing etc.) can be see between the corresponding
+source lines.
+. f i l e
+” e u c l i d . c”
+. t e x t
+. Ltext0 :
+. f i l e
+0 ”/home/ rs −j o s h i / sangrah /
+Courses /PoPL/DemoProgs/
+ProcedureActivation ” ” e u c l i d . c”
+. g l o b l
+gcd
+. type
+gcd ,
+@function
+gcd :
+. LFB0 :
+. f i l e
+1 ” e u c l i d . c”
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 77/118
+=== PAGE 102 ===
+euclid.s II
+. l o c
+1 1 33
+. c f i s t a r t p r o c
+endbr64
+pushq
+%rbp
+. c f i d e f c f a o f f s e t
+16
+. c f i o f f s e t
+6 , −16
+movq
+%rsp , %rbp
+. c f i d e f c f a r e g i s t e r
+6
+subq
+$16 , %rsp
+movl
+%edi , −4(%rbp )
+movl
+%esi , −8(%rbp )
+. l o c
+1 4 18
+movl
+−4(%rbp ) , %eax
+subl
+−8(%rbp ) , %eax
+. l o c
+1 4 10
+movl
+%eax ,
+x s t a t i c .0(% r i p )
+. l o c
+1 5 4
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 78/118
+=== PAGE 103 ===
+euclid.s III
+cmpl
+$0 , −4(%rbp )
+j l e
+. L2
+. l o c
+1 5 14
+d i s c r i m i n a t o r
+1
+cmpl
+$0 , −8(%rbp )
+j l e
+. L2
+. l o c
+1 6 14
+movl
+x s t a t i c .0(% r i p ) , %eax
+. l o c
+1 6 6
+t e s t l
+%eax , %eax
+j n s
+. L3
+. l o c
+1 6 25
+d i s c r i m i n a t o r
+1
+movl
+x s t a t i c .0(% r i p ) , %eax
+negl
+%eax
+movl
+%eax , %edx
+movl
+−4(%rbp ) , %eax
+movl
+%edx , %e s i
+movl
+%eax , %e d i
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 79/118
+=== PAGE 104 ===
+euclid.s IV
+c a l l
+gcd
+jmp
+. L4
+. L3 :
+. l o c
+1 7 19
+movl
+x s t a t i c .0(% r i p ) , %eax
+. l o c
+1 7 11
+t e s t l
+%eax , %eax
+j l e
+. L5
+. l o c
+1 7 30
+d i s c r i m i n a t o r
+1
+movl
+x s t a t i c .0(% r i p ) , %edx
+movl
+−8(%rbp ) , %eax
+movl
+%edx , %e s i
+movl
+%eax , %e d i
+c a l l
+gcd
+jmp
+. L4
+. L5 :
+. l o c
+1 8 16
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 80/118
+=== PAGE 105 ===
+euclid.s V
+movl
+−4(%rbp ) , %eax
+jmp
+. L4
+. L2 :
+. l o c
+1 10 14
+movl
+$−1, %eax
+. L4 :
+. l o c
+1 11 1
+l e a v e
+. c f i d e f c f a
+7 , 8
+r e t
+. c f i e n d p r o c
+. LFE0 :
+. s i z e
+gcd , .−gcd
+. l o c a l
+x s t a t i c .0
+.comm
+x s t a t i c .0 ,4 ,4
+. Letext0 :
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 81/118
+=== PAGE 106 ===
+euclid.s VI
+. s e c t i o n
+. debug info ,”” ,
+@progbits
+. Ldebug info0 :
+. long
+0x85
+. value
+0x5
+. byte
+0x1
+. byte
+0x8
+. long
+. Ldebug abbrev0
+. uleb128 0x2
+. long
+. LASF4
+. byte
+0x1d
+. long
+. LASF0
+. long
+. LASF1
+. quad
+. Ltext0
+. quad
+. Letext0 −. Ltext0
+. long
+. Ldebug line0
+. uleb128 0x3
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 82/118
+=== PAGE 107 ===
+euclid.s VII
+. s t r i n g
+”gcd”
+. byte
+0x1
+. byte
+0x1
+. byte
+0x5
+. long
+0x81
+. quad
+. LFB0
+. quad
+. LFE0−.LFB0
+. uleb128 0x1
+. byte
+0x9c
+. long
+0x81
+. uleb128 0x1
+. long
+. LASF2
+. byte
+0xd
+. long
+0x81
+. uleb128 0x2
+. byte
+0x91
+. sleb128 −20
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 83/118
+=== PAGE 108 ===
+euclid.s VIII
+. uleb128 0x1
+. long
+. LASF3
+. byte
+0x19
+. long
+0x81
+. uleb128 0x2
+. byte
+0x91
+. sleb128 −24
+. uleb128 0x4
+. long
+. LASF5
+. byte
+0x1
+. byte
+0x2
+. byte
+0xd
+. long
+0x81
+. uleb128 0x9
+. byte
+0x3
+. quad
+x s t a t i c .0
+. byte
+0
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 84/118
+=== PAGE 109 ===
+euclid.s IX
+. uleb128 0x5
+. byte
+0x4
+. byte
+0x5
+. s t r i n g
+” i n t ”
+. byte
+0
+. s e c t i o n
+. debug abbrev ,”” ,
+@progbits
+. Ldebug abbrev0 :
+. uleb128 0x1
+. uleb128 0x5
+. byte
+0
+. uleb128 0x3
+. uleb128 0xe
+. uleb128 0x3a
+. uleb128 0x21
+. sleb128 1
+. uleb128 0x3b
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 85/118
+=== PAGE 110 ===
+euclid.s X
+. uleb128 0x21
+. sleb128 1
+. uleb128 0x39
+. uleb128 0xb
+. uleb128 0x49
+. uleb128 0x13
+. uleb128 0x2
+. uleb128 0x18
+. byte
+0
+. byte
+0
+. uleb128 0x2
+. uleb128 0x11
+. byte
+0x1
+. uleb128 0x25
+. uleb128 0xe
+. uleb128 0x13
+. uleb128 0xb
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 86/118
+=== PAGE 111 ===
+euclid.s XI
+. uleb128 0x3
+. uleb128 0 x1f
+. uleb128 0x1b
+. uleb128 0 x1f
+. uleb128 0x11
+. uleb128 0x1
+. uleb128 0x12
+. uleb128 0x7
+. uleb128 0x10
+. uleb128 0x17
+. byte
+0
+. byte
+0
+. uleb128 0x3
+. uleb128 0x2e
+. byte
+0x1
+. uleb128 0 x3f
+. uleb128 0x19
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 87/118
+=== PAGE 112 ===
+euclid.s XII
+. uleb128 0x3
+. uleb128 0x8
+. uleb128 0x3a
+. uleb128 0xb
+. uleb128 0x3b
+. uleb128 0xb
+. uleb128 0x39
+. uleb128 0xb
+. uleb128 0x27
+. uleb128 0x19
+. uleb128 0x49
+. uleb128 0x13
+. uleb128 0x11
+. uleb128 0x1
+. uleb128 0x12
+. uleb128 0x7
+. uleb128 0x40
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 88/118
+=== PAGE 113 ===
+euclid.s XIII
+. uleb128 0x18
+. uleb128 0x7c
+. uleb128 0x19
+. uleb128 0x1
+. uleb128 0x13
+. byte
+0
+. byte
+0
+. uleb128 0x4
+. uleb128 0x34
+. byte
+0
+. uleb128 0x3
+. uleb128 0xe
+. uleb128 0x3a
+. uleb128 0xb
+. uleb128 0x3b
+. uleb128 0xb
+. uleb128 0x39
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 89/118
+=== PAGE 114 ===
+euclid.s XIV
+. uleb128 0xb
+. uleb128 0x49
+. uleb128 0x13
+. uleb128 0x2
+. uleb128 0x18
+. byte
+0
+. byte
+0
+. uleb128 0x5
+. uleb128 0x24
+. byte
+0
+. uleb128 0xb
+. uleb128 0xb
+. uleb128 0x3e
+. uleb128 0xb
+. uleb128 0x3
+. uleb128 0x8
+. byte
+0
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 90/118
+=== PAGE 115 ===
+euclid.s XV
+. byte
+0
+. byte
+0
+. s e c t i o n
+. debug aranges ,”” ,
+@progbits
+. long
+0x2c
+. value
+0x2
+. long
+. Ldebug info0
+. byte
+0x8
+. byte
+0
+. value
+0
+. value
+0
+. quad
+. Ltext0
+. quad
+. Letext0 −. Ltext0
+. quad
+0
+. quad
+0
+. s e c t i o n
+. debug line ,”” ,
+@progbits
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 91/118
+=== PAGE 116 ===
+euclid.s XVI
+. Ldebug line0 :
+. s e c t i o n
+. debug str ,”MS” ,
+@progbits ,1
+. LASF4 :
+. s t r i n g
+”GNU C17 1 1.4.0 −mtune=g e n e r i c
+−march=x86−64 −g −fasynchronous −
+unwind−t a b l e s −fstack −protector −
+strong −fstack −clash −p r o t e c t i o n −
+fcf −p r o t e c t i o n ”
+. LASF3 :
+. s t r i n g
+”paramb”
+. LASF2 :
+. s t r i n g
+”parama”
+. LASF5 :
+. s t r i n g
+” x s t a t i c ”
+. s e c t i o n
+. d e b u g l i n e s t r ,”MS” ,
+@progbits ,1
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 92/118
+=== PAGE 117 ===
+euclid.s XVII
+. LASF0 :
+. s t r i n g
+” e u c l i d . c”
+. LASF1 :
+. s t r i n g
+”/home/ rs −j o s h i / sangrah /
+Courses /PoPL/DemoProgs/
+ProcedureActivation ”
+. i d e n t
+”GCC:
+( Ubuntu 11.4.0 −1 ubuntu1
+˜22.04)
+11.4.0”
+. s e c t i o n
+. note .GNU−stack ,”” ,
+@progbits
+. s e c t i o n
+. note . gnu . property ,” a”
+. a l i g n
+8
+. long
+1 f −0 f
+. long
+4 f −1 f
+. long
+5
+0:
+. s t r i n g
+”GNU”
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 93/118
+=== PAGE 118 ===
+euclid.s XVIII
+1:
+. a l i g n
+8
+. long
+0xc0000002
+. long
+3 f −2 f
+2:
+. long
+0x3
+3:
+. a l i g n
+8
+4:
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 94/118
+=== PAGE 119 ===
+The Stack Frame
+Ref: Sethi [1996, page 146, Figure 5.13]
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 95/118
+=== PAGE 120 ===
+C and C++ Procedure Activations
+Sethi [1996, Figure 5.19]
+We explain the corresponding assembly instructions next.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 96/118
+=== PAGE 121 ===
+Call and Subroutine I
+▶Incoming parameters: Pushed by the caller onto the stack
+before issuing the call instruction.
+▶The call instruction saves the state (return address; if
+re-entrant code then the PSW, etc.)
+▶The (callee) frame pointer is now fixed at this point.
+. c f i s t a r t p r o c
+endbr64
+pushq
+%rbp
+. c f i d e f c f a o f f s e t
+16
+. c f i o f f s e t
+6 , −16
+movq
+%rsp , %rbp
+. c f i d e f c f a r e g i s t e r
+6
+subq
+$16 , %rsp
+movl
+%edi , −4(%rbp )
+movl
+%esi , −8(%rbp )
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 97/118
+=== PAGE 122 ===
+Call and Subroutine II
+Local variables and temporary storage are calculated before
+doing these offset adjustments. Before this, of course, the BP
+(the frame pointer of the caller’s frame) is saved in the “saved
+state information” block. This is the access link.
+▶Outgoing parameters for the call on line 6 of gcd.c:
+movl
+x s t a t i c .0(% r i p ) , %eax
+negl
+%eax
+movl
+%eax , %edx
+movl
+−4(%rbp ) , %eax
+movl
+%edx , %e s i
+movl
+%eax , %e d i
+c a l l
+gcd
+jmp
+. L4
+▶After all recursion ends, the winding up part:
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 98/118
+=== PAGE 123 ===
+Call and Subroutine III
+. L4 :
+l e a v e
+. c f i d e f c f a
+7 , 8
+r e t
+. c f i e n d p r o c
+▶Note the “recursive returns”—after each recursive call, the
+return value is assumed to be there in the expected location
+(in this instance, the accumulator register) and control is
+transferred to the leave instrcuction above. Only for lines 8
+(else return parama) and 10 (else return -1) there is
+explicit result movement:
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 99/118
+=== PAGE 124 ===
+Call and Subroutine IV
+. L5 :
+. l o c
+1 8 16
+movl
+−4(%rbp ) , %eax
+jmp
+. L4
+. L2 :
+. l o c
+1 10 14
+movl
+$−1, %eax
+. L4 :
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 100/118
+=== PAGE 125 ===
+Lessons from these exercises
+Along with the gcd program, we experimented with many C and
+C++ programs, often debugging them line by line and examining
+the stack frames. Here are the important questions we sought to
+solve by this:
+▶Which names are retained in the symbol table for the linker?
+▶Which names are converted into offsets? How?
+▶How are method calls in C++ handled? In the same way as
+procedure activation for global functions, or differently?
+▶How is polymorphism enabled in C++? How is the class name
+preserved, how are method signatures uniquely identified so
+that membership, class hierarchy, overloading, overriding,
+virtual methods (abstraction), reflection etc. are handled?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Procedure Activation 101/118
+=== PAGE 126 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 127 ===
+When to Java?
+▶Mainly for interfacing (not just UI, but for development
+without the nitty-gritty)
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 102/118
+=== PAGE 128 ===
+When to Java?
+▶Mainly for interfacing (not just UI, but for development
+without the nitty-gritty)
+▶When the focus is the core business logic of the application,
+not the implementation
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 102/118
+=== PAGE 129 ===
+When to Java?
+▶Mainly for interfacing (not just UI, but for development
+without the nitty-gritty)
+▶When the focus is the core business logic of the application,
+not the implementation
+▶When the user and system requirements prompt the choices of
+libraries and class hierarchies
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 102/118
+=== PAGE 130 ===
+When to Java?
+▶Mainly for interfacing (not just UI, but for development
+without the nitty-gritty)
+▶When the focus is the core business logic of the application,
+not the implementation
+▶When the user and system requirements prompt the choices of
+libraries and class hierarchies
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 102/118
+=== PAGE 131 ===
+When to Java?
+▶Mainly for interfacing (not just UI, but for development
+without the nitty-gritty)
+▶When the focus is the core business logic of the application,
+not the implementation
+▶When the user and system requirements prompt the choices of
+libraries and class hierarchies
+Then, wouldn’t LLMs replace Java programmers?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 102/118
+=== PAGE 132 ===
+When Not to Java?
+▶The Banana Monkey Jungle Problem
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 103/118
+=== PAGE 133 ===
+When Not to Java?
+▶The Banana Monkey Jungle Problem
+▶The problem with the “contain and delegate” solution
+https://cscalfani.medium.com/
+goodbye-object-oriented-programming-a59cda4c0e53
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 103/118
+=== PAGE 134 ===
+When Not to Java?
+▶The Banana Monkey Jungle Problem
+▶The problem with the “contain and delegate” solution
+https://cscalfani.medium.com/
+goodbye-object-oriented-programming-a59cda4c0e53
+▶Is “reusability” such a holy or useful thing in the times of
+LLMs?
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 103/118
+=== PAGE 135 ===
+When Not to Java?
+▶The Banana Monkey Jungle Problem
+▶The problem with the “contain and delegate” solution
+https://cscalfani.medium.com/
+goodbye-object-oriented-programming-a59cda4c0e53
+▶Is “reusability” such a holy or useful thing in the times of
+LLMs?
+▶Polymorphism, Contracts and Flexibility: the “tension-triad”
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 103/118
+=== PAGE 136 ===
+Exercises
+1. Make a 2-class hierarchy, instantiate any one of the two
+classes, make this instance forget what it was to begin with
+and instead imagine itself to be of the other class.
+2. Make a single instance of a class deviate in a call to a method
+from all other instances of the class.
+3. Replace an instance of a superclass by that of a subclass after
+requiring the corresponding specialization and waiting for that
+specialization to be developed and available.
+4. Make a generic method adapt to a new specialization.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+OOP in Java 104/118
+=== PAGE 137 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 138 ===
+The MetaObject Protocol I
+Modern programming language design lives in tension between two
+apparently conflicting demands. On the one hand, high-level lan-
+guages such as Scheme, Prolog, and ML incorporate significant ad-
+vances in elegance and expressive power. On the other hand, many
+industrial programmers find these languages too ”theoretical” or im-
+practical for everyday use, and too inefficient. As a result, these lan-
+guages are often used only in academic and research contexts, while
+the majority of the world’s mainline programming is conducted in
+such languages as C and C++, distinguished instead for their effi-
+ciency and adaptability.
+This book is about a new approach to programming language de-
+sign, in which these two demands of elegance and efficiency are
+viewed as compatible, not conflicting. Our goal is the development
+of languages that are as clean as the purest theoretical designs, but
+that make no compromises on performance or control over imple-
+mentation.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 105/118
+=== PAGE 139 ===
+The MetaObject Protocol II
+The way in which we have achieved elegance and efficiency jointly
+is to base language design on metaobject protocols.
+Metaobject
+protocols are interfaces to the language that give users the ability to
+incrementally modify the language’s behavior and implementation,
+as well as the ability to write programs within the language.
+Languages that incorporate metaobject protocols blur the distinction
+between language designer and language user. Traditionally, design-
+ers are expected to produce languages with well-defined, fixed behav-
+iors (or ”semantics”). Users are expected to treat these languages as
+immutable black-box abstractions, and to derive any needed flexibil-
+ity or power from constructs built on top of them. This sharp division
+is thought to constitute an appropriate division of labor. Program-
+ming language design is viewed as a difficult, highly-specialized art,
+inappropriate for average users to engage in. It is also often assumed
+that a language design must be rigid in order to support portable
+implementations, efficient compilers, and the like.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 106/118
+=== PAGE 140 ===
+CLOS Bucket-List I
+▶Class Redefinition: allows the definition of a class to be
+changed; the changes are propagated to its subclasses and to
+extant instances.
+▶Method Redefinition: replaces the current definition
+completely by the new definition.
+▶Forward-Referencing of Superclasses: allows classes to be
+referenced before they are defined. One class can be defined
+in terms of another before the second has been defined.
+▶Implicit (inferred) Generic Function Definitions: allows
+the definition of a generic function to be inferred from the
+method definitions.
+▶User Control of Method Combination: It provides a
+mechanism for customizing the production of the effective
+method; in the full form, mechanisms for implementing
+arbitrary control structures within method combination and
+for arbitrary processing of method qualifiers.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 107/118
+=== PAGE 141 ===
+CLOS Bucket-List II
+▶The “eql” Specializers: allows methods to be specialized
+not only to classes, but also to individual objects.
+▶Slots with “:” Class Allocation: supports slots allocated in
+each instance of a class and slots which are shared across all
+of them.
+▶Fully Integrated Types and Classes: closely integrates
+Common Lisp types and CLOS classes. It is possible to define
+methods specialized to primitive classes (e.g., symbol) and
+structure classes (defined with defstruct).
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 108/118
+=== PAGE 142 ===
+CLOS Program Structure
+▶In its simplest terms, a CLOS program consists of defclass,
+defgeneric, and defmethod forms mixed in with other more
+traditional Common Lisp forms. Executing these forms defines
+the program’s classes, generic functions and methods.
+▶Backstage, execution of these forms creates internal
+representations of the classes, generic functions, and methods,
+recording the information provided in their definitions. The
+implementation uses the information stored in the internal
+representation of a class to create instances of that class and
+to access their slots. Information stored in the internal
+representation of a generic function and its methods is used to
+invoke the generic function.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 109/118
+=== PAGE 143 ===
+An Example: Painting
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 110/118
+=== PAGE 144 ===
+Reflection
+▶(find-class ⟨symbol⟩&optional ⟨errorp⟩) Returns the
+class metaobject corresponding to the class named by
+⟨symbol⟩. If there is no class with this name and ⟨errorp⟩is
+either missing or non-nil, an error is signaled.
+▶If there is no class with this name and ⟨errorp⟩) is nil, then nil
+is returned.
+▶(class-of ⟨object⟩) Returns the class metaobject
+corresponding to the class of ⟨object⟩.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 111/118
+=== PAGE 145 ===
+The TextBook on Reflection
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 112/118
+=== PAGE 146 ===
+Method Combinations
+▶Under the rules of standard method combination, applicable
+before-methods are executed first, from most specific to
+least specific. The most specific applicable primary method is
+executed next, followed by the applicable after-methods,
+from least specific to most specific. The value(s) returned by
+the call to the generic function are the values(s) returned by
+the primary method.
+▶The function apply-methods does this sequencing, calling
+apply-method to invoke individual methods on the
+arguments.
+▶Applying a method is handled in basically the same way a Lisp
+interpreter handles a call to a normal (non-primitive) function:
+evaluate the body form in the lexical environment of the
+defmethod as extended with new variable binding resulting
+from matching the lambda list against the list of actual
+arguments.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 113/118
+=== PAGE 147 ===
+Another take on Reflection
+Engineer academicians working on an industrial project of design and development of a metaprogramming language
+with Europolitan Vodafone AB and Diedata AB say:
+Reflection
+There are two types of reflection:
+introspection and
+intercession ...
+The purpose of introspection is to
+acquire information about the program itself and to
+use that information within the program.
+Intercession goes further.
+It allows the program to
+alter its own behavior.
+Different programming
+languages have different reflection capabilities.
+Languages such as Lisp or Smalltalk have both
+introspection and intercession, while Java is
+basically introspective only.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 114/118
+=== PAGE 148 ===
+Performance v/s Expressive Power
+▶Naive implementations of the MOP are woefully inefficient.
+At the very least, any real implementation must handle
+generic function invocation and slot access more efficiently.
+▶The basis for optimizing implementations is the idea: improve
+performance by computing the results of critical internal
+computations once and then saving and reusing that
+result. This technique is known as memoization.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+Generics 115/118
+=== PAGE 149 ===
+Section
+Preliminaries
+Languages and Abstraction Levels
+Abstraction
+Programming Language Design
+The Clash of Purists and Linguists
+Lessons for Us
+Imperative Paradigm
+Structured Programming
+Principles of Imperative Languages
+Data Types
+Procedural to OO
+Object-Orientation
+Procedure Activation
+OOP in Java
+Generics
+References
+=== PAGE 150 ===
+References I
+Corrado B ohm and Giuseppe Jacopini. Flow diagrams, turing
+machines and languages with only two formation rules.
+Commun. ACM, 9(5 (May 1966)):366–371, 1966. URL
+https://doi.org/10.1145/355592.365646.
+Grady Booch. Object-Oriented Analysis and Design with
+Applications. Addison-Wesley, 2007. ISBN 978-0-201-89551-3.
+Jr. Brooks, Frederick P. The Mythical Man-Month: Essays on
+Software Engineering. Addison-Wesley Pub. Co., Chicago, 1982.
+Edsger W. Dijkstra. Letters to the editor: go to statement
+considered harmful. Commun. ACM, 11(3 (March 1968)):
+147–148, 1968. URL
+https://doi.org/10.1145/362929.362947.
+Edsger W. Dijkstra. A Discipline of Programming. Prentice-Hall,
+N.J., USA, 1976.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+References 116/118
+=== PAGE 151 ===
+References II
+Robert J. DuWorks and Steven W. Smoliar. The arrogant
+programmer: Dijkstra and wegner considered harmful. SIGCSE
+Bull., 4(4 (Dec. 1972)):19–21, 1972. URL
+https://doi.org/10.1145/382224.382454.
+David Gries. The Science of Programming. Springer Verlag, N.Y.,
+USA, 1981.
+M. Stuart Lynn. Acm forum. Commun. ACM, 15(4 (April 1972)):
+280, 1972. URL https://doi.org/10.1145/361284.361302.
+Kristen Nygaard. Basic concepts in object oriented programming.
+In Proceedings of the 1986 SIGPLAN Workshop on
+Object-Oriented Programming, OOPWORK ’86, page 128–132,
+New York, NY, USA, 1986. Association for Computing
+Machinery. ISBN 0897912055. doi: 10.1145/323779.323751.
+URL https://doi.org/10.1145/323779.323751.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+References 117/118
+=== PAGE 152 ===
+References III
+D. L. Parnas. On the criteria to be used in decomposing systems
+into modules. Commun. ACM, 15(12 (Dec. 1972)):1053–1058,
+1972. URL https://doi.org/10.1145/361598.361623.
+John R. Rice and Edsger W. Dijkstra. Letters to the editor: The go
+to statement reconsidered. Commun. ACM, 11(8 (Aug. 1968)):
+538, 1968. URL https://doi.org/10.1145/363567.363570.
+Michael L. Scott. Programming Language Pragmatics.
+Morgan-Kaufmann (Elsevier), 4 edition, 2015. ISBN
+9780124104099, 9780124104778.
+Ravi Sethi. Programming Languages: Concepts and Constructs.
+Addison-Wesley, Reading, Mass., USA, 2 edition, 1996.
+Note: The 3rd edition of Scott [2015], available as an Indian
+reprint, is also sufficient for the purpose. Wherever it is deficient,
+we will provide compensatory material.
+PoPL CS F301
+CC
+⃝RaJo BITS Goa CS&IS
+References 118/118

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 430" font-family="Segoe UI, Arial, sans-serif" font-size="15">
+  <rect width="780" height="430" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="700" fill="#1b1f24">A C program's memory: who allocates what</text>
+  <!-- address space -->
+  <g stroke="#5f6773" stroke-width="1.5">
+    <rect x="30" y="50" width="300" height="52" fill="#e8eef9"/>
+    <rect x="30" y="102" width="300" height="62" fill="#e6f2ea"/>
+    <rect x="30" y="164" width="300" height="62" fill="#fdf1d8"/>
+    <rect x="30" y="226" width="300" height="52" fill="#f3f3f3" stroke-dasharray="5 4"/>
+    <rect x="30" y="278" width="300" height="76" fill="#f9e3e3"/>
+  </g>
+  <g fill="#1b1f24">
+    <text x="42" y="72" font-weight="700">Code (text)</text><text x="42" y="92" font-size="13">compiled functions</text>
+    <text x="42" y="124" font-weight="700">Static storage</text><text x="42" y="143" font-size="13">globals, static locals · fixed at compile/link time</text>
+    <text x="42" y="186" font-weight="700">Heap</text><text x="42" y="205" font-size="13">malloc / free · library, run time ↓ grows up</text>
+    <text x="42" y="256" font-size="13" fill="#5f6773">(free space)</text>
+    <text x="42" y="300" font-weight="700">Stack</text><text x="42" y="319" font-size="13">one frame per call (automatic storage)</text><text x="42" y="338" font-size="13">grows toward lower addresses ↓</text>
+  </g>
+  <text x="30" y="378" font-size="13" fill="#5f6773">Compiler's role: static → lays out; stack → emits sub %esp / offsets;</text>
+  <text x="30" y="397" font-size="13" fill="#5f6773">heap → only sizes and types (malloc itself is a library call).</text>
+  <!-- frame -->
+  <text x="430" y="72" font-weight="700" fill="#1b1f24">One frame of  f(n)  with  int array[n];</text>
+  <g stroke="#5f6773" stroke-width="1.5">
+    <rect x="430" y="86" width="320" height="38" fill="#eef0f4"/>
+    <rect x="430" y="124" width="320" height="38" fill="#eef0f4"/>
+    <rect x="430" y="162" width="320" height="38" fill="#eef0f4"/>
+    <rect x="430" y="200" width="320" height="38" fill="#eef0f4"/>
+    <rect x="430" y="238" width="320" height="82" fill="#fdf1d8"/>
+  </g>
+  <g fill="#1b1f24" font-size="14">
+    <text x="442" y="110">parameter n</text>
+    <text x="442" y="148">return address</text>
+    <text x="442" y="186">saved base pointer (caller's frame)</text>
+    <text x="442" y="224">other locals / temporaries</text>
+    <text x="442" y="266" font-weight="700">array[0 … n-1]  (VLA)</text>
+    <text x="442" y="286" font-size="13">size known only when f is activated:</text>
+    <text x="442" y="304" font-size="13">%esp is lowered by n·sizeof(int) at that moment</text>
+  </g>
+  <text x="430" y="345" font-size="13" fill="#5f6773">So frame size is NOT a compile-time constant here.</text>
+</svg>

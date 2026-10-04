@@ -1,0 +1,121 @@
+# source: 03_Quizzes-Assignments/Quiz 1 - Procedural to OO _ Corrected Quiz_ Attempt review.pdf
+# ocr_pages: 
+=== PAGE 1 ===
+Dashboard / My courses / 1160_CS F301 / Hidden Class Example / Procedural to OO : Corrected Quiz
+Question 1
+Correct
+Mark 4.00 out
+of 4.00
+Started on
+Monday, 9 September 2024, 4:34 PM
+State
+Finished
+Completed on
+Monday, 9 September 2024, 4:57 PM
+Time taken
+23 mins 11 secs
+Grade
+Not yet graded
+Study the following two modules. If you prefer, you may type in the two files with contents as shown. The two
+C++ modules are to be compiled (independently or together), linked together, and the resulting executable (if
+any) is to be executed.
+Will they compile independently? Will they compile together?
+They will not compile, there will be "incompatible types" errors in both.
+They will not compile, because there are syntax errors.
+They will compile independently but not together. One of them will not compile when they are sought to
+be compiled together.
+They will compile independently or together, both ways identically without errors.
+
+Your answer is correct.
+The independence between modules regarding types, and our choice of not using a common header to be
+included, allows this.
+The correct answer is:
+They will compile independently or together, both ways identically without errors.
+=== PAGE 2 ===
+Question 2
+Correct
+Mark 4.00 out
+of 4.00
+Study the following two modules. If you prefer, you may type in the two files with contents as shown. The two
+C++ modules are to be compiled (independently or together), linked together, and the resulting executable (if
+any) is to be executed.
+Will they link together?
+They will not link, there will be "incompatible types" errors in both.
+They will not compile, because there are syntax errors. The question of linking does not arise.
+They will compile independently but will not link together. The linker will give "incompatible types" error.
+They will compile and link together, without errors.
+
+Your answer is correct.
+The independence between modules regarding types, and our choice of not using a common header to be
+included, allows this.
+The correct answer is:
+They will compile and link together, without errors.
+=== PAGE 3 ===
+Question 3
+Correct
+Mark 4.00 out
+of 4.00
+Study the following two modules. If you prefer, you may type in the two files with contents as shown. The two
+C++ modules are to be compiled (independently or together), linked together, and the resulting executable (if
+any) is to be executed. The command used to do so is: 
+$ g++ -o xec module1.cpp module2.cpp ; ./xec
+What will be the outcomes? 
+No outcome as they will not compile.
+No outcome as they will not link.
+There will be an executable and it will execute but will not produce any output.
+10
+
+Your answer is correct.
+The independence between modules regarding types, and our choice of not using a common header to be
+included, allows this.
+The correct answer is:
+10
+=== PAGE 4 ===
+Question 4
+Correct
+Mark 4.00 out
+of 4.00
+Study the following two modules. If you prefer, you may type in the two files with contents as shown. The two
+C++ modules are to be compiled (independently or together), linked together, and the resulting executable (if
+any) is to be executed. The command used to do so is: 
+$ g++ -o xec module1.cpp module2.cpp ; ./xec
+If we add one more line before "return 0;" in module2.cpp: "y.Tell();"  What will be the overall outcomes? 
+No outcome as they will not compile.
+No outcome as they will not link.
+There will be an executable and it will execute but will not produce any output.
+10
+0
+
+Your answer is correct.
+The independence between modules regarding types, and our choice of not using a common header to be
+included, allows this.
+The correct answer is:
+10
+0
+=== PAGE 5 ===
+Question 5
+Complete
+Marked out of
+4.00
+Explain all the experience of the previous questions. Also explain the implementation of the hidden type
+example given on the course page.
+1. Both moduleone.cpp and moduletwo.cpp compile independently and together because C++ allows certain
+implicit type conversions that results in no errors during compilation, even though the code might contain
+unusual constructs. Moreover, there were no syntax errors.
+2. The linker successfully resolved all symbol references across the two files. Even though the class X is
+defined differently in each file, the linker does not check for identical class definitions—only for matching
+symbols. The Tell() method required by moduletwo.cpp was found in moduleone.cpp, allowing the two files to
+link together without errors.
+3 and 4. I believe the picture accidentally included y.Tell(), otherwise the output would have been just 10. But
+according to the code shown the output (with y.Tell()) was 10 0. The first Tell() prints 10 from the temporary
+object created with ((X)10) and the second Tell() prints 0 from y, which was initialized with x.k, where x was
+default-constructed with k = 0
+Hidden Type:
+The Class1 class contains a private member, unsigned char *p, which points to a dynamically allocated array.
+On an x64 system, the class size is 8 bytes, corresponding to the pointer size. The methods setInt() and
+setFloat() use 4N+1 bytes, while setDouble() uses 8N+1 bytes. However, combining double with other types
+leads to inconsistent memory usage patterns. A significant issue with the class is that it only retrieves the
+integer part of float and double values, likely due to incorrect typecasting in its getter functions.
+◀︎ The missing type
+Jump to...
+Example1 ▶︎

@@ -1,0 +1,2 @@
+# source: 05_Code-Examples/Dictionary (2)/Dictionary/Ordering.java
+enum Ordering {NONE, ASC, DESC, PRIQASC, PRIQDESC, BST}

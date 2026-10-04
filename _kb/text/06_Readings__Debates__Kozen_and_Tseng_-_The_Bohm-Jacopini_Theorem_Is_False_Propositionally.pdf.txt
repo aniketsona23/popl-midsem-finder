@@ -1,0 +1,800 @@
+# source: 06_Readings/Debates/Kozen and Tseng - The Bohm-Jacopini Theorem Is False, Propositionally.pdf
+# ocr_pages: 
+=== PAGE 1 ===
+The B¨ohm–Jacopini Theorem is False,
+Propositionally
+Dexter Kozen and Wei-Lung Dustin Tseng
+Department of Computer Science
+Cornell University
+Ithaca, New York 14853-7501, USA
+{kozen,wdtseng}@cs.cornell.edu
+Abstract. The B¨ohm–Jacopini theorem (B¨ohm and Jacopini, 1966) is a
+classical result of program schematology. It states that any deterministic
+ﬂowchart program is equivalent to a while program. The theorem is usu-
+ally formulated at the ﬁrst-order interpreted or ﬁrst-order uninterpreted
+(schematic) level, because the construction requires the introduction of
+auxiliary variables. Ashcroft and Manna (1972) and Kosaraju (1973)
+showed that this is unavoidable. As observed by a number of authors, a
+slightly more powerful structured programming construct, namely loop
+programs with multi-level breaks, is suﬃcient to represent all determin-
+istic ﬂowcharts without introducing auxiliary variables. Kosaraju (1973)
+established a strict hierarchy determined by the maximum depth of nest-
+ing allowed. In this paper we give a purely propositional account of these
+results. We reformulate the problems at the propositional level in terms
+of automata on guarded strings, the automata-theoretic counterpart to
+Kleene algebra with tests. Whereas the classical approaches do not dis-
+tinguish between ﬁrst-order and propositional levels of abstraction, we
+ﬁnd that the purely propositional formulation allows a more streamlined
+mathematical treatment, using algebraic and topological concepts such
+as bisimulation and coinduction. Using these tools, we can give more
+mathematically rigorous formulations and simpler and more revealing
+proofs.
+1
+Introduction
+Program schematology was one of the earliest topics in the mathematics of com-
+puting. A central problem that has been well studied over the years is that of
+transforming an unstructured ﬂowgraph to structured form. A seminal result in
+this area is the B¨ohm–Jacopini theorem [2], which states that any deterministic
+ﬂowchart program is equivalent to a while program. This classical theorem has
+reappeared in many contexts and has been reproved by many diﬀerent methods.
+There are dozens of references on this topic; a few commonly cited ones are [1,
+8–11].
+1
+=== PAGE 2 ===
+The B¨ohm–Jacopini theorem is usually formulated at the ﬁrst-order inter-
+preted or ﬁrst-order uninterpreted (schematic) level, as was most early work in
+program schematology. The ﬁrst-order formulation allows the introduction of
+auxiliary individual or Boolean variables to preserve information during the re-
+structuring. This is an essential ingredient of the B¨ohm–Jacopini construction,
+and they asked whether it was strictly necessary. This question was answered
+aﬃrmatively by Ashcroft and Manna [1] and Kosaraju [4].
+B¨ohm and Jacopini’s question, and Ashcroft and Manna and Kosaraju’s so-
+lutions, were phrased in terms of the necessity of introducing auxiliary variables.
+This view is repeated in subsequent works, e.g. [8]. However, this is not really
+the best way to phrase the question. What was really shown was that a purely
+propositional formulation of the B¨ohm–Jacopini theorem is false: there is a de-
+terministic propositional ﬂowchart that is not equivalent to any propositional
+while program. This result is implicit in [1, 4], although it was not stated this
+way.
+As observed by a number of authors (e.g. [4, 9]), a slightly more powerful
+structured programming construct, namely loops with multi-level breaks, is suf-
+ﬁcient to represent all deterministic ﬂowcharts without introducing auxiliary
+variables. Kosaraju [4] established a strict hierarchy based on the levels of the
+multi-level breaks that are allowed. He showed that for any n ≥1, there exists
+a loop program with break m for m ≤n that is not equivalent to any loop pro-
+gram with break m for m ≤n−1. Again, however, these results were formulated
+and proved at the ﬁrst-order interpreted level, despite the fact that they are
+essentially propositional.
+Inexpressibility proofs such as those of [1, 4] that reason in terms of a particu-
+lar ﬁrst-order interpretation may appear contrived, because any number of other
+interpretations could serve the same purpose. One runs the risk of obscuring the
+underlying principles at work by the details of the particular construction, which
+are largely irrelevant. Moreover, the classical approach to program schematology
+relies heavily on graphs and combinatorial graph restructuring operations, which
+can be diﬃcult to reason about formally.
+Automata on guarded strings, the automata-theoretic counterpart of Kleene
+algebra with tests (KAT), provide an opportunity to reset the theory of program
+schemes on more rigorous algebraic foundations. We have found that a purely
+propositional, automata-theoretic reformulation of some of the questions men-
+tioned above allows a more streamlined treatment. Algebraic and topological
+concepts such as bisimulation and coinduction, absent in earlier treatments, pre-
+dominate here. We feel that the resulting proofs are simpler, more rigorous, and
+more revealing of the underlying principles at work.
+This paper is organized as follows. In Section 2, we brieﬂy discuss the dif-
+ferences between propositional and ﬁrst-order formulations, and recall the basic
+deﬁnitions regarding guarded strings and automata with tests. We introduce
+a special restricted form of automata with tests, which we call strictly deter-
+ministic, corresponding to deterministic ﬂowchart schemes. We argue that every
+deterministic ﬂowchart scheme is semantically equivalent to a strictly determinis-
+2
+=== PAGE 3 ===
+tic automaton. Also in Section 2, we deﬁne bisimulation for strictly deterministic
+automata and mention several more or less standard results regarding bisimu-
+lations. We also recall the deﬁnition of the structured programming constructs
+for while and loop programs and their semantics. Many proofs in this section are
+quite routine and are omitted.
+Using these tools, we then give a purely propositional account of three known
+results: that the B¨ohm–Jacopini theorem is false at the propositional level, that
+loop programs with multi-level breaks are suﬃcient to represent all deterministic
+ﬂowcharts, and that the Kosaraju hierarchy is strict. These results are proved
+in Sections 3, 4, and 5, respectively. We conclude with some open problems in
+Section 6.
+2
+Preliminaries
+2.1
+Propositional vs. First-Order Logic
+The notions of functions on a domain and variables ranging over that domain are
+inherent in ﬁrst-order logic, but are not present in propositional logic. Whereas
+we may consider a variable assignment x := t as a primitive action in ﬁrst-
+order program logic, a primitive action in propositional program logic is just a
+symbol. Since previous constructions establishing the B¨ohm–Jacopini theorem
+require the introduction of extra variables, they cannot be formalized at the
+propositional level of abstraction.
+In this paper, we model propositional deterministic ﬂowcharts and structured
+programs as strictly deterministic automata with tests, and we model program
+executions as guarded strings (both deﬁned below). If desired, our propositional
+formulation can be extended with a ﬁrst order interpretation. A subtle but im-
+portant point is that all behaviors of a propositional program have a ﬁrst-order
+realization; that is, given any guarded string representing a possible execution
+of a propositional program, there is a ﬁrst-order interpretation that realizes that
+execution.
+2.2
+Guarded Strings
+Guarded strings were introduced in [3]. They model program executions proposi-
+tionally. Let Σ be a ﬁnite set of action symbols and T a ﬁnite set of test symbols
+disjoint from Σ. The symbols T generate a free Boolean algebra B; elements
+of B are called tests. An atom is a minimal nonzero element of B. The set of
+atoms is denoted At. The elements of At can be regarded either as conjunctions
+of literals of T (elements of T or their negations) or as truth assignments to
+T, thus |At| = 2|T |. We write p, q, p0, . . . for elements of Σ and α, β, α0, . . . for
+elements of At. A guarded string is a ﬁnite alternating sequence of atoms and
+actions, beginning and ending with an atom; that is, an element of (At·Σ)∗·At.
+In other words, guarded strings represent the join-irreducible elements of the free
+KAT on generators Σ and T. Intuitively, a guarded string records the sequence
+3
+=== PAGE 4 ===
+of primitive actions taken by a program and the tests that are true between any
+two successive primitive actions.
+We will also consider inﬁnite guarded strings, which are members of (At·Σ)ω,
+but will always qualify with the adjective “inﬁnite” when doing so.
+2.3
+Automata with Tests
+Automata with tests, also known as automata on guarded strings, were stud-
+ied in [5]. They are the automata-theoretic counterpart to Kleene algebra with
+tests (KAT). In the formalism of [5], they have two types of transitions, ac-
+tion transitions and test transitions, and operate over guarded strings. An ordi-
+nary automaton with null transitions is just an automaton with tests over the
+two-element Boolean algebra. Many of the constructions of ordinary ﬁnite-state
+automata, such as determinization and state minimization, extend readily to
+automata with tests. In particular, there is a version of Kleene’s theorem show-
+ing that these automata are equivalent in expressive power to expressions in the
+language of KAT. See [5] for a more detailed introduction.
+2.4
+Strictly Deterministic Automata
+For the purposes of this paper, we will only need to consider a limited class
+of automata with tests corresponding to deterministic propositional ﬂowchart
+schemes. Since actions are uniquely determined, we may elide the action states
+to obtain what we call a strictly deterministic automaton.
+Intuitively, a strictly deterministic automaton operates by starting in its start
+state and scanning a sequence of atoms, which we can view as provided by an
+external agent. For each atom in succession, the automaton responds determin-
+istically either by emitting an action symbol and moving to a new state, by
+halting, or by failing, according to its transition function.
+Formally, a strictly deterministic automaton over Σ and T is a tuple
+M = (Q, δ, start),
+where Q is a (possibly inﬁnite) set of states, start ∈Q is the start state, and δ is
+a transition function
+δ : Q × At →(Σ × Q) + {halt, fail},
+where + denotes disjoint (marked) union. The elements halt and fail are not
+states, but universal constants used by an automaton to represent halting and
+failing, respectively. The components Q, δ, and start may be adorned with the
+subscript M where necessary to distinguish between automata. States are de-
+noted by s, t, u, v, . . . .
+A trace in M is a ﬁnite or inﬁnite alternating sequence of states and atoms
+specifying a path through M. Formally, a trace is a sequence σ in
+(Q · At)∗· Q + (Q · At)ω
+4
+=== PAGE 5 ===
+such that for every substring of σ of the form uαv, δ(u, α) = (p, v) for some
+p ∈Σ. The ﬁrst state of σ is denoted ﬁrst σ and the last state (if it exists) is
+denoted last σ.
+Given a state s and an inﬁnite sequence of atoms σ, there is a unique ﬁnite
+or inﬁnite trace tr(s, σ) determined intuitively by starting in state s and running
+the automaton, making choices at each successive state according to the next
+atom in the sequence σ as determined by the transition function δ. The trace is
+ﬁnite iﬀM halts or fails along the way, even though σ is inﬁnite. Formally, the
+map
+tr : Q × Atω →(Q · At)∗· Q + (Q · At)ω
+is deﬁned coinductively as follows:
+tr(s, α σ)
+def
+=
+(
+s · α · tr(t, σ)
+if δ(s, α) = (p, t)
+s
+if δ(s, α) ∈{halt, fail}.
+This deﬁnition determines tr(s, σ) uniquely for all s ∈Q and σ ∈Atω.
+A similar deﬁnition holds for guarded strings. Here we also allow inﬁnite
+guarded strings as well as ﬁnite ones. Given a starting state s and an inﬁnite
+sequence of atoms σ, there is at most one ﬁnite or inﬁnite guarded string gs(s, σ)
+obtained by running the automaton starting in state s. Formally, the partial map
+gs : Q × Atω →(At · Σ)∗· At + (At · Σ)ω
+is deﬁned coinductively as follows:
+gs(s, α σ)
+def
+=
+
+
+
+
+
+α · p · gs(t, σ)
+if δ(s, α) = (p, t)
+α
+if δ(s, α) = halt
+undeﬁned
+if δ(s, α) = fail.
+As with traces, gs(s, σ) is uniquely determined for all s ∈Q and σ ∈Aω.
+The set of (ﬁnite) guarded strings represented by the automaton M is
+GS(M)
+def
+= {gs(startM, σ) | σ ∈Atω} ∩(At · Σ)∗· At.
+Two automata are considered semantically equivalent if they represent the same
+set of ﬁnite guarded strings.
+The transition function δ determines a map
+bδ : Q × At∗→Q + {halt, fail}
+deﬁned inductively as follows:
+bδ(s, σ)
+def
+=
+
+
+
+
+
+
+
+
+
+s,
+if σ = ε
+bδ(t, τ),
+if σ = ατ and δ(s, α) = (p, t)
+halt,
+if σ = ατ and δ(s, α) = halt
+fail,
+if σ = ατ and δ(s, α) = fail.
+This is either the state that the machine is in after scanning σ starting in state
+s, or halt or fail if the machine halts or fails while scanning σ starting in state s.
+5
+=== PAGE 6 ===
+2.5
+Bisimulation
+Let M and N be two strictly deterministic automata. A bisimulation between
+M and N is a binary relation ≡between QM and QN such that
+(i) startM ≡startN, and
+(ii) if s ∈QM, t ∈QN, and s ≡t, then for all α ∈At,
+(a) δM(s, α) = halt iﬀδN(t, α) = halt;
+(b) δM(s, α) = fail iﬀδN(t, α) = fail; and
+(c) if δM(s, α) = (p, s′) and δN(t, α) = (q, t′), then p = q and s′ ≡t′.
+M and N are said to be bisimilar if there exists a bisimulation between M and
+N. An autobisimulation is a bisimulation between M and itself.
+Bisimulations are closed under relational composition and arbitrary union,
+and the identity relation on an automaton is an autobisimulation. Thus the re-
+ﬂexive transitive closure of an autobisimulation is again an autobisimulation.
+Moreover, if two automata are bisimilar, then there is a unique maximum bisim-
+ulation between them, namely the union of all bisimulations between them. We
+provide three lemmas regarding bisimulation.
+To show GS(M) = GS(N), it suﬃces to show that M and N are bisimilar:
+Lemma 1. If M and N are bisimilar, then GS(M) = GS(N).
+More interestingly, under certain mild conditions, the converse holds as well:
+Lemma 2. Suppose GS(M) = GS(N), M does not contain a fail transition, and
+halt is accessible from every state of M that is accessible from startM. Then M
+and N are bisimilar.
+Proof. For s ∈QM and t ∈QN, set
+s ≡t
+def
+⇐⇒∀σ ∈Atω gsM(s, σ) = gsN(t, σ).
+We show that ≡is a bisimulation. If s ≡t, then for all α ∈At and σ ∈Atω,
+δM(s, α) = halt ⇔gsM(s, ασ) = α ⇔gsN(t, ασ) = α ⇔δN(t, α) = halt
+and similarly for fail, and if δM(s, α) = (p, s′) and δN(t, α) = (q, t′), then
+α · p · gsM(s′, σ) = gsM(s, ασ) = gsN(t, ασ) = α · q · gsN(t′, σ),
+thus p = q and gsM(s′, σ) = gsN(t′, σ). As σ was arbitrary, s′ ≡t′. This estab-
+lishes property (ii) of bisimulation.
+It remains to show property (i); that is, startM ≡startN, or in other words,
+gsM(startM, σ) = gsN(startN, σ) for all σ. By assumption, GS(M) = GS(N), so
+if gsM(startM, σ) is ﬁnite, then so is gsN(startN, σ) and they are equal. Thus the
+functions
+gsM(startM, −) : Atω →(At · Σ)∗· At + (At · Σ)ω
+gsN(startN, −) : Atω →(At · Σ)∗· At + (At · Σ)ω
+6
+=== PAGE 7 ===
+agree on the set {σ | gsM(startM, σ) is ﬁnite}. The accessibility condition in the
+statement of the lemma implies that this set is dense in Atω under the usual
+metric topology on ω-sequences1. Moreover, the two functions are continuous,
+and continuous functions that agree on a dense set must agree everywhere.
+⊓⊔
+Lemma 3. If M and N are bisimilar under ≡, then for any σ ∈At∗, either
+both bδM(startM, σ) and bδN(startN, σ) are states, both are halt, or both are fail;
+and if they are states, then they are related by ≡.
+2.6
+Structured Programming Constructs
+Deterministic while programs are formed inductively from sequential composition
+(p ; q), conditional tests (if b then p else q), and while loops (while b do p), where
+b is a test and p, q are programs. We also include instructions skip (do nothing)
+and fail (looping or abnormal termination), although these constructs are redun-
+dant, being semantically equivalent to while false do p and while true do skip, re-
+spectively. We do not include a halt instruction; a program terminates normally
+by falling oﬀthe end.
+Every while program can be converted to an equivalent strictly deterministic
+automaton. One ﬁrst converts the program to a KAT term using the standard
+translation
+p ; q = pq
+if b then p else q = bp + bq
+while b do p = (bp)∗b,
+then applies Kleene’s theorem for KAT to yield an automaton with test and
+action states [5], which can be viewed as a deterministic ﬂowchart F. One can
+then deﬁne a strictly deterministic transition function δ on the states of F as
+follows. For any state s and atom α, start at s and follow test transitions enabled
+by α until encountering an action state or a halt state. If an action state is
+encountered, let p be the label of the transition from that state and set δ(s, α) =
+(p, t), where t is the target state of the transition. If a halt state is encountered,
+set δ(s, α) = halt. If neither of these occur, that is, if the process traces a cycle
+of enabled test transitions, set δ(s, α) = fail.
+By restricting to the start state and the targets of action transitions, one
+obtains a strictly deterministic automaton of the form of Section 2.4. An example
+is shown in Fig. 1. In that ﬁgure, an edge from s to t labeled αp denotes the
+transition δ(s, α) = (p, t). Note that the set of states of the strictly deterministic
+automaton is a subset of the states of the original automaton. The conversion
+of deterministic ﬂowcharts to strictly deterministic automata does not change
+the set of guarded strings accepted. Moreover, by Kleene’s theorem for KAT [5],
+this is the same as the set of guarded strings represented by the equivalent KAT
+expression.
+In addition to the usual while program constructs, we consider the looping
+construct loop with nonlocal breaks break n, n ≥1. After conversion to a de-
+terministic ﬂowchart, every loop instruction ℓhas one entry point entryℓand
+1 The distance between two sequences is 2−n if they agree on their ﬁrst n symbols but
+diﬀer on their n + 1st symbol.
+7
+=== PAGE 8 ===
+while b do {
+while c do q;
+p;
+}
+0
+2
+halt
+1
+3
+b
+b
+c
+c
+p
+q
+0
+halt
+1
+bcq
+bcp
+bc
+bc
+bcp
+bcp
+bcq
+bcq
+Fig. 1: A while program and its corresponding deterministic ﬂowchart and strictly de-
+terministic automaton
+one exit point exitℓ. Intuitively, the instruction break n transfers control to exitℓ,
+where ℓis the nth loop in whose scope the break n instruction occurs, counting
+from innermost to outermost. For while loops ℓ, entryℓ= exitℓ.
+One can give a rigorous compositional semantics and an equational axiom-
+atization of loop and break n, but this topic deserves a careful and systematic
+development that would be too much of a digression for the purposes of this
+paper, so we defer it to a forthcoming paper [6].
+Allowing Boolean combinations of primitive tests in while loops and condi-
+tionals is quite natural and allows more ﬂexibility than primitive tests alone. For
+instance, Kosaraju [4, Theorem 2] presents the ﬂowchart of Fig. 2 as an example
+of a deterministic program that is not equivalent to any while program. This is
+halt
+b
+b
+c
+c
+p
+Fig. 2: An example from [4]
+true under his deﬁnition, but for the uninteresting reason that only primitive
+tests are allowed. Allowing Boolean combinations, the ﬂowchart is equivalent
+to while bc do p. The counterexample of Ashcroft and Manna [1] is much more
+complicated, requiring 13 nodes. Both proofs are rather lengthy and reason in
+terms of a particular ﬁrst-order interpretation.
+8
+=== PAGE 9 ===
+3
+While Programs Are Not Suﬃcient
+In this section we give a three-state strictly deterministic automaton M that
+cannot be represented by any while program. The states are 0, 1, 2 with start
+state 0. The primitive actions are pst for s, t ∈{0, 1, 2}, s ̸= t, and the primitive
+tests are a, b, giving four atoms α0, . . . , α3. The transitions are δ(s, αt) = (pst, t)
+for s, t ∈{0, 1, 2}, s ̸= t, and δ(s, α3) = δ(s, αs) = halt. The automaton M is
+illustrated in Fig. 3. For example, the edge from 0 to 2 labeled α2p02 represents
+the transition δ(0, α2) = (p02, 2). The tests c, d, e represent α0 + α3, α1 + α3,
+halt
+0
+1
+2
+α1p01
+α2p02
+c
+α2p12
+α0p10
+d
+α0p20
+α1p21
+e
+Fig. 3: A strictly deterministic automaton not equivalent to any while program
+and α2 + α3, respectively. The edge labeled c represents the two transitions
+δ(0, α0) = δ(0, α3) = halt.
+The automaton M has no nontrivial autobisimulation, since δ(s, αt) ̸= δ(t, αt)
+for s ̸= t.
+Theorem 1. The strictly deterministic automaton M of Fig. 3 is not equivalent
+to any while program.
+Proof. Suppose for a contradiction that there exists a while program W equiv-
+alent to M; that is, such that GS(W) = GS(M). Then W has a representation
+as a deterministic ﬂowchart, and as a consequence of the construction of Section
+2.6, as a strictly deterministic automaton S whose states are a subset of the
+states of W. We can assume without loss of generality that all states of W are
+accessible from startW under a string in {αi | 0 ≤i ≤2}∗; inaccessible states
+can be deleted with impunity. By Lemma 2, M and S are bisimilar.
+For s ∈QS, let bisim(s) ∈QM be the unique state in M to which s is
+bisimilar. The state bisim(s) is unique, otherwise by transitivity there would be
+two bisimilar states of M, contradicting the fact that M is reduced. Also, since
+startW ∈QS, bisim(startW ) exists and is equal to 0.
+9
+=== PAGE 10 ===
+Let ℓ= while c do r be a while loop in W of maximal depth, and let s0 =
+entryℓ= exitℓ. Note that s0 is not necessarily in QS. Let s, t ∈QS and α ∈At
+such that bδ(s, α) = (pij, t), s is not in the body of ℓ, and t is in the body of ℓ.
+It may be that s = s0, but not necessarily. The states s and t exist, otherwise
+the body of ℓis inaccessible. By symmetry, we may assume without loss of
+generality that i = 0 and j = 1. Thus bisim(s) = 0, bisim(t) = 1, α = α1, and
+δ(s, α1) = δ(s0, α1) = (p01, t).
+Let σ be a maximum-length string of the form (α2α1)n or (α2α1)nα2 such
+that the computation in W under σ starting from t does not meet s0. The string
+σ exists, since ℓhas no inner loops, so all suﬃciently long computations will
+loop back to s0. Let u = bδ(t, σ). The string σ cannot be of the form (α2α1)nα2,
+because then we would have bisim(u) = 2 and δ(u, α1) = δ(s0, α1) = (p21, w) for
+some w, a contradiction. Thus σ is of the form (α2α1)n, and δ(s0, α2) = (p12, w)
+for some w.
+Suppose there is a state y in the body of ℓwith bisim(y) ∈{0, 2}. Consider
+a maximum-length string of alternating α2 and α0 such that the computation
+sequence under this string starting at y does not meet s0. The ﬁrst atom of
+the sequence is α2 if bisim(y) = 0 and α0 if bisim(y) = 2. As above, the last
+state v of the sequence cannot be bisimilar to 0, because then we would have
+δ(v, α2) = δ(s0, α2) = (p02, z) for some z, a contradiction. Thus we must have
+δ(v, α0) = δ(s0, α0) = (p20, x) for some x.
+Collecting information about ℓso far, we have
+δ(s0, α0) = (p20, x),
+δ(s0, α1) = (p01, t),
+δ(s0, α2) = (p12, w).
+But now if we start from t and follow a suﬃciently long path of the form
+(α0α2α1)∗, we will achieve a contradiction no matter what. Thus our assump-
+tion that the body of ℓcontains a state y with bisim(y) ∈{0, 2} was fallacious.
+The body of ℓcontains only the state t ∈QS with bisim(t) = 1, and x and
+w are outside the body of ℓ. The loop ℓis only entered under α1, after which
+it performs the action p01 and immediately halts or exits the loop. Thus ℓis
+equivalent to a conditional test.
+By inductively replacing all maximally deeply nested while loops with equiv-
+alent conditional tests in this way, we can eventually eliminate all while loops.
+This is a contradiction.
+⊓⊔
+Theorem 1 shows that the B¨ohm-Jacopini theorem is false propositionally. In
+Section 5, a similar argument is used to prove the Kosaraju hierarchy theorem
+[4].
+4
+Loop Programs with Multi-Level Breaks
+As we saw in Section 3, while programs cannot express all programs represented
+by strictly deterministic automata. On the other hand, if an automaton has
+no cycles, then by duplicating states it can be converted to a tree, which is
+equivalent to a program built from just the if-then-else construct.
+10
+=== PAGE 11 ===
+Motivated by this idea, our construction will ﬁrst construct an equivalent
+tree-like automaton consisting of (downward-directed) tree transitions and (up-
+ward-directed) back transitions, then convert the resulting tree-like automaton
+to a loop program. This is done in three steps. The ﬁrst step “unwinds” the
+original automaton to an inﬁnite tree. This is a fairly standard construction,
+although we do it here with traces and bisimulations. The second step identiﬁes
+states in the inﬁnite tree with equivalent ancestors to obtain a ﬁnite tree-like
+automaton. In both steps, there is a bisimulation that guarantees equivalence.
+Finally, the tree-like automaton is converted to a loop program by using loop
+and break n to eﬀect the back transitions and halting.
+The “unwinding” of an automaton M to an inﬁnite tree is done formally as
+follows. Let
+U
+def
+= (QU, δU, startU)
+where
+QU
+def
+= {ﬁnite traces σ of M such that ﬁrst σ = startM},
+δU(σ, α)
+def
+=
+
+
+
+
+
+(p, σαt)
+if δM(last σ, α) = (p, t)
+halt
+if δM(last σ, α) = halt
+fail
+if δM(last σ, α) = fail,
+startU
+def
+= startM.
+Lemma 4. The relation {(σ, last σ) | σ ∈QU} is a bisimulation between U and
+M. Thus by Lemma 1, GS(U) = GS(M).
+A congruence on M is an equivalence relation ≡that is an autobisimulation
+on M. Property (ii) of bisimulations says that the action of δ is well deﬁned on
+≡-congruence classes, thus we can form the quotient automaton M/ ≡whose
+states are the ≡-congruence classes. Denote the congruence class of state u by
+[u].
+Lemma 5. The relation {(u, [u]) | u ∈QM} is a bisimulation between M and
+M/≡. Thus by Lemma 1, GS(M) = GS(M/≡).
+We can now use this construction to form a tree-like automaton with ﬁnitely
+many states equivalent to U. Here tree-like means that it has tree edges that
+form a rooted tree, but also may contain back edges to ancestors.
+Recall that the states of U are the ﬁnite traces of M starting with startM.
+For σ, τ ∈QU, set σ R τ iﬀ
+– all states of τ occur exactly once in τ except last τ, which occurs exactly
+twice;
+– σ is the unique proper preﬁx of τ such that last σ = last τ.
+Let ≡be the smallest congruence containing R. That is, ≡is the smallest binary
+relation on QU such that
+11
+=== PAGE 12 ===
+(i) ≡contains R,
+(ii) ≡is an equivalence relation, and
+(iii) if σ ≡τ and δM(last σ, α) = δM(last τ, α) = (p, v), then σαv ≡ταv.
+It can be shown inductively that last σ = last τ whenever σ ≡τ, so condition
+(iii) makes sense. The quotient automaton U/ ≡has ﬁnitely many states, at
+most (|QM| −1)! in fact, since each ≡-congruence class contains a unique trace
+with no repeated states beginning with startM. This trace is of minimal length
+among all elements of its ≡-class. It can be obtained from any other element of
+the class by repeatedly deleting the subtrace between the ﬁrst recurring state
+and its earlier occurrence.
+We can view the states of U/ ≡as arranged in a tree with root [startM],
+tree edges to descendants, and back edges to ancestors. By Lemma 5, GS(U) =
+GS(U/≡).
+Now we can convert this automaton to a loop program as follows. Let C be
+the set of traces of M with no repeated states beginning with startM. This is the
+set of canonical representatives of the ≡-classes. Let α1, . . . , αm be the elements
+of At. For each σ ∈C, let Lσ be the following loop program:
+loop {
+if α1 then S1
+else if α2 then S2
+· · ·
+else if αm then Sm
+}
+where
+(i) if δM(last σ, αi) = (p, t), then
+Si =
+
+
+
+
+
+p ; Lσαit
+if t does not occur in σ,
+p
+if t = last σ,
+p ; break n
+if t occurs in σ but t ̸= last σ,
+where in the last case, n is the number of states occurring after t in σ;
+(ii) if δM(last σ, αi) = halt, then Si = break n, where n is the number of states
+in σ; and
+(iii) if δM(last σ, αi) = fail, then Si = loop skip.
+The choice of n in the last case of (i) causes control to return to the top of Lτ,
+where τ is the unique preﬁx of σ such that last τ = t. This is tantamount to
+taking the back edge from the node of the tree represented by σ to its ancestor
+represented by τ. The choice of n in case (ii) causes the program to halt by
+exiting the outermost loop Lstart.
+Example 1. Fig. 4 shows a tree-like automaton equivalent to the automaton of
+Fig. 3. (The central edges leading to halt are not considered part of the tree,
+since halt is not a state of the automaton.) A corresponding loop program is
+shown in Fig. 5. This is not exactly the program that would be produced by the
+construction given above; we have removed the innermost loops to save space.
+12
+=== PAGE 13 ===
+[0]
+[1]
+[2]
+[2]
+[1]
+halt
+α1p01 α2p02
+c
+α2p12
+α0p10
+d
+α1p21
+α0p20
+e
+α1p21
+α0p20
+e
+α2p12
+α0p10
+d
+Fig. 4: A tree-like automaton equivalent to the automaton of Fig. 3
+5
+The Loop Hierarchy
+Now we give an alternative proof of the hierarchy result of Kosaraju [4], namely
+that there is a strict hierarchy of loop programs determined by the depth of
+nesting of loop instructions.
+We construct an automaton Pn as follows. The states of Pn are all strings over
+the alphabet {0, 1, . . . , n−1} with no repeated letters, including the empty string
+ε. There are roughly n!e states. The atoms and actions are 0, 1, . . . , n −1 and
+E. The transition i appends i to the current string if it does not already occur,
+or else truncates back to the preﬁx ending in i if it does occur. The transition E
+erases the string. We also include an atom H such that δ(s, H) = halt for states
+s of maximum length n and δ(s, H) = fail for the other states. This precludes
+nontrivial autobisimulations.
+An illustration of a depth-4 implementation of P7 is shown in Fig. 6. Each
+box represents a loop instruction. Only four paths of the nested loop program
+are shown; there are many others not shown. There is one top-level loop,
+ n
+2
+
+2!
+second-level loops,
+ n
+4
+
+4! third-level loops within each second-level loop, etc.
+At the entry point of each loop, there is a multiway branch depending on
+the current atom. The resulting action is the same as the atom, and the new
+state is the one whose last symbol is the action just performed (except for ε,
+which is only obtained by E). Note that every preﬁx of every string occurs in
+the same loop or an ancestor, therefore is accessible by a break instruction, and
+every string obtained by appending one symbol is in the same loop or a child
+loop.
+For example, suppose the current state is 012. If we perform action 3, we
+would enter the subloop below 012 containing 0123. If we perform action 4, we
+13
+=== PAGE 14 ===
+loop {
+if a then break 1;
+if b then {
+p;
+loop {
+if a then break 2;
+if b then { t; break 1; }
+else {
+s;
+if a then break 2;
+if b then { v; break 1; }
+else w;
+}
+}
+} else {
+q;
+loop {
+if a then break 2;
+if b then { v; break 1; }
+else {
+w;
+if a then break 2;
+if b then { t; break 1; }
+else s;
+}
+}
+}
+}
+Fig. 5: A loop program equivalent to the automaton of Fig. 4; we have removed the
+innermost loops to save space.
+would enter a parallel subloop not shown. If we perform action 1, we would loop
+to the top of the current loop, execute the action 1, and enter state 01.
+Theorem 2. The program Pn can be implemented in depth ⌊n/2 + 1⌋and no
+less.
+Proof. For the upper bound, Fig. 6 illustrates the pattern that achieves ⌊n/2+1⌋.
+For the lower bound, the proof is by induction on n. The idea is illustrated
+in Fig. 6: note that all strings in the 01 subloop begin with 01, so it has the
+same structure as the outer loop, but with two fewer letters. We actually prove
+a stronger result, namely that the bound holds irrespective of which state is the
+start state.
+The basis for n = 0 and n = 1 is trivial, since there always must be at least
+one loop. For n = 2, there are only three transitions but ﬁve states requiring
+self-loops, so the depth must be at least two.
+14
+=== PAGE 15 ===
+ε
+0
+1
+2
+3
+4
+5
+6
+01
+012
+013
+014
+015
+016
+0123
+01234
+01235
+01236
+012345 0123456
+012346 0123465
+02
+021
+023
+024
+025
+026
+0213
+02134
+02135
+02136
+021345 0213456
+021346 0213465
+Fig. 6: Automaton P7 implemented with a loop program of depth 4
+Now let n ≥3 and let W be any implementation of Pn. Let ℓ0 be an outer
+loop of W and s0 = entryℓ0. There must be some pair i, j such that ij does not
+appear as a preﬁx of any x for δ(s0, k) = (k, x). Say ij = 01 without loss of
+generality.
+Consider the subprogram ℓ1 consisting of all states of W that are accessible
+from 01 after deleting the transitions E and 0 (that is, setting them to fail). Since
+all states of ℓ1 have preﬁx 01, the entry point s0 of ℓ0 is no longer accessible,
+so the outer loop can be deleted. The represented automaton is isomorphic to
+Pn−2. The transition 1 plays the role of E. By the induction hypothesis, it
+must have depth at least ⌊(n −2)/2 + 1⌋, thus ℓ0 must have depth at least
+⌊(n −2)/2 + 1⌋+ 1 = ⌊n/2 + 1⌋.
+6
+Conclusion and Open Problems
+We have shown three results giving upper and lower bounds on the power of
+various programming constructs to represent ﬂowchart programs, modeled as
+automata on guarded strings. On the one hand, the simple three-state automaton
+in Section 3 cannot be represented by any while program. On the other hand, we
+present a congruence in Section 4 that transforms any automaton into a tree-like
+structure and show how a tree-like automaton can be turned into a loop program
+with multi-level breaks. We also give an alternative proof of Kosaraju’s hierarchy
+result for loop programs with multi-level breaks.
+We did not give a formal proof of equivalence between the tree-like automa-
+ton and its corresponding loop program with multi-level breaks constructed in
+Section 4. However, it is possible to prove their equivalence formally. The break n
+construct, and more generally the goto construct, although representing nonlocal
+ﬂow of control, can nevertheless be given a formal equational semantics in the
+style of KAT. We have developed this semantics and an equational axiomatiza-
+tion and have shown how to use it to give rigorous proofs of the correctness of
+transformations like those of Section 4 [6].
+One popular line of research has been to develop restructuring techniques
+that minimize the amount of duplication of code [8, 10]. The construction given
+in Section 4 is as bad in this regard as it can possibly be: it transforms an
+n-state automaton to an (n −1)!-state tree-like automaton in the worst case.
+Are there more eﬃcient transformations at the propositional level? Or is this an
+inescapable feature of the propositional formulation?
+15
+=== PAGE 16 ===
+Acknowledgements
+We would like to thank the reviewers for their helpful suggestions for improving
+the presentation. This work was supported by NSF grant CCF-0635028 and a
+NSF Graduate Research Fellowship.
+References
+1. E. Ashcroft and Z. Manna. The translation of goto programs into while programs.
+In C.V. Freiman, J.E. Griﬃth, and J.L. Rosenfeld, editors, Proceedings of IFIP
+Congress 71, volume 1, pages 250–255. North-Holland, 1972.
+2. C. B¨ohm and G. Jacopini. Flow diagrams, Turing machines and languages with
+only two formation rules. Communications of the ACM, pages 366–371, May 1966.
+3. Donald M. Kaplan.
+Regular expressions and the equivalence of programs.
+J.
+Comput. Syst. Sci., 3:361–386, 1969.
+4. S. Rao Kosaraju. Analysis of structured programs. In Proc. 5th ACM Symp. Theory
+of Computing (STOC’73), pages 240–252, New York, NY, USA, 1973. ACM.
+5. Dexter Kozen. Automata on guarded strings and applications. Mat´ematica Con-
+temporˆanea, 24:117–139, 2003.
+6. Dexter Kozen. Nonlocal ﬂow of control and Kleene algebra with tests. Technical
+Report http://hdl.handle.net/1813/10595, Computing and Information Science,
+Cornell University, April 2008. Proc. 23rd IEEE Symp. Logic in Computer Science
+(LICS’08), June 2008, to appear.
+7. Paul H. Morris, Ronald A. Gray, and Robert E. Filman. Goto removal based on
+regular expressions. J. Software Maintenance: Research and Practice, 9(1):47–66,
+1997.
+8. G. Oulsnam.
+Unraveling unstructured programs.
+The Computer Journal,
+25(3):379–387, 1982.
+9. W. Peterson, T. Kasami, and N. Tokura. On the capabilities of while, repeat, and
+exit statements. Comm. Assoc. Comput. Mach., 16(8):503–512, 1973.
+10. L. Ramshaw. Eliminating goto’s while preserving program structure. Journal of
+the ACM, 35(4):893–920, 1988.
+11. M. Williams and H. Ossher. Conversion of unstructured ﬂow diagrams into struc-
+tured form. The Computer Journal, 21(2):161–167, 1978.
+16

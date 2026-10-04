@@ -1,0 +1,143 @@
+# source: 05_Code-Examples/Code-Examples-Explained.md
+# The code examples — what each one shows
+
+*Folder: `05_Code-Examples`. Written for a student who has to explain these programs in the exam. I read every file, compiled and ran everything that can run on this laptop (gcc/g++ 6.3, 32-bit MinGW; JDK 17). The three Lisp files could not be run (no Lisp is installed), so their descriptions come from reading the code. Outputs below are real unless marked otherwise.*
+
+## The big picture
+
+These are not random programs. Each one is a small experiment for one idea of the course:
+
+| Idea | Examples |
+|---|---|
+| **Modules are compiled separately; the linker only matches names** | `AbstractClassModules`, `IndependentModules`, `examplesOf23aug2024` (struct1, class1, printf), `ExampleOf26-27-Sept`, the 2025 example |
+| **Two modules can declare the "same" type differently — and nothing checks** | struct1/struct1bad, class1/class1bad, FullClass |
+| **Procedure activation and stack frames** | Example Program GCD, `params`, recurmain, temp1/temp2 |
+| **Arrays are not pointers to pointers (layout must be known)** | `params` |
+| **Dynamic binding, generics and type erasure in Java** | `dynamicBindingJava` |
+| **Information hiding / data abstraction** | `Dictionary (2)` (own document: `Dictionary-Explained.md`) |
+| **Functional / logic style and CLOS** | `fghc.lisp`, `mergesort-final.lisp`, `painting.lisp` |
+
+---
+
+## 1 · `examplesOf23aug2024` — separate compilation experiments
+
+### `struct1.c` + `struct1bad.c` — same struct, different member order
+- `struct1.c` declares `struct ll { int key; struct ll *next; }`, builds a one-element circular list (`l.next` points to `l` itself), prints `1 1`, and then calls `func(&l)`, defined elsewhere.
+- `struct1bad.c` defines `func` against `struct llbad { struct llbad *next; int key; }` — **the same two members in the opposite order**.
+- **What happens:** both files compile on their own; they link; the program **crashes** (segmentation fault). `func` reads `l->key` where `struct1.c` stored the pointer, and follows that number as an address.
+- **Why:** the linker sees only the name `func`. It never compares the two declarations of the struct. Layout is decided per module.
+
+### `class1.cpp` + `class1bad.cpp` — the C++ version
+- `class1.cpp` defines class `class1` with private `int size; int *a;` and the methods (constructor allocates `a`, `tell()` prints). It has no `main`.
+- `class1bad.cpp` has the `main` and declares `class1` differently: public `double x; int key;` plus the same two methods. It makes `class1 c1(2); c1.tell(); c1.key = 1; c1.tell(); c1.x = 0.45; c1.tell();`.
+- **What happens:** compiles and links. Output (real): `Size2 / a[0]=18126824 a[1]=18088128` twice, then `Size-858993459` and nothing useful. The first `tell()` looks fine because the constructor and `tell()` both come from `class1.cpp` and agree with each other. Assigning `c1.x` overwrites the bytes where `class1.cpp` keeps `size`, so `size` becomes garbage.
+- **Sizes:** the real layout is 8 bytes, the "bad" declaration is 16 bytes (measured). The caller allocates 16 bytes, the library thinks the object is 8: member names are meaningless after compilation.
+- **Why it matters:** this is the "partially hidden class" of slides 79–84 and the answer to "(i) size of storage, (ii) layout: independent between modules? Yes — each module's declaration decides, and nothing checks consistency".
+
+### `printf.c` — replacing a library function
+- Declares `extern int printf(const char *format, int integerInput);` (a **wrong** prototype: the real `printf` takes any number of arguments) and calls `printf("%d\n", printf("Hello, World!\n", 0))`.
+- **Output:** `Hello, World!` then `14`. The inner call prints 14 characters and returns 14; the outer prints it. The program's exit code is 3 (the outer `printf` printed 3 characters: `14` and the newline).
+- **Why it matters:** C resolves `printf` by name only, so any prototype works at link time; this is the tutorial challenge "provide a body for printf" (Tutorial 2, Q4).
+
+### `recurmain.c`, `temp1.cpp`, `temp2.cpp` — `main` calling `main`
+- `recurmain.c` (C): prints `argc` and `argv[argc-1]`, then calls itself with `argc-1`. With arguments `a b c` it prints `4 c`, `3 b`, `2 a`, `1 <program path>`, and stops at `argc == 0`.
+- `temp1.cpp` (C++): a global counter; `main` calls `main()` until the counter reaches 5. Prints `0 1 2 3 4`. **g++ accepts it by default but rejects it with `-pedantic-errors`** ("ISO C++ forbids taking address of function main"): C allows calling `main`, C++ does not.
+- `temp2.cpp` (C++): prints the arguments in reverse by calling `main(argc-1, argv)`. With `x y z`: `z y x`.
+- **Why it matters:** `main` is an ordinary function with its own stack frame per call (Tutorial 2, Q1–Q2).
+
+---
+
+## 2 · `ExampleOf26-27-Sept` — `FullClass`, the user module and the class module
+Practice assignment on module independence ("Practice Assignment.pdf").
+- `FullClass.cpp` is the **class module**: private `int objectId, *data, size`, four constructors (empty, size only, size + array, copy), `tell()`, `setNthElement()`, a destructor. It counts objects with a global serial number and prints a line at every construction and destruction.
+- `UserOfFullClass.cpp` is the **user module**. It declares `FullClass` **by itself** with `char x[2*sizeof(int)+sizeof(int*)]` instead of the three private members, so its object has the same size (12 bytes here). Its `main` builds four objects, then `f(fc)` calls `g(fc, fc)`, which takes two **by value** — so two copy constructors and two destructors run per call.
+- `FullClass.hpp` is a *third* declaration: public part only, no private members at all.
+- **What happens (real):** it works: 150 lines of output, 14 "Destroying" lines. Object ids 5 and 6 appear when `g` copies its arguments ("Constructed by method 4"). Objects built with `FullClass(10)` show leftover numbers in their array because `new int[n]` is not zeroed.
+- **The experiment the comment invites:** remove the private part (as `FullClass.hpp` does). `sizeof(FullClass)` becomes **1 byte** (measured); the program then **crashes** — the caller makes 1-byte objects but the constructor writes 12 bytes, and `fc3` shows garbage (`[0] : 513724416 [1] : 1281`) before the segmentation fault.
+- **Lesson:** the user module may hide the *names* of the members but must get the **size** right, because it allocates and copies the object. Also note `delete data` (should be `delete[] data`) in the destructor.
+
+---
+
+## 3 · The 2025 Mid-Sem example (`02_Past-Papers/An Example Program for Q2 (2025) Solution-20260922`)
+- `class1.hpp`: `Class1` has a private `srno`. Its constructor's default argument is the **global** `globalSrNo` (declared `extern`): if the argument is ≤ 0 it takes the next serial number, otherwise it uses the given value. Its destructor adds `1<<21` to the global; `SrNo()` returns `srno` divided by the low 21 bits of the global.
+- `Module1.cpp`: defines `globalSrNo` and `void function(Class1 c)`, which prints `c.SrNo()`.
+- `Module2.cpp`: `Class2 : public Class1` (its destructor adds `1<<25`); declares `extern void function(Class1)` (the line for `Class2` is commented out "to allow linking") and calls `function(c)` for a `Class2` object, 1000 times.
+- **What happens (real, 3000 lines):** `Cycle 0 pre gSrNo 1`, prints `1`, `post gSrNo 2097153` (that is 1 + 2²¹: the **copy** of `c` made for the by-value parameter is destroyed at the end of `function` and adds 2²¹). Cycle 1 starts at `37748737` (1 + 2²⁵ + 2·2²¹: the original `Class2` also died) and prints `3.77487e+007`. The global eventually overflows to negative numbers.
+- **Why it matters:** this is the working answer to 2025 Q2. The body is `function(Class1)`; `Class2` derives from `Class1`; the declaration in `Module2` is changed to match the body. It also shows **slicing** (a `Class2` passed by value becomes a `Class1` copy) and a global shared between modules through `extern`.
+
+---
+
+## 4 · `params` — passing 2-D arrays (`params.c`, `params.s`, `params.pdf`)
+- `main` builds a 10×10 matrix `mat`. The loops fill only rows and columns **1 to 9** (never index 0); values come from the command-line numbers (backwards), then from `i*10+j`.
+- It then calls five functions with five different parameter types for the same matrix: `fmat1(int *A, n)`, `fmat2(int **A, n)`, `fmat3(int *A[10], n)`, `fmat4(int A[][10], n)`, `fmat5(int A[10][10])`.
+
+| Function | Parameter really is | Works? |
+|---|---|---|
+| `fmat1` | pointer to one `int` | Yes, if you treat the matrix as one flat row of ints (it prints row 0 — never initialised, so garbage like `!6385263`) |
+| `fmat2` | pointer to pointer | **No.** A 10×10 array is 10 rows of numbers, not 10 pointers. gcc warns "incompatible pointer type"; at run time it reads numbers as addresses and **crashes** (real: prints `1 : 10`, then segmentation fault) |
+| `fmat3` | `int *A[10]` is the same as `int **A` | **No**, same problem |
+| `fmat4` | pointer to a row of 10 ints | **Yes** — the compiler knows each row has 10 ints, so `A[i][j]` is `base + (i*10 + j)*4` |
+| `fmat5` | same as `fmat4` (the first size is ignored) | **Yes** |
+
+- I confirmed with a clean program: `sizeof(mat)` = 400, `sizeof(mat[0])` = 40, `sizeof(int*)` = 4; `fmat1`, `fmat4`, `fmat5` all work.
+- `fmat2` also has a `static int k = -100` that keeps its value between calls, and `globalN` is a global in the data section. `params.s` / `params.pdf` is the **assembly** of this program (32-bit, old gcc) with comments such as "i = 9 in the for loop"; it is the example for how parameters and locals are addressed relative to the frame pointer.
+- `params.c` uses `atoi` without including `<stdlib.h>`: an "implicit declaration" warning.
+- **Lesson:** to compute an element's address the compiler needs the **row length** (type information); an array of arrays is not an array of pointers.
+
+---
+
+## 5 · `Example Program GCD.pdf` — `euclid.c`
+- Euclid's algorithm by **subtraction**, written recursively: if both numbers are positive, `gcd(a, b-a)` when a<b, `gcd(b, a-b)` when b<a, `a` when equal, else −1. `main` reads two optional command-line numbers (default 10 and 15) and **returns the value of `printf`** (the number of characters printed).
+- **Real runs:** `gcd(10,15)=5` (exit code 13, the length of that line), `gcd(48,18)=6`, `gcd(7,0)=-1`.
+- **Why it matters:** this is the program of slides 100–118 (the version in the slides adds `static int xstatic`), compiled with `gcc -g -S` to show one activation record per recursive call.
+
+---
+
+## 6 · `dynamicBindingJava` — generics, erasure and run-time types
+Four files: `Abstract1` (abstract `Object tell()` and `tellType()` returning the run-time class name), `Interface1<T>` (`T tell()`, `void listen(T)`), `Concrete1<T> extends Abstract1 implements Interface1<T>` (holds a `T data`), `Main`.
+- `Main` first shows that `"S1"+" + S2"` and `"S1 + S2"` are both `java.lang.String` objects. Then it makes `Concrete1<String>`, `Concrete1<Integer>` and `Concrete1<Object>` (given a String), asks each for `tellType()`, and tries to replace the data of the first and third with the integer.
+- **As delivered it does not compile:** `s.listen(i.tell())` — an `Integer` cannot be passed to `Concrete1<String>.listen(String)`. This is deliberate: the file says "keep exactly one of the `listen` methods and see the effects".
+- **Variant B** (comment out `listen(T)`, use `listen(Object t) { data = (T) t; }`) compiles with an "unchecked" warning, and prints:
+  ```
+  Type of s.data java.lang.String      Type of t.data java.lang.String
+  Changing s.data from Some string to 0
+  Changing t.data from String to 0
+  Type of s.data java.lang.Integer     <- a Concrete1<String> now holds an Integer
+  Type of t.data java.lang.Integer
+  ```
+- **Lesson:** generic type parameters exist only at compile time (**type erasure**); at run time `data` is just an `Object`. `tellType()` uses `getClass()`, i.e. the **dynamic** type, while the declared type is `T`. The unchecked cast `(T) t` lets a wrong type in, and the compiler can no longer protect you.
+
+---
+
+## 7 · `AbstractClassModules` — the 2024 Mid-Sem modules
+`Module1.c` and `Module2.c` are the code of the 2024 Mid-Sem paper (struct `Abstract`, function-pointer table, `main`; `f` and `g` mutual recursion). Everything about them — compile, link, binding times, segfault, stack size — is in the cheat sheets "Modules, linking", "Binding times" and "Stack frames" and in `answers/verified-experiments.md`.
+
+## 8 · `IndependentModules` — `structure.c`, `main.c`, `newmain.c`
+The module-independence quiz. Answers to Quiz 1-1, 1-2 and 1-3, with real runs, are in `03_Quizzes-Assignments/IndependentModules/Quiz-1-Answers.md`. In one line: `main.c` includes `structure.c` (so `f` is defined twice and linking fails), while `newmain.c` re-declares the struct and prototype itself (links, prints leftover stack data).
+
+## 9 · `Dictionary (2)`
+A Java dictionary in three stages (first two do not compile, the last works). See `Dictionary (2)/Dictionary-Explained.md`.
+
+---
+
+## 10 · The Lisp files (read, not run)
+
+### `fghc.lisp` — the river-crossing puzzle (farmer, cat, hen, grain)
+- A **state** is a list of four sides, `(farmer cat hen grain)`, each `e` (east) or `w` (west). `farmer-side`, `cat-side` … read the parts with `nth`.
+- `safe` rejects a state if the hen is with the cat or with the grain **without the farmer**; it returns the state or `nil`.
+- Four move functions (`farmer-takes-self`, `-cat`, `-hen`, `-grain`) build the next state, but only if the farmer and the passenger are on the same side, and check it is `safe`.
+- `path1` is the **naive** search: try the four moves recursively until the goal `(w w w w)`. Nothing stops it going back and forth, so it can **recurse forever**.
+- `path2` carries a **visited list** (`is-visited`), stops on `nil` states, and returns the whole list of states from `(e e e e)` to `(w w w w)`. `reachall` runs either one (1 = naive, otherwise the careful one).
+- **Lesson:** recursion without a termination guarantee (Tutorial 2, Q3), and functional style: no assignment, state is passed as a value.
+
+### `mergesort-final.lisp`
+- A merge sort that **counts its comparisons** in the global `*global-count*` and takes the comparison as a function argument (`funcall compare-form`), so the comparison can be replaced.
+- `sortmerge` merges two lists and also copes with elements that are themselves lists (nested lists); `mergesort` splits a list in two halves by index; `generate-random-list-of-lists` builds test data (about one element in ten is a nested list); `sorted` checks the result.
+- **Lesson:** first-class functions (the comparison is a value) and recursion over lists.
+
+### `painting.lisp` — CLOS (the example of slide 143)
+- Classes: `rectangle` (height, width), `color-mixin` (cyan, magenta, yellow), `color-rectangle` which inherits from **both** (multiple inheritance) and adds `clearp`, whose default value asks the user "But is it transparent?".
+- One **generic function** `paint` with three **methods**: #1 on `rectangle` (draw a vertical stroke), #2 an `:before` method on `color-mixin` (set the brush colour), #3 on `color-rectangle` (`unless (clearp x) (call-next-method)`).
+- The instance `door` is a `color-rectangle` of width 38, height 84, colour 60/0/55, `clearp nil`.
+- **What `(paint door)` does:** the `:before` method runs first (set the colour), then the most specific main method (#3); because the door is not transparent it calls `call-next-method`, which runs #1 (the stroke). The helper functions `set-brush-color` and `vertical-stroke` are not defined in the file — they stand for the drawing system.
+- **Lesson:** methods belong to *generic functions*, not to classes, and are chosen by the types of the arguments (slide 140–142, method combination before/main/after).

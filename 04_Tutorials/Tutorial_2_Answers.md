@@ -1,0 +1,336 @@
+# CS F301 – Principles of Programming Languages
+## Tutorial 2: "Tutorial Problems for August 2024 End Week" – Questions and Exam-Style Answers
+
+**Challenges for August 2024 (full text of the slide):**
+1. Implement recursion on the `main` function in *any* programming language you are comfortable with among C/C++/Java.
+2. Using this, print the command line arguments to a program in the reverse order.
+3. Write a set of functions (procedures) that call one another in such recursive cycles that one cannot predict just by reading the program whether recursion will end and whether a certain function will be called for a given input.
+4. Provide a body for the `printf` function and use that function instead of the std libc function with the same name in your C program.
+5. Implement a type that can only be used by calling the procedures you provide to use it, and even its contents cannot be accessed or displayed by the user programmer.
+6. Using only `math.h` or `numpy` function calls and arithmetic expressions but no assignment statement, generate and print an input integer.
+
+All C code was compiled with gcc and run; Java with javac; Python with numpy.
+
+---
+
+## Question 1
+**Implement recursion on the `main` function in any programming language you are comfortable with among C/C++/Java.**
+
+### Answer
+`main` is an ordinary function, so it can call itself. The parameters `argc`/`args.length` give a natural, shrinking argument, so we use them as the recursion variable. A recursive function needs (i) a **base case**, (ii) a **recursive call on a smaller problem**.
+
+**C**
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    printf("main entered with argc = %d\n", argc);
+    if (argc > 1)                       /* recursive case                    */
+        main(argc - 1, argv);           /* main calls main on a smaller argc */
+    return 0;                           /* base case: argc == 1              */
+}
+```
+Run `./a.out a b c` →
+```
+main entered with argc = 4
+main entered with argc = 3
+main entered with argc = 2
+main entered with argc = 1
+```
+**Java** (`main` is a static method; recursion is legal)
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("main entered, args.length = " + args.length);
+        if (args.length > 0)
+            main(java.util.Arrays.copyOf(args, args.length - 1));   // smaller array
+    }
+}
+```
+**Notes**
+* **C**: allowed (main is a normal function; each call gets its own stack frame with its own `argc`).
+* **C++**: **NOT allowed** – the standard says `main` shall not be used within a program (g++ gives only a warning with `-pedantic`, "ISO C++ forbids taking address of function main"). So use C or Java for this question.
+* Stack depth: one frame per argument – fine for command-line sizes.
+
+---
+
+## Question 2
+**Using this, print the command line arguments to a program in the reverse order.**
+
+### Answer
+Idea: print the *last* argument `argv[argc-1]`, then recurse with `argc-1`. Stop when only `argv[0]` (the program name) remains.
+
+**C**
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    if (argc <= 1)                    /* base case: only program name left        */
+        return 0;
+    printf("%s\n", argv[argc - 1]);   /* print current last argument               */
+    return main(argc - 1, argv);      /* recursion on main with one fewer argument */
+}
+```
+Run: `./a.out one two three` →
+```
+three
+two
+one
+```
+**Why this prints in reverse:** each call prints *before* recursing, and the index it prints (`argc-1`) goes downwards. (If instead we recursed on `argv+1`/`argc-1` and printed *after* the recursive call returned, the output would also be reversed, because printing happens while the calls unwind.)
+
+**Java**
+```java
+import java.util.Arrays;
+public class Main {
+    public static void main(String[] args) {
+        if (args.length == 0) return;                       // base case
+        System.out.println(args[args.length - 1]);          // last argument first
+        main(Arrays.copyOf(args, args.length - 1));         // recursion on main
+    }
+}
+```
+`java Main one two three` prints `three two one` (one per line).
+
+---
+
+## Question 3
+**Write a set of functions (procedures) that call one another in such recursive cycles that one cannot predict just by reading the program whether recursion will end and whether a certain function will be called for a given input.**
+
+### Answer
+Use **mutual (indirect) recursion** with **data-dependent branching** – the Collatz (3n+1) iteration split into several functions:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void step(unsigned long long n);
+void even(unsigned long long n);
+void odd (unsigned long long n);
+void done(unsigned long long n);
+
+void step(unsigned long long n) {          /* dispatcher */
+    if (n == 1)           done(n);
+    else if (n % 2 == 0)  even(n);
+    else                  odd(n);
+}
+void even(unsigned long long n) { step(n / 2); }        /* step -> even -> step */
+void odd (unsigned long long n) { step(3 * n + 1); }    /* step -> odd  -> step */
+void done(unsigned long long n) { printf("done() reached: sequence hit 1\n"); }
+
+int main(int argc, char *argv[]) {
+    step(argc > 1 ? strtoull(argv[1], NULL, 10) : 27);
+    return 0;
+}
+```
+**Call graph:** `step → even → step → odd → step → … → done`. This is a recursion cycle `step → {even | odd} → step`.
+
+**Why one cannot predict by reading the program**
+* Whether the cycle ever ends depends on the *values* generated, not on the program text. Whether `done()` is ever called for input *n* is exactly the question "does the Collatz sequence of *n* reach 1?" – the **Collatz conjecture, still unproven** (verified by computer only for a large finite range).
+* Which function is called is also input-dependent: e.g. input 8 → `even,even,even,done`, `odd()` is never called; input 27 → 111 steps, with `odd` and `even` called many times (peaking at 9232); for inputs that never reach 1 (if any exist) it would loop forever (or until the stack overflows).
+* In general this is the **halting problem** – undecidable: no algorithm can decide, for an arbitrary set of mutually-recursive functions and input, whether recursion terminates or whether a given function gets called (Rice's theorem).
+
+**Practical caveats:** every call uses a stack frame, so very long sequences can overflow the stack (unless the compiler does tail-call optimisation, e.g. `gcc -O2`); `3*n+1` can overflow `unsigned long long` and wrap around.
+
+---
+
+## Question 4
+**Provide a body for the `printf` function and use that function instead of the std libc function with the same name in your C program.**
+
+### Answer
+**Idea.** Define a function with the *same name and signature* `int printf(const char *fmt, ...)` in your own program. At link time the linker resolves the symbol `printf` to **your definition in the program's object file first**; the library definition is only pulled in for symbols that are still undefined, so libc's `printf` is not used. The body uses `<stdarg.h>` (`va_list`, `va_start`, `va_arg`, `va_end`) to walk the variable argument list, and a lower-level output function (`putchar`/`write`) to emit characters – it must **not** call `printf` itself (infinite recursion).
+
+```c
+#include <stdarg.h>
+int putchar(int);   /* declared by hand: <stdio.h> also declares printf, which can clash */
+
+static int put_str(const char *s) { int n = 0; while (*s) { putchar(*s++); n++; } return n; }
+
+static int put_num(unsigned long v, unsigned base, int neg) {
+    char buf[32]; int i = 0, n = 0;
+    if (v == 0) buf[i++] = '0';
+    while (v) { buf[i++] = "0123456789abcdef"[v % base]; v /= base; }
+    if (neg) buf[i++] = '-';
+    while (i--) { putchar(buf[i]); n++; }
+    return n;                                  /* number of characters written */
+}
+
+int printf(const char *fmt, ...)               /* same name & type as libc's printf */
+{
+    va_list ap; int count = 0;
+    va_start(ap, fmt);
+    for (; *fmt; fmt++) {
+        if (*fmt != '%') { putchar(*fmt); count++; continue; }
+        switch (*++fmt) {                      /* conversion character */
+        case 'd': { int v = va_arg(ap, int);
+                    count += put_num(v < 0 ? -(unsigned long)v : v, 10, v < 0); break; }
+        case 'u': count += put_num(va_arg(ap, unsigned), 10, 0); break;
+        case 'x': count += put_num(va_arg(ap, unsigned), 16, 0); break;
+        case 'c': putchar(va_arg(ap, int)); count++; break;
+        case 's': count += put_str(va_arg(ap, char *)); break;
+        case '%': putchar('%'); count++; break;
+        default:  putchar('%'); putchar(*fmt); count += 2;
+        }
+    }
+    va_end(ap);
+    return count;
+}
+
+int main(void)
+{
+    printf("My own printf: %d %s %c %x %u 100%%\n", -42, "hello", 'Z', 255, 7u);
+    return 0;
+}
+```
+Compile: `gcc -fno-builtin myprintf.c -o myprintf` → output:
+```
+My own printf: -42 hello Z ff 7 100%
+```
+(`nm` on the executable shows the `printf` symbol defined in *our* object code.)
+
+**Points to mention**
+* `-fno-builtin`: otherwise gcc may replace `printf("...\n")` by `puts(...)` or `putchar` (it treats `printf` as a known builtin), bypassing our body.
+* **Variadic function mechanism**: `...` has no type information; the format string tells us how to `va_arg` each argument – this is also why mismatched format specifiers are undefined behaviour.
+* Redefining a standard-library name is, strictly, undefined behaviour per ISO C (reserved identifier), but it works in practice because of the linking order. On glibc/Linux one can use `#include <stdio.h>`; with MinGW, `stdio.h` itself defines an inline `printf`, hence the hand-written `putchar` declaration above.
+
+---
+
+## Question 5
+**Implement a type that can only be used by calling the procedures you provide to use it, and even its contents cannot be accessed or displayed by the user programmer.**
+
+### Answer
+Use an **abstract data type with an opaque (incomplete) type** – the user gets only a handle (pointer) and a set of procedures. The structure's definition lives only in the implementation file.
+
+`stack.h` (the only file the user programmer sees):
+```c
+#ifndef STACK_H
+#define STACK_H
+typedef struct Stack Stack;                  /* opaque: definition not visible */
+
+Stack *stack_create(void);
+void   stack_destroy(Stack *s);
+int    stack_push(Stack *s, int value);      /* 0 on success */
+int    stack_pop(Stack *s, int *out);        /* 0 on success, -1 if empty */
+int    stack_is_empty(const Stack *s);
+#endif
+```
+`stack.c` (hidden implementation, shipped as object file/library):
+```c
+#include <stdlib.h>
+#include "stack.h"
+
+struct Stack { int *data; size_t size, cap; };      /* private representation */
+
+Stack *stack_create(void) {
+    Stack *s = malloc(sizeof *s);
+    if (!s) return NULL;
+    s->size = 0; s->cap = 4;
+    s->data = malloc(s->cap * sizeof *s->data);
+    if (!s->data) { free(s); return NULL; }
+    return s;
+}
+void stack_destroy(Stack *s) { if (s) { free(s->data); free(s); } }
+int stack_push(Stack *s, int v) {
+    if (s->size == s->cap) {
+        int *p = realloc(s->data, 2 * s->cap * sizeof *p);
+        if (!p) return -1;
+        s->data = p; s->cap *= 2;
+    }
+    s->data[s->size++] = v;
+    return 0;
+}
+int stack_pop(Stack *s, int *out) {
+    if (s->size == 0) return -1;
+    *out = s->data[--s->size];
+    return 0;
+}
+int stack_is_empty(const Stack *s) { return s->size == 0; }
+```
+`main.c` (client – legal use):
+```c
+#include <stdio.h>
+#include "stack.h"
+int main(void) {
+    Stack *s = stack_create();
+    for (int i = 1; i <= 5; i++) stack_push(s, i * i);
+    int v;
+    while (!stack_is_empty(s)) { stack_pop(s, &v); printf("%d ", v); }   /* 25 16 9 4 1 */
+    printf("\n");
+    stack_destroy(s);
+    return 0;
+}
+```
+**What the client cannot do (compiler errors):**
+```c
+s->size = 99;      /* error: dereferencing pointer to incomplete type 'Stack' */
+Stack t = *s;      /* error: variable 't' has initializer but incomplete type */
+Stack u;           /* error: storage size of 'u' isn't known (cannot even allocate it) */
+printf("%d", sizeof(Stack));   /* error: invalid application of sizeof to incomplete type */
+```
+* The type's contents (array, size, capacity) can't be read, written, copied, printed or sized – there is no `stack_print`/`stack_dump` procedure, and the struct fields have no names outside `stack.c`. The only way to use it is through `stack_create/push/pop/is_empty/destroy`.
+* Advantage: the representation (array → linked list) can change with **no change to client code** (information hiding, separate compilation).
+* Honest limitation: hiding is a compile-time guarantee; a determined programmer could still inspect raw memory via a debugger or by casting the pointer.
+
+**Same idea in other languages**
+```cpp
+// C++
+class Stack { struct Impl; Impl* p;          // pimpl: even the private members are not in the header
+public: Stack(); ~Stack(); void push(int); int pop(); bool empty() const;
+        Stack(const Stack&) = delete; Stack& operator=(const Stack&) = delete; };
+```
+```java
+// Java
+public final class Stack {
+    private int[] data = new int[4]; private int size = 0;      // private
+    public void push(int v) { if (size == data.length) data = java.util.Arrays.copyOf(data, 2 * size); data[size++] = v; }
+    public int pop() { return data[--size]; }
+    public boolean isEmpty() { return size == 0; }
+    @Override public String toString() { return "<opaque Stack>"; }   // contents not displayed
+}
+```
+
+---
+
+## Question 6
+**Using only `math.h` or `numpy` function calls and arithmetic expressions but no assignment statement, generate and print an input integer.**
+
+### Answer
+**Interpretation:** an integer is supplied as input; the program must *regenerate* it purely by evaluating math-library calls and arithmetic expressions (a single expression, no `x = ...` statement anywhere) and print it.
+
+**C** (only a declaration `int n;` – no assignment statement; `scanf` stores into `n` through its pointer argument, and the entire logic is one expression):
+```c
+#include <stdio.h>
+#include <math.h>
+
+int n;                                    /* declaration only - no assignment statement */
+
+int main(void)
+{
+    return scanf("%d", &n) != 1 ||                          /* read the input integer     */
+           printf("%d\n", (int) lround(cbrt(pow(n, 3)))) < 0;  /* print cbrt(n^3) rounded = n */
+}
+```
+Run: inputs `42`, `-17`, `0`, `12345` print `42`, `-17`, `0`, `12345`.
+
+**How it works**
+* `pow(n, 3)` computes n³; `cbrt` (cube root, defined for negatives) undoes it → n up to rounding error; `lround` rounds to the nearest `long`. Combined: `n → n³ → n`, built only from `math.h` calls and arithmetic.
+* Other valid expression-only generators of the same integer: `lround(sqrt(pow(n,2)))` (non-negative only), `lround(exp(log(n)))` (n > 0), `(int) floor(ceil(n))` (works for all n), `lround(log2(pow(2, n)))` (n small).
+* The `||` / `?:` / comma operators give sequencing *inside an expression*, so no assignment or statement list is needed. `n` is written only by `scanf`, a function call, not an assignment statement.
+* Range note: `pow(n,3)` is exact in `double` only while n³ < 2⁵³ (|n| < ≈ 200 000); for larger values, use `floor(ceil(n))`.
+
+**Python / numpy** – one expression, no `=`:
+```python
+import sys
+import numpy as np
+
+print(int(np.rint(np.cbrt(np.power(np.loadtxt(sys.stdin, dtype=np.int64), 3)))))
+```
+`echo -17 | python prog.py` → `-17`. (`np.loadtxt` reads the integer, `np.power` cubes it, `np.cbrt` takes the cube root, `np.rint` rounds to the nearest integer, `int` + `print` display it.)
+
+**Variant – the integer is a fixed constant (e.g. 42) and must be generated by math calls only:**
+```c
+printf("%d\n", (int) round(exp(log(42))));          /* e^(ln 42) = 42 */
+printf("%d\n", (int) (pow(cos(0)+cos(0), 5) + 10)); /* cos(0)=1, so 2^5 + 10 = 42 */
+```

@@ -1,0 +1,11 @@
+class Record {
+	public int key;
+	public double value;
+	public Record(double givenValue) {
+		value=givenValue;
+		key=(int)Math.round(givenValue);
+	}
+	public void show() {
+		System.out.print("Key: "+key+" Value: "+value);
+	}
+}

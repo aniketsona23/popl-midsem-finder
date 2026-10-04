@@ -1,0 +1,1195 @@
+# source: 06_Readings/Debates/Naur - Computing versus Human Thinking (2005 Turing lecture).pdf
+# ocr_pages: 1
+=== PAGE 1 ===
+updates
+=== PAGE 2 ===
+Computing Versus 
+Human Thinking
+By Peter Naur, recipient of ACM’s 2005 A.M. Turing Award
+I
+n this presentation I shall give you an overview of
+my works from the past fifty years concerning the
+issue given in the title. Concerning this title I
+invite you to note particularly the middle word, ‘ver-
+sus’. This word points to the tendency of my efforts
+around this theme, to wit, to clarify the contrast
+between the two items, computing and human
+thinking. This tendency of my work has found its
+ultimate fulfilment in my latest result, which is a
+description of the nervous system showing that this
+system has no similarity whatever to a computer.
+It is ironic that my present award lecture is given
+under the title of Turing. As a matter of fact, one part
+of my work concerning computing and human think-
+ing has been an explicit critique, or rejection, of the
+ideas of one prominent contribution from Alan Tur-
+ing—his presentation of what is known as the Turing
+Test [56, 31-1986] (References appended by the year
+refer to works authored by the present author.)
+Such rejection of notions currently held to be well
+established has been an important component of my
+efforts. Indeed, I have found that a large part of what
+is currently said about human thinking and about sci-
+entific and scholarly activity is false and harmful to
+our understanding. I realize that my presentation of
+some of these issues may be offensive to you. This I
+regret, but it cannot be avoided.
+DESCRIPTION AS THE CORE ISSUE OF SCIENCE AND
+SCHOLARSHIP
+The tone of critique and rejection of established
+ideas has its roots in my earliest activity, from its very
+beginning more than fifty years ago. Already in my
+work in astronomy, around 1955, a decisive item in
+my awareness came from Bertrand Russell’s explicit
+rejection of any notion of cause as a central issue of
+scientific work. As pointed out clearly by Russell,
+science as pursued by astronomers is concerned, not
+with causes, not with logic, but with description [53].
+When about this time I got into computing, into
+the work on establishing the programming language
+Algol 60 [2], I saw the crucial issue to be description.
+COMMUNICATIONS OF THE ACM
+January  2007/Vol. 50, No. 1
+85
+=== PAGE 3 ===
+86
+January  2007/Vol. 50, No. 1 COMMUNICATIONS OF THE ACM
+Consequently my principal contribution to this work
+was the development of a new form of description,
+continuing the work of John Backus [1], and the
+application of this form to describing the program-
+ming language adopted by the Algol committee. This
+new form of description was an indirect critique
+against the form of description employed in the ear-
+lier version, so-called Algol 58. It was first presented
+in a working document to the Algol 60 conference in
+Paris in January 1960 [8-1960]. The discussions lead-
+ing to Algol 60 were later described by Perlis [51] and
+in [24-1981].
+COMPILER DESIGN
+During the following years I got mostly engaged in
+the design of compilers for Algol 60. My main con-
+tribution was the design, together with Jørn Jensen,
+of the Gier Algol compiler [9-1963]. The success of
+this design rested directly on taking the primary
+issue in the design of a compiler to be, not syntactic
+analysis, but storage allocation. The Gier Algol com-
+piler had 9 translation passes. During execution the
+translated program was held in a paging system.
+Some of the techniques of the compiler were
+described separately in [10-1965, 12-1965, 15-1966].
+TECHNIQUES OF PROGRAMMING AND
+PROGRAM DESCRIPTION
+I
+n the following years I entered the discussions of
+the problems of programming of computers and
+on establishing computing as an academic sub-
+ject. I suggested that the most proper designation of
+such a subject would be, not computer science, but
+datalogy, that is the study of data and data processes
+[13-1966, 16-1968]. This was adopted by Copen-
+hagen University, where the field under that desig-
+nation was established in 1969. I presented the
+subject in textbook form in [20-1974].
+In the papers [14-1966], [18-1969], and [22-
+1976], I presented programming techniques aiming
+at enhancing the programmer’s understanding of the
+program he is constructing. In [14-1966] I suggested
+that one main issue is the question of description of
+algorithms and programs and propose that the descrip-
+tion in terms of a programming language be supple-
+mented with what I call general snapshots, that is
+descriptions in the form of statements of relations hold-
+ing between the values of the relevant variables at defi-
+nite points of the program. With the aid of such
+snapshots formal arguments and proofs concerning
+the values of the variables will be possible, but far
+more important, general snapshots are invaluable as
+aids to the human reader. In [18-1969] I described a
+discipline, programming by action clusters, that help
+the programmer’s understanding by making relations
+concerning the variables hold invariantly throughout
+the program text. In [22-1976] I described how for-
+mulating the program as an interpreter of control
+records may enhance both the efficiency and the pro-
+grammer’s understanding of certain common types of
+programs. 
+One use of general snapshots is demonstrated in a
+later work in which I apply them to Turing’s univer-
+sal machine [55, 37-1993]. As a result I found several
+programming errors in Turing’s program.
+Problems of program development were brought
+forward particularly during the Conference on Soft-
+ware Engineering in October 1968 and in the report
+on that conference to which I, together with Brian
+Randell, contributed as editor [17-1969].
+During the following years the discussions became
+centred particularly on ideas of so-called structured
+programming and on claims for so-called formal
+specifications of programs. I contributed to this dis-
+cussion with empirical studies of the programming
+activity and of such formalizations that may be found
+in the mathematical literature and in program speci-
+fications as they have appeared in publication, includ-
+ing a formal description of Algol 60 [19-1972,
+23-1981, 25-1982, 26-1983, 30-1985]. By these
+studies I succeeded in demonstrating that the claims
+for the advantages of formal specifications as a tool to
+human programmers are unjustified.
+As a major result of these studies I described pro-
+gramming as a human activity: theory building [27-
+1985]. By this description the core of programming is
+the programmer’s developing a certain kind of under-
+standing of the matters of concern.
+DESCRIPTIONS OF MENTAL LIFE
+M
+y work on the programming activity led me
+directly to a consideration of related aspects
+of mathematics and natural languages, and
+thus of psychological and philosophical issues of
+human thinking [11-1965, 21-1975, 34-1989].
+In this context I had occasion to examine a num-
+ber of newly published works on such topics as
+machine or artificial intelligence and cognitive sci-
+ence, by contributing reviews of works on such topics
+to the Computing Reviews [28-1985, 29-1985, 32-
+1988, 33-1989, 38-1993].
+Through this reviewing activity I found confirmed
+time after time that present-day authors argue about
+mental life from totally defect, confused cognitivist
+notions, in terms such as ‘consciousness’, ‘knowledge’,
+‘language’, ‘intelligence’, ‘concept’, that denote noth-
+ing clearly, and moreover that William James’s insight
+into human mental life as presented in his Principles
+=== PAGE 4 ===
+of Psychology [5] is unknown. I gradually came to real-
+ize that the whole field of psychology, which suppos-
+edly is concerned with mental life, during the
+twentieth century has become entirely misguided into
+an ideological position such that only discussions that
+adopt the computer inspired form of description of
+mental life is accepted, while any other form, includ-
+ing the form developed by William James in his Psy-
+chology, is rejected as inadmissible and unpublishable.
+So as to clarify this extraordinary situation of psychol-
+ogy I engaged from 1986 into a series of studies.
+In one study I subjected Turing’s paper on the so-
+called Turing Test [56] to a thorough critical analysis
+[31-1986], resulting in a conclusion by which Tur-
+ing’s whole argumentation is invalid, the basic reason
+being that Turing argues from a fallacious notion of
+thinking, as something done by somebody or some-
+thing. This notion is contradicted by what William
+James [5] states as the first fact of psychology, to wit,
+that thinking is something that goes on.
+KNOWING
+U
+nder the influence of my recurrent experience
+that the argumentation in recent discussions
+related to human knowing is defect, I decided
+to carry out a more systematic study of the signifi-
+cance of formalization, logic, and rules, in discus-
+sions of human thinking, linguistic activity,
+computing, and scientific/scholarly activity. The
+result was two papers, [39-1994, 45-2000], and a
+book titled Knowing and the Mystique of Logic and
+Rules [42-1995].
+In this book human knowing is examined as it
+emerges from classical empirical psychology, with its
+ramifications into language, computing, science, and
+scholarship. While the discussion takes empirical sup-
+port from a wide range, claims for the significance of
+logic and rules are challenged throughout. Highlights
+of the discussion:
+• Knowing is a matter of habits or dispositions that
+guide the person’s stream of consciousness;
+• Rules of language have no significance in lan-
+guage production and understanding, being
+descriptions of linguistic styles;
+• Statements that may be true or false enter into
+ordinary linguistic activity, not as elements of
+messages, but merely as summaries of situations,
+with a view to action and reaction;
+• In computer programming the significance of
+logic, proof, and formalized description, is 
+incidental and subject to the programmer’s 
+personality;
+• Analysis of computer modelling of the mental
+activity shows that in describing human knowing
+the computer is irrelevant;
+• In accounting for the scholarly/scientific activity,
+logic and rules are impotent;
+• A novel theory is presented: scholarship and sci-
+ence have coherent descriptions as their core.
+Another major conclusion of the studies was that
+the works by William James [5] and Otto Jespersen
+[6, 7] are superior to any other accounts of human
+thinking and linguistic activity, while they are ignored
+by cognitivist psychologists.
+SCIENCE AND SCHOLARSHIP
+I
+n parallel with writing the book on Knowing [42-
+1995] I discussed the place of computing in rela-
+tion to other fields of science and scholarship, in
+two articles [35-1990, 41-1995, English version 43-
+1996]. In these articles I argued that as far as the
+activity of science and scholarship is concerned,
+computing makes sense as a form of description, while
+issues of logic or method are irrelevant.
+This was confirmed in an empirical study of the
+use of formal descriptions in the programming activ-
+ity [37-1993].
+Other issues of science and scholarship imposed
+themselves upon my attention in the form of ideolog-
+ical suppression of scientific discussions of computing
+and human thinking, not only in psychology but also
+in the recent computer literature. Such suppression is
+illustrated by the following three incidents. Commu-
+nications of the ACM, November 1995, brought an
+article by the psychologist G. A. Miller: WordNet: A
+Lexical Database for English, describing a so far unsuc-
+cessful project to develop a computer program that
+supposedly processes natural languages as people do.
+Miller describes language in terms of words, word
+senses, and linguistic contexts. By this manner of
+describing the linguistic activity he gets stuck. He says
+that ‘Choosing between alternative senses of a polyse-
+mous word is a matter of distinguishing between dif-
+ferent sets of linguistic contexts in which the word
+form can be used to express the word sense’ and then
+concludes that ‘How people make such distinctions is
+not well understood.’
+But this impasse arises merely from Miller’s inade-
+quate description of the linguistic process. Talking of
+verbal ‘word senses’ given by ‘sets of linguistic con-
+texts’ is an impossible way of describing human lin-
+guistic activity. Choosing between alternative senses of
+a polysemous word does not arise when people speak.
+The action of each person engaged in the conversa-
+tion consists of the continuous changes in the person’s
+thought object. What each word means appears in
+COMMUNICATIONS OF THE ACM
+January  2007/Vol. 50, No. 1
+87
+=== PAGE 5 ===
+each person’s stream of thought, by the associations
+coming in the situation from that person’s habits.
+Typically the meaning of a word is ephemeral, entirely
+a matter of the particular conversation taking place.
+This is obvious for such common words as ‘the’, ‘he’,
+and ‘she’.
+In response to this article I wrote a letter to the edi-
+tor of the Communications of the ACM, pointing out
+the defects of Miller’s approach. This was refused by
+the editor. This made me resign from my member-
+ship of the ACM. I later included the text of the let-
+ter in [50-2005] section 3.3.
+In the second incident, also in 1995, I was given
+the book by B. von Eckardt: What is cognitive science?
+by Computing Reviews for review. I wrote a review that
+indicated the failure of the author to argue for the
+field, pointing out in detail how the author is com-
+mitted to confused notions both of science, mental
+life, and computing. My review was rejected by the
+editor of the Computing Reviews. I later had it pub-
+lished in The Computer Journal [40-1995]. This
+ended my contribution of reviews to the Computing
+Reviews.
+As the third incident, the article [43-1996] titled
+Computing As Science was rejected by the editor of the
+Communications of the ACM.
+PHILOSOPHY AS PRESUMPTION
+A
+fter writing the book on Knowing [42-1995] I
+decided that at least part of the ground of the
+decay of psychology lies in the philosophical
+influence. The result was an Antiphilosophical Dic-
+tionary: 
+Thinking—Speech—Science/Scholarship,
+published first in a version in Danish [44-1999] and
+then in English [47-2001]. In this I carry through a
+critical analysis of pronouncements, allegedly philo-
+sophical, by some of the best known philosophers,
+such as Descartes, Bertrand Russell, Martin Heideg-
+ger, Gilbert Ryle, and Ludwig Wittgenstein.
+Through these analyses I establish that what is said
+by philosophers about human mental life is void of
+empirical support. The overall conclusion of the
+work is that philosophy is an ideology of presump-
+tion, harmful to science and scholarship, while the
+descriptions by William James of mental life and by
+Otto Jespersen of the linguistic activity, although
+unsurpassed in their insight are unknown to
+philosophers.
+This work I supplemented with an empirical study,
+carried out together with Erik Frøkjær, of the impor-
+tance or otherwise of philosophical locutions in sci-
+entific and scholarly work [46-2000]. The study is
+based on pronouncements from 80 scientists and
+scholars from a variety of fields, all professors at
+Copenhagen University. These pronouncements con-
+firm that the influence of philosophy on science and
+scholarship is confusion.
+THE IDEOLOGICAL DECAY OF PSYCHOLOGY
+S
+ubsequently I decided to lay bare more explic-
+itly the ideological decay of psychology during
+the twentieth century. A major issue of such
+an undertaking is to select the literature sources that
+may rightfully be claimed to represent present day
+psychology. In the first version of my study, in Dan-
+ish, I choose Den Store Danske Encyclopædi [3]. The
+first version of my work on this subject was pub-
+lished under the title Psykologi i videnskabelig rekon-
+struktion [48-2002].
+In October 2003 I decided to produce an English
+version of this work. Since the Danish source of the
+first version obviously would be inadequate in an
+English version, I chose instead the Oxford Encyclope-
+dia of Psychology [4] and Penguin Dictionary of Psy-
+chology [52] as the sources of present day psychology.
+The work was published under the title An anatomy
+of human mental life—Psychology in unideological
+reconstruction—incorporating The Synapse-State The-
+ory of mental life [50-2005].
+In this book the anatomy of mental life is pre-
+sented primarily in carefully selected, rearranged and
+annotated quotations from William James’s Principles
+of Psychology, in terms of four themes: habit, the
+stream of thought, association, and acquainting. Addi-
+tional original presentations: sign habits and language,
+creative thinking, and the activity of art. It is argued in
+detail that William James’s Principles of Psychology
+from 1890 is a supreme scientific contribution of
+mankind, on a par with Newton’s Principia.
+The presentation is justified by the ideological
+decay of psychology during the twentieth century, as it
+was brought about by the activity of what is called the
+American-psychology-enterprise. The decay is docu-
+mented by detailed, critical analyses of 51 articles in
+the Oxford Encyclopedia of Psychology, by 63 authors,
+and of articles in the Penguin Dictionary of Psychology.
+Most of the articles examined are found to be marred
+by fallacies, mostly ideological. As conclusion on the
+situation of the activity of the American-psychology-
+enterprise around year 2000:
+• The discussions of the phenomena of mental life
+are dominated by invalid ideologies: behaviorism
+and cognitivism, resulting in a confusion by
+which there is no clear common understanding of
+the terms being used and a failure to account for
+the life experience had by anyone.
+• The psychotherapy practised is quackery on a
+88
+January  2007/Vol. 50, No. 1 COMMUNICATIONS OF THE ACM
+=== PAGE 6 ===
+COMMUNICATIONS OF THE ACM
+January  2007/Vol. 50, No. 1
+89
+continental scale. 
+• The academic activity consists of confused ideo-
+logical skirmishes and laboratory experiments
+with slight relevance to human life, while the
+quackery performed by the psychotherapeutists is
+ignored. In the attitude to and handling of psy-
+chotherapy the American-psychology-enterprise
+of year 2000 is as general medicine was around
+the year 1800.
+THE SYNAPSE-STATE THEORY OF MENTAL LIFE
+T
+he work on the Anatomy [50-2005] gave me the
+occasion, in November 2003, to look closely at
+Charles Sherrington’s The Integrative Action of
+the Nervous System [54]. This immediately told me
+where in the nervous system one finds the plasticity
+that James states very clearly must be the neural
+ground of habits, to wit: in the synapses. And so the
+way was open to a neurophysiological description of
+the nervous system, which I have called the Synapse-
+State Theory [49-2004].
+The Synapse-State Theory of mental life is
+grounded empirically partly in mental life as it is
+known to anyone and partly in neurophysiological
+insight into the nervous system as this was established
+around 1910.
+Mental life is experienced at all times by anyone,
+but only a genius such as William James has been able
+to describe it coherently, as he presents it in his Prin-
+ciples of Psychology [5]. James mainly describes experi-
+ences and actions as they are know to anyone. In
+addition he describes certain neurophysiological fea-
+tures as they have been established empirically in
+experiments with frogs.
+First of all, the most prevalent feature of our expe-
+riences and actions are habits. And James immediately
+points out: habits are grounded in the plasticity of the
+nervous system. This is a central matter in my theory.
+Side by side with habits James describes instincts,
+which are, as it were, the origin of habits.
+And next comes the great phenomenon: thinking
+goes on. This is what James calls The Stream of
+Thought, of Consciousness: we experience thoughts and
+feelings. More in detail: at any moment we experience
+a thought object. A thought object is complicated. It
+has certain cores that have faint fringes. When one
+thinks about any definite topic there will be a thou-
+sand other things in the stream of thought: the
+fringes.
+The cores are the anchor-points of the stream of
+thought, which James calls concepts but which I prefer
+to call acquaintance objects. We can know that we
+think of the same as at earlier occasions—but the
+thought about it, what is in the fringe, is never the
+same. I can think of my mother. This I have been able
+to do my whole life. My mother is an unchangeable
+acquaintance object in my life. But each time I think
+of my mother the thought is different. But I know
+that it is the mother with whom I am acquainted I
+think of.
+The thought objects are changing incessantly.
+There are some important circumstances about the
+changes. One of them concerns attention. That is a
+concentration within the thought object towards an
+acquaintance object, at any time, of short duration.
+Our attention jumps back and forth within the
+thought object. This happens within a time scale of
+about one second.
+Then there is another, rather different way in
+which the changes take place, namely what James
+talks about as the specious present. This concerns that
+whatever we think about at a certain moment con-
+tains in weak form what we thought about a few sec-
+onds before. It is a kind of tail to the acquaintance
+object presently in the attention, within a time scale of
+20 or 40 seconds, in such a way that what we thought
+of 20 seconds ago is still there, getting gradually
+weaker.
+Attention and the specious present combine in a
+circumstance of the changes of the stream of thought
+that James describes by distinguishing what he calls
+substantive and transitive parts of the stream of
+thought. In transitive parts the attention is directed
+only towards such acquaintance objects in the
+thought object that have been the objects of the atten-
+tion within the latest specious present, without being
+directed towards any other acquaintance object. James
+compares it with a bird in flight. The transition to a
+substantive part happens when the attention is
+2005 A.M. TURING AWARD—PETER NAUR
+“For fundamental contributions to
+programming language design and the
+definition of Algol 60, to compiler 
+design, and to the art and practice of 
+computer programming.”
+=== PAGE 7 ===
+directed toward an acquaintance object from the
+fringes. This will be experienced as a result of the pre-
+vious process and thus as a resting point in the stream
+of thought. Here the bird perches.
+An acquaintance object which is called forth to the
+attention from the fringes is one that has been habit-
+ually connected to one or more of the other acquain-
+tance objects in the thought object by being excited at
+the same time. This kind of habitual connection
+between the acquaintance
+objects is denoted associa-
+tion.
+Within this activity there
+are special processes, sensa-
+tion and perception. In per-
+ception something sensed
+directs the attention to an
+acquaintance object.
+Further there is recall and
+memory. Memory is recall—
+through associations—of an
+acquaintance object that is
+associated to something in
+the past. What James calls
+memory has no relation to
+what is called memory by
+modern cognitivists.
+The understanding of
+time builds upon the specious present and associa-
+tions.
+Actions, instinctive and voluntary, are controlled by
+the thought objects. In this context William James
+gives much attention to the physiology: neurons and
+impulses, sense cells, muscles and glands. He particu-
+larly stresses a general property of the neurophysiol-
+ogy: summation of impulses. That which releases an
+action within us may be various impulses. And it may
+be such that each of these impulses by itself is insuffi-
+cient to make the action happen. If then two of these
+impulses occur simultaneously they are added
+together, and then the action is released.
+So much about mental life as it is known to all of
+us and described by William James. We do not have
+go further into it, it is well known, we just have to
+read William James. That no present day psychologist
+knows anything about it is another story.
+The other main source is Charles Sherrington: The
+Integrative Action of the Nervous System [54], which
+presents fundamental empirical studies, particularly
+of dogs—dogs scratching themselves, for example—
+how that happens. By these studies Sherrington has
+found that the paths of neural excitations, the neu-
+rons, are connected by what he calls synapses. The
+synapses are plastic in the way they transmit the
+neural excitations. By Sherrington’s researches the
+synapses come in several different forms and they are
+influenced by drugs.
+All this is the empirical basis.
+This leads to my theory—description—of the cen-
+tral nervous system, shown in Figure 1. The nervous
+system consists of three kinds of things: synapses, neu-
+rons, and nodes where the neurons meet. The activity
+of the nervous system consists of excitations. Excita-
+tions are transmitted
+along 
+the 
+neurons,
+through the synapses,
+and are summed and
+distributed 
+in 
+the
+nodes. This function of
+the nodes embodies the
+summation of impulses.
+Structurally I have
+occasion to talk of five
+different layers: (1)
+item-layer, (2) attention-
+layer, (3) specious-pre-
+sent-layer, (4) sense-layer,
+(5) motor-layer. All this
+may be seen in Fig. 1.
+In
+the figure the
+item-layer is in the cen-
+ter, the attention-layer is
+to the left, the specious-
+present-layer to the
+right, the sense-layer is
+at the top, closely con-
+nected to the sense transducers, and the motor-layer is
+below, connected to muscles and glands. Each of
+these layers has its own synapses having different
+properties. The nodes are shown within boxes, the
+neurons are lines, and the synapses are identified as
+ITEM, ATT, SPEC, SENS, or MOT.
+Let us start at the center, the item-layer. With its
+synapses this embodies the long term habits of our
+organism. In other words, all what is there through
+many years of our life, more or less prominently. It
+consists of nodes where the neurons join in large
+numbers. The figure shows two nodes: Node A and
+Node B. Of such nodes there are roughly 100,000.
+Each such node is connected to every other through a
+path consisting of a neuron, a synapse, and a neuron.
+One of these paths is shown in the figure: Node A,
+neuron, ITEM-AB, neuron, Node B. Such a connec-
+tion with a synapse connects every pair of nodes in
+this layer. Thus there must be of the order of 10 thou-
+sand million synapses. These synapses have that plas-
+ticity which embodies all the long term habits of our
+mental life.
+90
+January  2007/Vol. 50, No. 1 COMMUNICATIONS OF THE ACM
+MOT-A1       MOT-A4     MOT-B2        MOT-B4
+Synapses of
+the motor layer
+Light
+transducer
+Sound
+transducer
+Taste
+transducer
+Smell
+transducer
+Feeling
+transducer
+Sense cells:
+S1
+S2
+S3 S4
+S5
+S6
+S7
+S8
+S9 S10
+Node B 
+ATT-A
+MA1
+MA2        MA3         MA4
+Muscular and glandular 
+activations:
+Attention
+excitation
+Influences within and outside of organism on sense from muscular activations: 
+Nodes of the 
+sense layer: 
+Synapses of the
+sense layer
+ITEM-x     ITEM-AB    ITEM-y
+SENS-A1         SENS-A5
+SENS-B5         SENS-B9
+Nodes of the motor layer:
+M1         M2           M3           M4
+ATT-B
+Node A 
+Specious
+present
+excitation
+SPEC-A
+SPEC-B
+Nodes and synapses 
+of the item layer
+Figure 1. The Synapse-State 
+description of the nervous system.
+=== PAGE 8 ===
+In the figure I have suggested the many neurons
+that connect to each node—each node has many
+short lines. From each node there are about 100,000
+of them, since they should connect to 100,000 others.
+The nodes are the neurophysiological embodiments
+of the acquaintance objects.
+The plastic properties of the ITEM-synapses are
+such that in the newborn individual they have low
+conductivity. But the moment the two nodes to which
+a synapse is connected are both excited, the synapse
+becomes conductive. It will develop every time the
+two connecting nodes are excited, getting more con-
+ductive in a plastic way. In this way the two nodes
+become associated, with the effect that whenever one
+of them gets excited the other one becomes excited as
+well since the synapse connecting them will conduct
+the excitation. And it will conduct in both directions.
+If no re-excitation takes place the synapse will slowly,
+gradually over years, lose the conductivity again.
+This is how it happens in the item-layer.
+Attention-layer: Each node in the item-layer has one
+connection, through one attention-synapse, to a com-
+mon node, denoted Attention excitation. So ATT-A
+and ATT-B are two attention-synapses. But their
+properties are entirely different those of the synapses
+in the item-layer. An attention-synapse, for example
+ATT-A, works such that if the connected node, here
+Node A, gets excited beyond a certain level of
+strength—and this may happen through its connec-
+tion to and excitation from nodes of the sense-layer,
+such as S1 and S5, or from other nodes in the item-
+layer with which it is associated, e.g. Node B—if this
+excitation rises to a certain level it will excite the atten-
+tion-synapse ATT-A, with the consequence that this
+synapse becomes conductive for a duration of about
+one second and conducts a strong excitation from the
+Attention excitation into Node A. This will influence
+the summation of impulses in that node. If Node A is
+already strongly excited and then in addition receives
+excitation from the attention-synapse ATT-A, it will
+have extra strength. This is the impulse that—as we
+say—attracts the attention. At this moment the atten-
+tion sits in Node A.
+When the synapse ATT-A has delivered this
+impulse—it lasts only about a second—it will cease
+the excitation, and may be assumed to be tired after
+this action. Probably it will have to recover for perhaps
+20 or 30 seconds before it is ready to act again.
+So much about the attention-layer.
+Specious-present-layer: each node in the item-layer is
+connected to just one specious-present-synapse,
+which I denote SPEC. Every SPEC-synapse is con-
+nected to a common node denoted specious-present-
+excitation. These synapses work somewhat like the
+attention-synapses, but slower. Normally they will
+have no conductivity, so no excitation will come
+through from the specious-present-excitation. But
+when their connected node becomes excited above a
+certain level—perhaps because the connected atten-
+tion-synapse has delivered an impulse—the specious-
+present-synapse gets excited and will then conduct an
+excitation from the specious-present-excitation into
+the same node, and this extra excitation will gradually
+fall off within a time scale of about 20 seconds. This
+means that there may be a handful of these synapses,
+perhaps 5 or 10, that are all at some stage of falling off
+in their excitation. They form a queue of nodes that
+have been strongly excited within the latest minute or
+so.
+So much about the specious-present-layer.
+Now for the sense-layer. It has a number of nodes,
+of which only a few are shown: S1, S2, ..., S10. Each
+such node gets excited from one of the senses. There
+is a certain transformation of sense impulses in the
+sense transducers, different for each sense, and the
+resulting impulses are sent to the nodes. From each
+such node there is a connection through a synapse to
+every one of the nodes in the item-layer. We see a few
+of them: SENS-A1, SENS-A5, SENS-B5, and SENS-
+B9. These synapses again are plastic. In the young
+individual they will have only low conductivity. But
+by being excited from both sides simultaneously they
+gain in a conductivity which is higher in the direction
+towards the node in the item-layer, and lower in the
+opposite direction. Whenever we have a sensation
+there will therefore be a tendency that certain of the
+item-nodes become excited. When having a sensation
+of something specific a whole number of the nodes
+S1, S2, ..., S10—there may be hundreds of them—
+will receive an excitation. And if from each of the
+hundred there is a conductive synapse into one par-
+ticular item-node, this node by summation of the
+impulses will become strongly excited. When this
+excitation is strong enough to excite the attention-
+synapse of the node, this is called perception of the cor-
+responding acquaintance object.
+What is embodied in the node may for example be
+the acquaintance object of my mother. Certain
+impulses make me think of my mother, that is make
+my mother come forth in my stream of thought. It
+may be sense impressions, but it may also be many
+other things and combinations of things.
+The conductivity in the opposite direction, from
+ITEM-nodes to SENS-nodes, is a matter of imagery.
+When we think of something we get a faint image in
+our stream of thought, by the excitations in the oppo-
+site direction. But the image is faint and blurred. It is
+blurred because there is no strict relation between the
+COMMUNICATIONS OF THE ACM
+January  2007/Vol. 50, No. 1
+91
+=== PAGE 9 ===
+set of impulses that excite the ITEM-node and the
+nodes in the sense-layer.
+A very important matter should be said: the exci-
+tation of the nodes in the sense-layer, S1, S2, ..., S10,
+that is where the experience happens. That is what we
+see, hear, smell, taste, feel. Whenever one of these
+nodes is excited we experience it in the stream of
+thought.
+So much about the sense-layer.
+Finally about the motor-layer. It has a number of
+nodes, M1, M2, ..., each of which may excite a mus-
+cle or a gland. Each of these nodes is connected
+through a synapse of a spe-
+cial kind, a MOT-synapse,
+to every node in the item-
+layer. This is where the acti-
+vation of muscles take
+place, 
+depending 
+on
+whether certain synapses
+have been made conduc-
+tive, again plastically, and
+again with a long term plas-
+ticity, but with a shorter
+time scale than in the case
+of the ITEM-synapses—I
+believe they are here to be
+reckoned in weeks or
+months, where in the item-
+layer it a matter of years.
+The training of a muscular
+action decays quite rapidly.
+When in playing the flute
+one has trained a particular
+muscular figure, it takes no
+more that a week before it it noticeably deteriorated.
+It is a matter of the MOT-synapses.
+But again it is so that the conductivity of the active
+synapses is increased by training. 
+So much about the motor-layer.
+Finally Fig. 1 turns the attention to a general,
+important matter, with the thick black arrow that
+shows influences from muscular activations to sense
+cells. This is a phenomenon that William James
+points out very clearly, that all what we call feelings
+and emotions is a matter of the muscles having sense
+cells in them. When we feel something the primary
+phenomenon is that certain muscles are activated.
+And then, in the muscles, anywhere in the organism,
+there are sense cells that are influenced by the activity.
+This is a very important process that happens all the
+time, that we in this way experience, feel, the state of
+our own body. That is what is indicated by the thick
+line.
+It may also be a muscular action which one picks
+up visually, for example a movement of the hand.
+One sees the movement. The impulse goes the same
+way.
+This connection is a decisive circumstance in the
+way our movements are controlled from the nervous
+system.
+As illustration I will show a picture of a typical pat-
+tern of excitations. Fig. 1 showed permanent connec-
+tions. Fig. 2 shows some of the synaptic connections
+and nodes that are excited at a certain moment, and
+by bold type and thickness of the frames around the
+nodes shows the relative strengths of the excitations of
+some of those connec-
+tions and nodes. The
+moment is one at which
+the person has just been
+asked: 
+When 
+was
+Mozart’s 
+birthday?
+While hearing that ques-
+tion spoken a large num-
+ber of the person’s
+auditive sense cells have
+become excited, and
+these excitations have
+been transferred by the
+Sound transducer into a
+large number of nodes of
+the sense layer, whereby
+they have come into the
+person’s
+stream 
+of
+thought 
+as 
+sounds.
+Moreover, while hearing the word ‘Mozart’ a number
+of nodes such as S1 and S2 that are connected to the
+node MOZART through synapses that have high
+conductivity, SENS-1 and SENS-2, have been
+strongly excited. These many excitations will have
+been combined by summation into the node
+MOZART, with the consequence that the attention
+and specious present synapses of that node have
+become excited. A few seconds later these excitations
+still linger on in the synapse SPEC-1 that keeps the
+node MOZART excited for the duration of the spe-
+cious present. This process by which the node
+MOZART has become strongly excited from the
+nodes of the sense layer is know as perception. In quite
+a similar manner, the hearing of the spoken word
+‘Birthday’ and the attendant excitations of nodes and
+synapses such as S3, S4, SENS-3, and SENS-4, has
+led to the perceptional excitation of the node
+BIRTHDAY.
+The strong perceptional excitations of the nodes
+MOZART and BIRTHDAY will immediately have
+become transferred through conductive synapses
+(embodying associations) into a large number of other
+92
+January  2007/Vol. 50, No. 1 COMMUNICATIONS OF THE ACM
+ITEM-1
+SPEC-1
+SPEC -3
+SENS-1
+MOZART
+BIRTHDAY
+SPEC-2
+1756
+ITEM-4
+ITEM-3
+ITEM-2
+SENS-4
+ATT-3
+Attention
+excitation
+Specious
+present
+excitation
+Seventeenfiftysix
+Symphony
+Salieri
+Jupiter
+Salzburg
+SENS-2
+SENS-3
+Birth
+Date
+ITEM-5
+ITEM-6
+ITEM-7
+ITEM-8
+ITEM-9
+ITEM-10
+Sound transducer
+Sense cells:
+S1
+S2
+S3
+S4
+ITEM-11
+Admiration
+ITEM-12
+MOT-1
+MA1
+M1
+Feeling transducer
+S5
+Figure 2. Excitation pattern:
+When was Mozart’s birthday?
+=== PAGE 10 ===
+nodes, that at this moment will form the fringe of the
+thought object. Only a very few of these fringe nodes
+are shown in the figure: by association with
+MOZART: Salieri, Salzburg, Jupiter, Symphony,
+1756, Admiration; by association with BIRTHDAY:
+Birth, Date, 1756. Any of these nodes may through
+conductive synapses in the motor layer excite muscu-
+lar or glandular activations. Thus the node Admira-
+tion through the synapse MOT-1 and the node M1
+activates a muscle MA1 that in its activation influ-
+ences sense cells that in their turn by exciting the node
+S5 produce the experience of a feeling of admiration
+in the stream of thought.
+The node 1756 will become excited from both
+MOZART and BIRTHDAY and so will excite its
+attention synapse, ATT-3, and its specious present
+synapse, SPEC-3. And so as the result of hearing the
+question ‘When was Mozart’s birthday?’ spoken the
+node 1756 will become strongly excited.
+It should be made explicitly clear that the identify-
+ing labels put on the nodes in Fig. 2, such as
+MOZART, BIRTHDAY, and 1756, are there merely
+for purposes of description. In the nervous system the
+nodes of the item layer are all alike and only distinct
+by the states of their connected synapses. For example,
+the node MOZART is distinct by virtue of the states
+of such synapses as SENS-1, SENS-2, ITEM-1,
+ITEM-2, ITEM-3, ITEM-4, ITEM-5, ITEM-7 and
+ITEM-12. The spoken, sounding word ‘Mozart’ is
+attached to the node MOZART only by the states of
+synapses of the sense layer, such as SENS-1, SENS-2,
+and others, that become excited when the word
+‘Mozart’ is sensed in hearing, as explained above.
+Likewise, the person’s pronouncing of a word
+attached to a node in the description is a matter of
+conductive synapses connected to such nodes in the
+motor layer that when excited will activate muscles of
+articulation and vocalization. In Fig. 2 ITEM-9 con-
+necting to ‘Seventeenfiftysix’ may be such a synapse.
+In summary, according to the description of Fig. 2
+the response in the person’s stream of thought to the
+question When was Mozart’s birthday? is a matter of
+(1) the person having nodes, embodying acquaintance
+objects, of ‘Mozart’, ‘birthday’, and ‘1756’, and fur-
+ther (2) that the synapses connecting them, ITEM-7
+and ITEM-8, have in the person’s past been put into
+conductive states. The response involves neither any
+kind of ‘language processing’, nor any ‘memory’ con-
+tainer. What is sometimes called ‘short term memory’
+is a matter of nodes of the item layer that are excited
+for the duration of the specious present by their
+SPEC-synapse, such as MOZART, BIRTHDAY, and
+1756, in Fig. 2.
+How this form of description may account for all
+the features of mental life is a longer story, of which I
+have written a series of articles, one about the stream
+of consciousness, one about sensation and perception,
+one about what William James calls memory, which is
+something entirely different from what modern psy-
+chologist call memory, and I am working on an
+account of instinctive and voluntary actions. I have
+tried to have these articles published in journals, so far
+without any success. The present presentation, when
+published in the Communications of the ACM, will in
+fact be the first presentation of the Synapse-State The-
+ory of mental life to appear in a journal.
+So I am clearly at the beginning of that twenty year
+period that it usually takes to have a scientific break-
+through accepted.
+CONCLUSION
+A
+nd so, as the conclusion of this discussion of
+the theme given in the title: Computing pre-
+sents us a form of description. This form is
+very useful for describing a great variety of phenom-
+ena of this world, but human thinking is not one of
+them, the reason being that human thinking basi-
+cally is a matter of the plasticity of the elements of
+the nervous system, while computers—Turing
+machines—have no plastic elements. For describing
+human thinking one needs a very different, non-dig-
+ital form, as demonstrated by the Synapse-State 
+Theory.
+Acknowledgement. I wish to record my great
+indebtedness to Erik Frøkjær, who in a sustained
+activity over many years has acted as a sounding board
+to my ideas, in criticism and encouragement, in addi-
+tion to confirming my understanding of human
+thinking in his own work on the computer human
+interface.  
+References
+1. Backus, J. The syntax and semantics of the proposed international alge-
+braic language of the Zurich ACM-GAMM conference. In Proceedings
+of the International Conference on Information Processing (1959), 125-
+32, UNESCO.
+2. Backus, J. W., Bauer, F. L., Green, J., Katz, C., McCarthy, J., Naur, P.
+(Ed.), Perlis, A. J., Rutishauser, H., Samelson, K., Vauquois, B., Weg-
+stein, J. H., van Wijngaarden, A., and Woodger, M. Report on the
+algorithmic language ALGOL 60. Num. Math. 2. (1960), 106-136.
+Also in Comm. ACM 3, 5 (May 1960), 299-314.
+3. Encyclopædi, Den Store Danske, 1994-2000, Gyldendal, København.
+4. Encyclopedia of Psychology: Vol. 1-8, 2000, Oxford University Press,
+New York.
+5. James, W. 1890, The Principles of Psychology. Henry Holt, USA;
+reprinted in Dover, 1950.
+6. Jespersen, O. 1924, The Philosophy of Grammar. George Allen &
+Unwin, London.
+7. Jespersen, O. 1933, Essentials of English Grammar. George Allen &
+Unwin, London.
+8. Naur, P. Contributions to Algol 60 (1959-60). 1960. Also in [36-1992],
+65-93.
+9. Naur, P. The design of the Gier Algol Compiler. BIT 3 (1963), 124-
+140 and 145-166; Annual Review in Automatic Programming 4 (R.
+Goodman, Ed.), 49-85; Russian translation: Sovremennoye Program-
+c
+COMMUNICATIONS OF THE ACM
+January  2007/Vol. 50, No. 1
+93
+=== PAGE 11 ===
+mirovanie, Sovjetskoye Radio, Moskva 1966, 161-207. Also in [36-
+1992], 117-49.
+10. Naur, P. Checking of operand types in Algol compilers. NordSAM 64
+Stockholm, August 1964; BIT 5 (1965), 151-163.
+11. Naur, P. The place of programming in a world of problems, tools, and
+people. In Proceedings of IFIP Congress 65 (1965), 195-199. Also in
+[36-1992], 1-9.
+12. Naur, P. The performance of a system for automatic segmentation of
+programs within an Algol compiler (Gier Algol). Comm. ACM 8
+(1965), 671-677. Also in Proceedings of Symposium in Information Pro-
+cessing Machines, (Prague, 7-9 September 1964), 89-106. 
+13. Naur, P. The science of datalogy (Forum). Comm. ACM 9, 7 (July
+1966), 485. Also in [36-1992], 221-22.
+14. Naur, P. Proof of algorithms by general snapshots. BIT 6 (1966), 310-
+316. Also in [36-1992], 329-35.
+15. Naur, P. Program translation viewed as a general data processing prob-
+lem. Comm. ACM 9 (1966), 176-179.
+16. Naur, P. Datalogy, the science of data and data processes, and its place
+in education. Proceedings of the IFIP Congress ‘68, G48-G52, 1968. Also
+in [36-1992], 175-80.
+17. Naur, P. (Ed.) Software Engineering (co-editor: Brian Randell). Report
+on a Conference sponsored by NATO Science Committee, 1969. 231
+Reprinted in Software Engineering: Concepts and Techniques. P. Naur,
+B. Randell and J. N. Buxton, Eds. Petrocelli/Carter, New York, 1976.
+18. Naur, P. Programming by action clusters. BIT 9 (1969), 250-258. Also
+in [36-1992], 335-42.
+19. Naur, P. An experiment on program development.. BIT 12, 3 (1972),
+347-365. Also in [36-1992], 396-412.
+20. Naur, P. Concise Survey of Computer Methods. Studentlitteratur, Lund,
+1974, 397 Also Petrocelli/Carter, New York, 1974.
+21. Naur, P. Programming languages, natural languages, and mathematics.
+Comm. ACM 18, 12 (December 1975), 676-683. Also in [36-1992],
+22-36.
+22. Naur, P. Control record driven processing. In Structured Programming,
+The Infotech International State of the Art Reports, 1976, 309-322. Also
+in Current Trends in Programming Methodology, Vol. 1 Software Speci-
+fication  and Design. R. T. Yeh, Ed. Prentice-Hall, Englewood Cliffs,
+NJ, 1977, 220-232. Also in [36-1992], 358-71.
+23. Naur, P. An empirical approach to program analysis and construction.
+In Proceedings of the 6th ACM European Regional Conference: Systems
+Architecture (1981). Westbury House, Guildford, Surrey, England,
+265-272.  Also in [36-1992], 412-23.
+24. Naur, P. The European side of the last phase of the development of
+Algol 60. History of Programming Languages. R. L. Wexelblat, Ed. Aca-
+demic Press, NY, 92-139.
+25. Naur, P. Formalization in program development. BIT 22 (1982), 437-
+453. Also in [36-1992], 433-49.
+26. Naur, P. Program development studies based on diaries. Psychology of
+Computer Use. T. R. G. Green, S. J. Payne, G. C. van der Veer, Eds.
+Academic Press, London, 1983, 159-170. Also in [36-1992], 423-31.
+27. Naur, P. Programming as theory building. Microprocessing and Micro-
+programming 15 (1985), 253-261. Also in [36-1992], 37-49.
+28. Naur, P. Review of D. Michie: Machine intelligence and related topics.
+Computing Reviews 26, 2 (Febr. 1985), 101-104. Also in [36-1992],
+498-502.
+29. Naur, P. Review of J.-R. Abrial: Specification or how to give reality to
+abstraction. Computing Reviews 26, 6 (June 1985), 335. Also in [36-
+1992], 466-67.
+30. Naur, P. Intuition in software development. Formal Methods and Soft-
+ware Development, Vol. 2: Colloquium on Software Engineering. H.
+Ehrig, C. Floyd, M. Nivat, and J. Thatcher, Eds. Lecture Notes in Com-
+puter Science 186, Springer-Verlag, Berlin, 1985, 60-79. Also in [36-
+1992], 449-66.
+31. Naur, P. Thinking and Turing’s test. BIT 26 (1986), 175-187. Also in
+[36-1992], 485-97.
+32. Naur, P. Review of M. A. Arbib: In search of the person: Philosophical
+explorations in cognitive science. Computing Reviews 29, 2 (February
+1988), 88.
+33. Naur, P. Review of Y. Shoham: Reasoning about change—Time and
+causation from the standpoint of artificial intelligence, Computing
+Reviews 30, 1 (January 1989), 55-56. Also in [36-1992], 510-13.
+34. Naur, P. The place of strictly defined notation in human insight.
+Workshop on Programming Logic, (Båstad, Sweden, 1989). P. Dybjer, L.
+Hallnäs, B. Nordström, K. Petersson, and J. M. Smith, Eds. Report 54,
+Programming Methodology Group, Univ. of Göteborg and Chalmers
+Univ. of Technology, Göteborg, Sweden, (May 1989), 429-443. Also
+in [36-1992], 468-478.
+35. Naur, P. Computing and the so-called foundations of the so-called sci-
+ences. Invited Lecture, Informatics Curricula for the 1990s, IFIP Work-
+ing Group 3.2 Workshop. (Providence, RI, 1990 April 6). Also in
+[36-1992], 49-63.
+36. Naur, P. Computing: A Human Activity. ACM Press/Addison-Wesley,
+New York, 1992.
+37. Naur, P. Understanding Turing’s universal machine-personal style in
+program description. The Computer Journal, 36 4 (1993), 351-372.
+38. Naur, P. Review of M. Wagman: Cognitive science and concepts of
+mind: Toward a general theory of human and artifical intelligence,
+Computing Reviews 34, 8 (Aug. 1993), 413.
+39. Naur, P. Proof versus formalization. BIT 34 (1994), 148-164. Also in
+[1995], 171-88.
+40. Naur, P. Review of B. von Eckardt: What is cognitive science? The
+Computer Journal, 38, 10, (1995) 833-34.
+41. Naur, P. Datalogi som videnskab. DIKU rapport nr. 95/4, 1995.
+42. Naur, P. Knowing and the Mystique of Logic and Rules. Kluwer Acade-
+mic Publishers. 1995.
+43. Naur, P. Computing As Science. 1996. Also in [50-2005] Appendix 2,
+208-17.
+44. Naur, P. Antifilosofisk leksikon: Tænkning - sproglighed - videnskabe-
+lighed. naur.com publishing, 1999.
+45. Naur, P. CHI and human thinking. Proceedings of NordiCHI2000
+(Stockholm, 2000 Oct. 23-25). Also in [50-2005] Appendix 1, 199-
+207.
+46. Naur, P. (with Erik Frøkjær) Philosophical Locutions in Scientific and
+Scholarly Activity. 2000 Nov. 4; http://www.naur.com. Also in [50-
+2005] Appendix 3, 218-38.
+47. Naur, 
+P. 
+Antiphilosophical 
+Dictionary: 
+Thinking—Speech—
+Science/Scholarship.. naur.com publishing 2001.
+48. Naur, P. Psykologi i videnskabelig rekonstruktion. 113. naur.com pub-
+lishing, 2002. 
+49. Naur, P. A Synapse-State Theory of Mental Life. 2004.
+www.naur.com/synapse-state.pdf.
+50. Naur, P. An anatomy of human mental life—Psychology in unideological
+reconstruction—incorporating the synapse-state theory of mental life.
+naur.com publishing; www.naur.com/Nauranat-ref.html, 2005.
+51. Perlis, A. The American side of the development of Algol. History of
+Programming Languages. R. L. Wexelblat, Ed. Academic Press, New
+York, 1981, 75-91. 
+52. Reber, A. S. and Reber, E., Eds. Penguin Dictionary of Psychology. Pen-
+guin Books, London, 2001.
+53. Russell, B. On the Notion of Cause. 1912. In Mysticism and Logic. Pen-
+guin, London, 1953, 171-196.
+54. Sherrington, C. S. The Integrative Action of the Nervous System, 1906.
+The Integrative Action of the Nervous System 2nd. Ed. 1948. Reprinted
+1973 Cambridge University Press.
+55. Turing, A. On computable numbers, with an application to the
+entscheidungsproblem. In Proceedings London Math. Soc. Ser. 2, 42
+(1937),  230-265.
+56. Turing, A. Computing machinery and intelligence. Mind LIX, 236,
+(1950), 433-460; also in The World of Mathematics Vol. 4. J. R. New-
+man, Ed. Simon and Schuster, New York, 1956, 2099-2133.
+Peter Naur is currently Professor Emeritus at the University of
+Copenhagen, Denmark.
+Permission to make digital or hard copies of all or part of this work for personal or class-
+room use is granted without fee provided that copies are not made or distributed for
+profit or commercial advantage and that copies bear this notice and the full citation on
+the first page. To copy otherwise, to republish, to post on servers or to redistribute to
+lists, requires prior specific permission and/or a fee.
+© 2007 ACM 0001-0782/07/0100 $5.00
+94
+January  2007/Vol. 50, No. 1 COMMUNICATIONS OF THE ACM

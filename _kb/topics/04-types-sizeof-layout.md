@@ -1,0 +1,50 @@
+# Types, sizes, layout, pointers, incomplete types
+
+## In plain words
+
+A type tells the compiler how many bytes a value needs and how its parts are arranged in memory. `sizeof` asks the compiler for that size, and it is answered while compiling. A pointer needs the same space whatever it points to.
+
+**Example.** `struct S { int a; char b; }` takes 8 bytes, not 5, because the compiler adds padding. A pointer to S takes 4 bytes on this laptop and 8 on most Linux machines, so exam answers are written as sizeof(void*) instead of a number.
+
+
+## Short answer
+
+* The compiler needs size and layout only where an object is created, copied, passed by value or dereferenced. *[slides p81-82; 2024 key A1]*
+* A pointer to an incomplete type needs neither; all object pointers have the same size. *[2024 key A1]*
+* Write sizes symbolically with the unit: ClassSize = 3*sizeof(void*). *[2024 key A3]*
+
+
+Slides: PDF p69 ("Types as just a Set of Values"), p71–74 (separation of what/how), p79–84 (class declared differently in two modules), p86 (conclusion: scope of type expressions, object independence, treatment of member functions). Past: 2024 Q3(a), 2025 Q1(i,ii), qbank Q4–Q8.
+
+## Same idea, different words
+
+The slides show this under “Does it work?” (pages 81–84), with a class declared differently in two modules. The exam asks about sizeof, layout and padding.
+
+## What the compiler needs a type for
+
+| Use | Needs size/layout? |
+|---|---|
+| declare a pointer to `struct S` (incomplete), copy it, pass it | **No** (all object pointers have the same size) |
+| `p->field`, `*p`, `sizeof(struct S)`, define `struct S x;`, pass/return `struct S` by value | **Yes**, from the declaration visible in *that* module |
+| call a function | needs the prototype (parameter types) to set up the frame; if absent C assumes `int f()` ("implicit declaration") |
+
+## sizeof cheat-table (state the unit!)
+* `sizeof(char)=1` always. `int`=4, `float`=4, `double`=8 on both common targets. **Pointer = 8 on 64-bit Linux, 4 on this laptop's 32-bit MinGW** → answer symbolically: `3*sizeof(void*)`.
+* Struct size = members + **padding**: each member aligned to its own size; whole struct padded to a multiple of its largest member alignment. `{char c; int i;}` = 8, `{int i; char c;}` = 8, `{char a,b; int i;}` = 8. Reordering members changes size and offsets, which is exactly why two modules with different declarations of "the same" struct break.
+* `struct Abstract {void *abstractData; Class (*Abstract)(void*); void (**abstractMethod)(Class,...);}` = three pointers ⇒ `3*sizeof(void*)` (2024 Q3a). `sizeof(Class)` where `Class` is a pointer typedef = `sizeof(void*)`.
+* `sizeof` is a **compile-time** constant (except for VLAs). `sizeof` of an array *parameter* is the pointer size. `sizeof('a')` is `sizeof(int)` in C, 1 in C++.
+* Probe (save as `s.c`, run `gcc s.c && a.exe`):
+```c
+#include <stdio.h>
+#include <stddef.h>
+struct T { char c; int i; double d; };
+int main(void){ printf("%u %u %u | off i=%u d=%u\n", (unsigned)sizeof(struct T), (unsigned)sizeof(void*), (unsigned)sizeof(int), (unsigned)offsetof(struct T,i), (unsigned)offsetof(struct T,d)); return 0; }
+```
+
+## Types as sets of values (slide p69)
+Natural ⊂ integer ⊂ rational ⊂ real ⊂ complex drawn as a "class hierarchy". The slide asks: do naturals have *all* the properties of reals plus extra ones? No: behaviour is not preserved (naturals are not closed under subtraction), so "is-a" by set inclusion is not substitutability. In Java, passing a complex number where a natural is expected is rejected. Use: "a type is a set of values *plus* operations; subtyping needs substitutability".
+
+## C vs C++ vs Java (slides p79–86 "The Lesson")
+* C/C++: types are **module-scoped**; objects are not independent components of a program, modules and global functions are. Encapsulation (private members) is a compile-time convention per module and is not enforced at link or run time (a class declaration with private members must be fully visible to every user module; layouts must match).
+* Java: no global functions; type information is global and present at run time (class loading, reflection), so "purely OO".
+* Objective-C (p85) treats methods differently from ordinary global functions (message passing).

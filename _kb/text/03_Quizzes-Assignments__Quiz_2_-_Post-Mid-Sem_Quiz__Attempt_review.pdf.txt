@@ -1,0 +1,164 @@
+# source: 03_Quizzes-Assignments/Quiz 2 - Post-Mid-Sem Quiz_ Attempt review.pdf
+# ocr_pages: 
+=== PAGE 1 ===
+Dashboard / My courses / 1160_CS F301 / Quiz / Post-Mid-Sem Quiz
+Question 1
+Partially
+correct
+Mark 4.17 out
+of 5.00
+Started on
+Monday, 25 November 2024, 8:25 AM
+State
+Finished
+Completed on
+Monday, 25 November 2024, 9:23 AM
+Time taken
+57 mins 55 secs
+Grade
+Not yet graded
+Study the following program (MyClass.java) and select which features does it exemplify. The LoremIpsum part
+is just a class generating gibberish, it is not much relevant here. Ignore it.
+Reflection
+
+None
+Functional
+Procedural
+Deep copy
+Shallow copy
+
+Your answer is partially correct.
+You have correctly selected 2.
+The correct answers are: Reflection
+,
+Deep copy,
+Shallow copy
+=== PAGE 2 ===
+Question 2
+Incorrect
+Mark 0.00 out
+of 5.00
+Study the following main program that instantiates the MyClass seen in the first question in an array. (It is
+again reproduced below for ref.) What makes it throw CloneNotSupportedException?
+Answer: 
+There is nothing in MyClass that would throw CloneNotSupportedException. The "thr 
+=== PAGE 3 ===
+Question 3
+Incorrect
+Mark 0.00 out
+of 5.00
+Study the following main and myclass programs and give a short formula for the number of occurrences of
+MyClass in the output when we run (after due compilation) in terms of <n>
+java Main <n>
+where <n> is a positive integer. The answer format is expected to be something like "
+" where k is a fixed
+constant, or "
+", "
+" etc.
+Answer: 
+3n
+
+𝑘𝑛
+𝑘𝑛2
+𝑛+
+𝑘1
+𝑘2𝑛2
+The correct answer is: 4 n
+=== PAGE 4 ===
+Question 4
+Partially
+correct
+Mark 3.75 out
+of 5.00
+You are to create a search tree (AVL, Red-Black, 2-4-Trees, etc.) class hierarchy. For keeping the trees
+balanced, we need to update global and local properties (like heights and balancing, of the whole and
+subtrees) in each node and subtree repeatedly. Also balancing requires restructuring the tree, sometimes
+even changing the root. The application may involve data in each node being a stream, a dynamic object that
+grows and shrinks without being in the main memory completely. Moreover, each node's key may change
+dynamically and asynchronously in response to the data stream flow, changing its position in the order, in turn
+requiring re-balancing of the tree.
+Will you create your own binary tree class
+class BinTree {  private BinTree left = null, right = null;  int height = 0;  Key key; ...}
+as the base class? Or it is easier to use container classes like maps treemaps etc.? Compare and select the
+true considerations given below.
+Both implementations have the same behaviour for global properties and restructuring. There is nothing
+to choose from.
+The first (BinTree) implementation requires deep copies. That makes restructuring cumbersome if it is
+not to be hazardous.
+
+The second (map containers) is less cumbersome but synchronization is still complicated.
+
+Handling dynamic keys is the same for both the implementations.
+None of the options is relevant or true.
+Your answer is partially correct.
+You have correctly selected 2.
+The correct answers are:
+The first (BinTree) implementation requires deep copies. That makes restructuring cumbersome if it is not to
+be hazardous.,
+The second (map containers) is less cumbersome but synchronization is still complicated.,
+Handling dynamic keys is the same for both the implementations.
+=== PAGE 5 ===
+Question 5
+Complete
+Marked out of
+5.00
+Study the following CLOS program and answer the following question.
+(defclass figure ()
+(
+(height :initform 0.0 :initarg :height)
+(width :initform 0.0 :initarg :width)
+)
+)
+(defclass hue-mixture ()
+(
+(cyan :initform 0 :initarg :cyan)
+(magenta :initform 0 :initarg :magenta)
+(yellow :initform 0 :initarg :yellow)
+)
+)
+(defclass paint-figure (hue-mixture figure)
+(
+(clearp :initform (y-or-n-p "But is it transparent?")
+:initarg :clearp :accessor clearp)
+)
+)
+(defgeneric render (x))
+(defmethod render ((x figure)) ;Method #1
+(vertical-stroke
+(slot-value x 'height)
+(slot-value x 'width)
+)
+)
+(defmethod render :before ((x hue-mixture)) ;Method #2
+(set-brush-hue
+(slot-value x 'cyan)
+(slot-value x 'magenta)
+(slot-value x 'yellow)
+)
+)
+(defmethod render ((x paint-figure)) ;Method #3
+(unless (clearp x) (call-next-method))
+)
+(setq another-figure (make-instance 'figure :width 10.0 :height 10.0))
+(setq some-figure
+(make-instance 'paint-figure
+:width 38 :height 84 :cyan 60
+:yellow 55 :clearp nil
+)
+)
+(defun vertical-stroke (height width)
+ (print (list height width))
+)
+Now, after loading (and compiling) the above program only, at the top level in the interpreter 
+shell, the following evaluations are sought. Explain what do you expect to happen and why.
+(render another-figure)
+(render some-figure)
+ 2022A7PS0244G-POPLQ2.pdf
+For another-figure it prints the rectangle size. For some-figure there is an "MISSING FDEFINITION SET-
+BRUSH-HUE" run-time error. If it is supplied, it again prints the size.
+◀︎ Generics in Lisp example
+Jump to...
+The Farmer Wolf Goat Cabbage 
+puzzle solver ▶︎
+=== PAGE 6 ===
+

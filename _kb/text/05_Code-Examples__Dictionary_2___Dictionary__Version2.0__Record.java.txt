@@ -1,0 +1,19 @@
+# source: 05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/Record.java
+class Record extends AbstractRecord {
+	private Object key, value;
+
+	public Record(Object givenKey, Object givenValue) {
+		key = givenKey;
+		value = givenValue;
+	}
+
+	public Object getKey() {
+		return key;
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
+}
+

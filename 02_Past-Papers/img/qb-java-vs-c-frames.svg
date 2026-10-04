@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="Segoe UI, Arial, sans-serif" font-size="15">
+  <rect width="800" height="380" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="700" fill="#1b1f24">Same frame layout; different thing inside it</text>
+  <g stroke="#5f6773" stroke-width="1.5">
+    <rect x="30" y="60" width="230" height="40" fill="#eef0f4"/><rect x="30" y="100" width="230" height="40" fill="#eef0f4"/><rect x="30" y="140" width="230" height="70" fill="#fdf1d8"/>
+    <rect x="300" y="60" width="230" height="40" fill="#eef0f4"/><rect x="300" y="100" width="230" height="40" fill="#eef0f4"/><rect x="300" y="140" width="230" height="40" fill="#e8eef9"/>
+    <rect x="590" y="140" width="190" height="90" fill="#e6f2ea"/>
+  </g>
+  <g fill="#1b1f24" font-size="14">
+    <text x="30" y="52" font-weight="700">C  — struct passed by value</text>
+    <text x="42" y="85">return address</text><text x="42" y="125">saved base pointer</text>
+    <text x="42" y="165" font-weight="700">struct S s</text><text x="42" y="185" font-size="13">the whole object is COPIED here</text><text x="42" y="202" font-size="13">(size/layout must be known)</text>
+    <text x="300" y="52" font-weight="700">Java — object variable</text>
+    <text x="312" y="85">return address</text><text x="312" y="125">saved frame link</text>
+    <text x="312" y="165" font-weight="700">reference s  →</text>
+    <text x="598" y="162" font-weight="700">Heap object</text><text x="598" y="184" font-size="13">fields live here (made by new)</text><text x="598" y="204" font-size="13">shared by every holder of</text><text x="598" y="222" font-size="13">the reference</text>
+  </g>
+  <path d="M530 160 L588 180" stroke="#1a56c4" stroke-width="2" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#1a56c4"/></marker></defs>
+  <text x="30" y="260" font-size="14" fill="#1b1f24">Call mechanism is identical: caller prepares arguments, call pushes return address, callee builds the frame.</text>
+  <text x="30" y="284" font-size="14" fill="#1b1f24">Java passes the reference BY VALUE: callee can change the object's fields, but cannot re-point the caller's variable.</text>
+  <text x="30" y="308" font-size="14" fill="#1b1f24">C: passing a pointer gives the same effect; passing the struct itself gives the callee a private copy.</text>
+</svg>

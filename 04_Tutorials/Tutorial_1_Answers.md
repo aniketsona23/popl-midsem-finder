@@ -1,0 +1,317 @@
+# CS F301 – Principles of Programming Languages
+## Tutorial 1 (2024-25 Sem-I) – Questions and Exam-Style Answers
+
+All code below was compiled/run and tested (Python 3.10, gcc, javac).
+
+---
+
+## Question 1
+**Can you hide the ("private") details of a data structure from its programmer consumers? Which programming languages can you demonstrate this in?**
+*Hint: Study the FILE type in stdio.h in C.*
+
+### Answer
+**Yes.** This is **information hiding / encapsulation / data abstraction**. The *interface* (type name + operations) is published; the *representation* (fields, layout, helper functions) is kept private. The client can then use the type only through its operations, and the implementer can change the representation without breaking client code.
+
+**The `FILE` example (C).** A program only ever holds a `FILE *` obtained from `fopen`, and uses it through `fgets`, `fread`, `fprintf`, `fclose`, ... It never touches fields such as buffer pointer, file descriptor, or position. The C standard says only that `FILE` is "an object type capable of recording all the information needed to control a stream"; its layout is *not* specified. So `FILE` is an **opaque type** and `fopen/fclose/...` are its only interface.
+(Note: some libc headers do expose the struct, so there it is hiding by *convention*. The technique below enforces it by the compiler.)
+
+**How to do it in C – opaque pointer (incomplete type) technique**
+
+`stack.h` (public interface – this is all the client sees):
+```c
+#ifndef STACK_H
+#define STACK_H
+typedef struct Stack Stack;          /* incomplete type: layout unknown to clients */
+
+Stack *stack_create(void);
+void   stack_destroy(Stack *s);
+int    stack_push(Stack *s, int value);   /* 0 on success */
+int    stack_pop(Stack *s, int *out);     /* -1 if empty  */
+int    stack_is_empty(const Stack *s);
+#endif
+```
+`stack.c` (private implementation):
+```c
+#include <stdlib.h>
+#include "stack.h"
+
+struct Stack { int *data; size_t size, cap; };   /* private representation */
+
+Stack *stack_create(void) {
+    Stack *s = malloc(sizeof *s);
+    if (!s) return NULL;
+    s->size = 0; s->cap = 4;
+    s->data = malloc(s->cap * sizeof *s->data);
+    if (!s->data) { free(s); return NULL; }
+    return s;
+}
+void stack_destroy(Stack *s) { if (s) { free(s->data); free(s); } }
+int stack_push(Stack *s, int v) {
+    if (s->size == s->cap) {
+        int *p = realloc(s->data, 2 * s->cap * sizeof *p);
+        if (!p) return -1;
+        s->data = p; s->cap *= 2;
+    }
+    s->data[s->size++] = v;
+    return 0;
+}
+int stack_pop(Stack *s, int *out) {
+    if (s->size == 0) return -1;
+    *out = s->data[--s->size];
+    return 0;
+}
+int stack_is_empty(const Stack *s) { return s->size == 0; }
+```
+A client that tries to break the hiding is **rejected by the compiler**:
+```c
+Stack *s = stack_create();
+s->size = 99;          /* error: dereferencing pointer to incomplete type 'Stack' */
+Stack t = *s;          /* error: variable 't' has initializer but incomplete type */
+sizeof(Stack);         /* error: size unknown */
+```
+
+**Other languages in which it can be demonstrated**
+
+| Language | Mechanism | Strength |
+|---|---|---|
+| **C** | opaque pointer to incomplete `struct` (header/`.c` split); `static` for file-private functions | compile-time enforced |
+| **C++** | `private` / `protected` members of a `class`; pimpl idiom (`class Impl; Impl* p;`) | compile-time enforced |
+| **Java** | `private` fields/methods, package-private, interfaces, modules | compile-time (reflection can bypass) |
+| **Ada** | `private` / `limited private` types in a package spec | compile-time enforced |
+| **Modula-2 / Modula-3** | opaque export of a type | compile-time enforced |
+| **ML / Haskell** | signatures / module export lists hiding constructors (abstract types) | compile-time enforced |
+| **Python** | `_x` (convention), `__x` (name mangling) | convention only – NOT truly private |
+
+C++ example:
+```cpp
+class Counter {
+    int n;                       // hidden representation
+public:
+    Counter() : n(0) {}
+    void inc() { ++n; }
+    int  get() const { return n; }
+};
+// Counter c; c.n = 5;   // error: 'int Counter::n' is private
+```
+Java example:
+```java
+public class Counter {
+    private int n = 0;           // hidden
+    public void inc() { n++; }
+    public int get() { return n; }
+}
+// new Counter().n  -> error: n has private access in Counter
+```
+
+---
+
+## Question 2
+**Can you name the functions and variables in a QuickSort implementation (in any programming language of your choice) such that just by reading your program (or just the API calls syntax) the reader can infer that**
+**1. It does in-place sorting**
+**2. It does (or it does not) perform a stable sort.** *(Note: There can be stable implementations of QuickSort.)*
+
+### Answer
+**Yes.** Good names (self-documenting identifiers) plus the *shape of the signature* tell the reader the guarantees. Using Python:
+
+**Rules used**
+* **In-place** is signalled by: suffix `_in_place` in function names; return type `None`/`void` (result is the *mutated argument*); no new list/array being allocated; the helper names `swap`, `partition_in_place`; index parameters `low`, `high`; the pivot-position variable `store_index`/`i` and the scan variable `j` that operate on the *same* array `a`.
+* **Not in-place** is signalled by: returning a new list (`-> list`), prefix words like `copy`, `new_`, `sorted_`, and new buffers named `smaller`, `equal`, `larger`.
+* **Stable** is signalled by: prefix `stable_`; a buffer named `equal` that keeps arrival order; a parameter or tie-break named `original_index`; comparison named `key_then_original_index`.
+* **Unstable** is signalled by: prefix `unstable_` or a doc comment `# long-distance swap: equal keys may be reordered`.
+
+**Case (a) – in-place (and, by name, explicitly *unstable*)**
+```python
+def swap(a, i, j):
+    a[i], a[j] = a[j], a[i]
+
+def partition_in_place(a, low, high):        # works on the SAME array a
+    pivot = a[high]
+    store_index = low
+    for j in range(low, high):
+        if a[j] < pivot:
+            swap(a, store_index, j)          # long-distance swap  -> unstable
+            store_index += 1
+    swap(a, store_index, high)
+    return store_index
+
+def unstable_quicksort_in_place(a, low=0, high=None):   # returns None: caller's list is mutated
+    if high is None:
+        high = len(a) - 1
+    if low < high:
+        p = partition_in_place(a, low, high)
+        unstable_quicksort_in_place(a, low, p - 1)
+        unstable_quicksort_in_place(a, p + 1, high)
+```
+Reader infers: `_in_place`, no result returned, only `swap` on `a` ⇒ **in-place**; `unstable_` ⇒ **not stable**.
+
+**Case (b) – stable (and, by name, *not* in-place)**
+```python
+def stable_quicksort_copy(items, key=lambda x: x):      # returns a NEW list, input untouched
+    if len(items) <= 1:
+        return list(items)
+    pivot_key = key(items[len(items) // 2])
+    smaller = [x for x in items if key(x) <  pivot_key]
+    equal   = [x for x in items if key(x) == pivot_key]   # equal keys keep arrival order
+    larger  = [x for x in items if key(x) >  pivot_key]
+    return stable_quicksort_copy(smaller, key) + equal + stable_quicksort_copy(larger, key)
+```
+Reader infers: `stable_` and `equal` list kept in arrival order ⇒ **stable**; `_copy`, `-> new list`, buffers `smaller/equal/larger` ⇒ **not in-place**.
+
+**The same idea through the API alone (C style prototypes – no body needed)**
+```c
+void  quicksort_in_place(int a[], int low, int high);      /* void + non-const array  => mutates a */
+int  *stable_quicksort_copy(const int in[], int n);         /* const input + returns new array => not in place */
+```
+`void` return with non-`const` array parameter ⇒ in-place. `const` input and a returned fresh array ⇒ not in-place. `stable_`/`unstable_` prefixes document stability.
+
+**Case (c) – both in-place API and stable** (see Q3(c)): name it `stable_quicksort_in_place(a, key)`, with the variable `original_index` visible in the code.
+
+---
+
+## Question 3
+**Implement QuickSort in Python. Can you make it do a stable sort?**
+
+### Answer
+**Yes, QuickSort can be made stable.** Standard in-place QuickSort (Lomuto/Hoare partition) is **not** stable, because the partition step swaps elements over long distances and can jump an element over an equal-keyed one.
+
+**Plain QuickSort (in place, unstable)**
+```python
+def swap(a, i, j):
+    a[i], a[j] = a[j], a[i]
+
+def partition_in_place(a, low, high, key=lambda x: x):
+    pivot = key(a[high])                  # Lomuto: last element is the pivot
+    i = low                               # a[low..i-1] holds elements < pivot
+    for j in range(low, high):
+        if key(a[j]) < pivot:
+            swap(a, i, j)                 # long-distance swap can jump over equal keys
+            i += 1
+    swap(a, i, high)                      # pivot goes to its final slot
+    return i
+
+def quicksort_in_place(a, low=0, high=None, key=lambda x: x):
+    if high is None:
+        high = len(a) - 1
+    if low < high:
+        p = partition_in_place(a, low, high, key)
+        quicksort_in_place(a, low, p - 1, key)
+        quicksort_in_place(a, p + 1, high, key)
+```
+**Why it is unstable – trace.** Records `[(1,'a'), (1,'b'), (1,'c')]` sorted by the first field:
+pivot = `c`; nothing is `< pivot`, so `i = 0`; `swap(a,0,2)` gives `[c, b, a]`; recursing on `[b, a]` gives `[c, a, b]`.
+Output `[(1,'c'), (1,'a'), (1,'b')]` – the equal keys changed relative order (verified by running).
+
+**Making it stable – Method 1: three-way partition with order-preserving lists (not in place, O(n) extra space)**
+```python
+def stable_quicksort(items, key=lambda x: x):
+    if len(items) <= 1:
+        return list(items)
+    pivot = key(items[len(items) // 2])
+    smaller = [x for x in items if key(x) <  pivot]   # each comprehension scans left to right,
+    equal   = [x for x in items if key(x) == pivot]   # so original order is kept inside each part
+    larger  = [x for x in items if key(x) >  pivot]
+    return stable_quicksort(smaller, key) + equal + stable_quicksort(larger, key)
+```
+Stability: elements are never moved past one another unless their keys differ; elements with equal keys all land in the same bucket in original order (`equal` is never re-sorted; `smaller`/`larger` keep order by induction).
+
+**Making it stable – Method 2: decorate with the original index (sorts the caller's list in place)**
+```python
+def stable_quicksort_in_place(a, key=lambda x: x):
+    tagged = [(key(x), i, x) for i, x in enumerate(a)]            # remember original position i
+    quicksort_in_place(tagged, key=lambda t: (t[0], t[1]))        # ties on key are broken by i
+    a[:] = [t[2] for t in tagged]                                  # write back into caller's list
+```
+Since `(key, index)` pairs are all distinct, no two elements ever compare "equal", so any correct sort (even an unstable one) gives the stable order. Cost: O(n) extra space for the tags.
+
+**Test (run output)**
+```
+A (plain)   : [(1,'c'), (1,'a'), (1,'b')]   <- unstable   (input [(1,'a'),(1,'b'),(1,'c')])
+B (method 1): [(1,'a'), (1,'b'), (1,'c')]   <- stable
+C (method 2): [(1,'a'), (1,'b'), (1,'c')]   <- stable
+```
+(300 random tests compared against Python's stable `sorted` – all passed.)
+
+**Remarks for the exam:** a stable partition that is *also* strictly in-place (O(1) extra space) exists, but it needs extra work (O(n log n) partition via rotations), so in practice one trades space for stability (Method 1 or 2). Recursion depth / average time: O(log n) / O(n log n); worst case O(n²) for bad pivots.
+
+---
+
+## Question 4
+**Can you untangle the following to make a program without gotos?**
+```
+L1: x=10;
+L2: if(x>0)
+L3: if(x--) goto L1;
+L4: else if(x++ <= 10) goto L2;
+L5: else if(x--) goto L4;
+L6: else x++;
+```
+
+### Answer
+
+**Step 1 – Parse it correctly (dangling else).** In C an `else` binds to the *nearest unmatched* `if`. So the `else`s on L4, L5, L6 all belong to the chain started on L3, and that whole chain is the body of `if (x>0)` on L2. Indented:
+```c
+L1: x = 10;
+L2: if (x > 0)
+L3:     if (x--) goto L1;
+L4:     else if (x++ <= 10) goto L2;
+L5:     else if (x--) goto L4;
+L6:     else x++;
+```
+`if (x>0)` has **no else**: if `x <= 0` control falls off the end and the program stops.
+
+**Step 2 – Remember the side effects.** `x--` and `x++` (post-fix) yield the *old* value, and change `x` **whether or not the condition is true**.
+
+**Step 3 – Control-flow table**
+
+| Label | Action | If true | If false |
+|---|---|---|---|
+| L1 | `x = 10` | → L2 | – |
+| L2 | test `x > 0` | → L3 | **END** |
+| L3 | test old `x != 0`, then `x = x-1` | → L1 | → L4 |
+| L4 | test old `x <= 10`, then `x = x+1` | → L2 | → L5 |
+| L5 | test old `x != 0`, then `x = x-1` | → L4 | → L6 |
+| L6 | `x = x+1` | END | – |
+
+Back edges: L3→L1, L4→L2, L5→L4. A back edge becomes a loop (Böhm–Jacopini: sequence + selection + iteration are enough).
+
+**Step 4 – Structured (goto-free) equivalent, faithful to all branches**
+```c
+x = 10;                              /* L1 (first time)                       */
+while (x > 0) {                      /* L2, with the back-edges L3->L1, L4->L2 */
+    if (x-- != 0) {                  /* L3 : goto L1                          */
+        x = 10;                      /*      L1 re-executed                    */
+        continue;
+    }
+    int back_to_L2 = 0;
+    for (;;) {                       /* L4 <-> L5 loop (L5: goto L4)           */
+        if (x++ <= 10) { back_to_L2 = 1; break; }   /* L4 : goto L2           */
+        if (x-- == 0) break;                         /* L5 fails -> L6         */
+    }
+    if (back_to_L2) continue;        /* goto L2                                */
+    x++;                             /* L6                                     */
+    break;                           /* program ends                           */
+}
+```
+(Checked against a goto-interpreter for many start values/entry labels – identical behaviour.)
+
+**Step 5 – Simplify (reasoning about values).**
+* After `L1`, `x == 10`, so `x > 0` at L2 is **true**.
+* At L3, `x` is 10 (non-zero), so `if (x--)` is **true** → `goto L1`. (It stays true on every pass, because L1 resets `x` to 10.)
+* Hence L4, L5, L6 are **unreachable (dead code)**.
+
+Execution trace: `x=10` → L2 true → L3: tests 10, `x=9` → L1: `x=10` → L2 … repeats forever.
+
+**Final goto-free program:**
+```c
+x = 10;
+while (x > 0) {      /* always true, since x is 10 here */
+    x--;             /* the x-- of L3 */
+    x = 10;          /* the "goto L1" */
+}
+```
+which is equivalent to
+```c
+x = 10;
+for (;;) { }         /* never terminates; no output; x only toggles 10 <-> 9 */
+```
+**Conclusion:** the tangled program is an **infinite loop**; the L4–L6 part is dead code that can never execute.

@@ -1,0 +1,148 @@
+# source: 06_Readings/Debates/Carlson - ACM Presidents Letter, The Answer Is Competence, Integrity and Productivity (1972).pdf
+# ocr_pages: 
+=== PAGE 1 ===
+' 
+ACM 
+President's Letter 
+The Answer Is... 
+Competence, Integrity, and Productivity 
+...What Is the Question? 
+The question is "What defines a 
+prolessional systems analyst or pro- 
+grammer?" 
+We now have legally important 
+answers to this question from the 
+Wage and Hour Division of the U.S. 
+Department of Labor and from the 
+National Labor Relations Board.* 
+These two regulatory bodies have 
+found that persons with job titles of 
+"programmer" or "systems analyst" 
+are not classifiable as proJessionals 
+under the definitions used in regula- 
+tions that determine status for over- 
+time pay and collective bargaining. 
+The impact on ACM may be im- 
+portant in the long term. 
+Let's look at a few facts that in- 
+dicate why: • Nearly 55 percent of 
+ACM members are directly involved 
+in programmingor systems analysis. A 
+crucial factor in the regulatory rulings 
+is the lack of availability of a bac- 
+calaureate degree in programming or 
+systems analysis. While 92 percent 
+of ACM members have college degrees, 
+not 1 percent have such a degree in 
+programming or systems analysis. • 
+The Wage and Hour Division also 
+found that "the computer sciences 
+are not generally recognized by col- 
+leges and universities as a bona fide 
+academic discipline .... " * Another 
+crucial factor is the lack of availability 
+of a formal certification process in the 
+fields covered. Of ACM members 87 
+percent hold no professional certifi- 
+cate of any kind; 6.5 percent have 
+the CDP issued by DPMA, 6 percent 
+have professional engineering regis- 
+trations, and the remainder hold CPAS 
+or miscellaneous other licenses. 
+These indicators appear to place 
+• See page 129 and 125 of this issue. 
+ACM squarely at the crossroads which 
+has been occupied, uncomfortably, 
+by a number of other technical so- 
+cieties during the past year or two: 
+Do we remain strictly a technical so- 
+ciety in accordance with the present 
+charter? or Do we become a society 
+having a primary concern for the 
+welfare of its members? There have 
+been strong voices raised within ACM 
+urging a move toward this latter mode 
+of operation similar to a Guild. 
+The actions by the Department 
+of Labor, the NLRB, and the courts 
+have convinced me beyond doubt 
+that the future of ACM is dependent 
+upon retaining the role of a technical 
+society. Doing so may, in fact, pro- 
+vide the only viable answers to the 
+question of what defines status in 
+programming and systems analysis. 
+By this, I mean that the day may be 
+close when employers and others may 
+make the determination of legal status 
+solely on the basis of whether the 
+programmer or systems analyst in- 
+volved is a member of ACM--and 
+therefore technically qualified. Along 
+the way we must also work to correct 
+the public impression that computer 
+science is not a learned profession. 
+The ACM membership adopted a 
+constitutional change last year that 
+clearly paves the way to a determi- 
+nation of legal status. By declaring 
+competence and integrity of our mem- 
+bers to be essential to continued 
+achievement of ACM'S objectives, we 
+have set in motion the steps necessary 
+to achieve two components of the 
+answer in the title above. 
+But assurances of competence and 
+integrity are not enough in the par- 
+ticular instance of programmers and 
+systems analysts. A third component, 
+productivity, is at least equally im- 
+portant. 
+The decline of programmer prod- 
+uctivity over the past decade, if con- 
+tinued, could approach the propor- 
+tions of a national scandal. A num- 
+ber of key people (Herb Grosch's and 
+Dick Hamming's names leap to mind) 
+have issued public warnings, but little 
+has been done about their concerns. 
+Beneath these concerns lies an 
+urgent issue. Who among today's pro- 
+grammers and systems analysts is 
+engaged in a disciplined, personal 
+effort to improve the tools, tech- 
+niques, organizations, and attitudes 
+that determine their own productivity 
+and that of their associates, i.e. the 
+true professional? Conversely, who 
+among these people is conducting or- 
+ganized efforts which effectively re- 
+strict the quantity and quality of 
+programming activities, i.e. the non- 
+professional? 
+My discussions with ACM mem- 
+bers lead me to believe that we have 
+as members a predominance of the 
+people who are trying to improve 
+productivity. 
+I would like to see ACM begin a 
+program that achieves the qualifica- 
+tion of every ACM member for suit- 
+able status in the eyes of the law and 
+in the eyes of society in general. Such 
+status is not granted-it is earned. 
+The project will be a difficult one. 
+Our associates in the British Compu- 
+ter Society have found a way to 
+achieve this goal. The Canadians 
+have begun action. 
+The question is asked in the U.S. 
+Let ACM give the answer! 
+-W.M. Carlson 
+69 
+Communications 
+of 
+the ACM 
+February 1972 
+Volume 15 
+Number 2

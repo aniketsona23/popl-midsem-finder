@@ -1,0 +1,9 @@
+# source: 05_Code-Examples/dynamicBindingJava/Abstract1.java
+public abstract class Abstract1 {
+  public abstract Object tell();
+	// Try making tell()
+	// return anything but Object
+	public String tellType() {
+		return tell().getClass().getName();
+	}
+}

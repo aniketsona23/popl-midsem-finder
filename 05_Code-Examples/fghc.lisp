@@ -1,0 +1,117 @@
+(defun make-state (f w g c) (list f w g c))
+(defun farmer-side (state)
+  (nth 0 state)
+)
+(defun cat-side (state)
+  (nth 1 state)
+)
+(defun hen-side (state)
+  (nth 2 state)
+)
+(defun grain-side (state)
+  (nth 3 state))
+(defun is-visited (state been-list)
+  (and state been-list
+       (or 
+			 		(equal state (car been-list))
+	   			(is-visited state (cdr been-list))
+	   	 )
+  )
+)
+
+(defun opposite (side)
+  (cond
+		((equal side 'e) 'w)
+		((equal side 'w) 'e)
+	)
+)
+
+(defun safe (state)
+  (cond
+		((and (equal (hen-side state) (cat-side state))
+	      (not (equal (farmer-side state) (cat-side state)))) nil
+		)
+		((and (equal (hen-side state) (grain-side state))
+	      (not (equal (farmer-side state) (hen-side state)))) nil
+		)
+		(t state)
+	)
+)
+
+(defun farmer-takes-self (state)
+  (safe (make-state (opposite (farmer-side state))
+		    (cat-side state)
+		    (hen-side state)
+		    (grain-side state)
+		    )
+	)
+)
+
+(defun farmer-takes-cat (state)
+  (cond
+		((equal (farmer-side state) (cat-side state))
+	 		(safe (make-state (opposite (farmer-side state))
+			   (opposite (cat-side state))
+			   (hen-side state)
+			   (grain-side state)))
+		)
+		(t nil)
+	)
+)
+
+(defun farmer-takes-hen (state)
+  (cond
+		((equal (farmer-side state) (hen-side state))
+	 		(safe (make-state (opposite (farmer-side state))
+			   (cat-side state)
+			   (opposite (hen-side state))
+			   (grain-side state)))
+		)
+		(t nil)
+	)
+)
+
+(defun farmer-takes-grain (state)
+  (cond
+		((equal (farmer-side state) (grain-side state))
+	    (safe (make-state (opposite (farmer-side state))
+			   (cat-side state)
+			   (hen-side state)
+			   (opposite (grain-side state))))
+		)
+	  (t nil)
+	)
+)
+
+(defun path1 (state goal)
+  (cond
+	  ((equal state goal) 'success)
+	   (t (or (path1 (farmer-takes-self state) goal)
+	       (path1 (farmer-takes-cat state) goal)
+	       (path1 (farmer-takes-hen state) goal)
+	       (path1 (farmer-takes-grain state) goal))
+		 )
+	)
+)
+
+(defun path2 (state goal been-list n)
+  (cond
+		((null state) nil)
+		((equal state goal) (reverse (cons state been-list)))
+		((not (is-visited state been-list))
+	 		(or (path2 (farmer-takes-self state) goal (cons state been-list) 1)
+	     	(path2 (farmer-takes-cat state) goal (cons state been-list) 2)
+	     	(path2 (farmer-takes-hen state) goal (cons state been-list) 3)
+	     	(path2 (farmer-takes-grain state) goal (cons state been-list) 4)
+	    )
+	 	)
+	)
+)
+
+(defun reachall (pathchoice)
+  (cond
+		((equal pathchoice 1) (path1 '(e e e e) '(w w w w)))
+  	(t (path2 '(e e e e) '(w w w w) nil 0))
+	)
+)
+

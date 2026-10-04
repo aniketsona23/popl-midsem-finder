@@ -1,0 +1,50 @@
+# source: 05_Code-Examples/Dictionary (2)/Dictionary/Version2.0/tempOutput2.txt
+Size of Dictionary: Count of entries: Reading 8000 elements into a dictionary of size 10000
+Record 1 : {Key: [-3] Value: [-3.078439]}
+Record 2 : {Key: [0] Value: [-0.425688]}
+Record 3 : {Key: [0] Value: [-0.072683]}
+Record 4 : {Key: [-2] Value: [-1.966429]}
+Record 5 : {Key: [1] Value: [0.992526]}
+Record 6 : {Key: [1] Value: [0.692417]}
+Record 7 : {Key: [-4] Value: [-3.96501]}
+Record 8 : {Key: [0] Value: [-0.177101]}
+Record 9 : {Key: [2] Value: [2.08945]}
+Record 10 : {Key: [-5] Value: [-4.73134]}
+Record 11 : {Key: [-1] Value: [-0.597192]}
+Record 12 : {Key: [1] Value: [0.59724]}
+Record 13 : {Key: [0] Value: [-0.233903]}
+Record 14 : {Key: [1] Value: [0.639671]}
+Record 15 : {Key: [0] Value: [-0.314014]}
+Record 16 : {Key: [-1] Value: [-1.144646]}
+Record 17 : {Key: [0] Value: [0.451336]}
+Record 18 : {Key: [0] Value: [-0.308739]}
+Record 19 : {Key: [0] Value: [0.186817]}
+Record 20 : {Key: [-1] Value: [-1.144312]}
+Record 21 : {Key: [-1] Value: [-1.380082]}
+Record 22 : {Key: [-8] Value: [-7.93997]}
+Record 23 : {Key: [0] Value: [-0.432929]}
+Record 24 : {Key: [-2] Value: [-1.779172]}
+Record 25 : {Key: [1] Value: [1.36167]}
+Record 26 : {Key: [1] Value: [0.601155]}
+Record 27 : {Key: [1] Value: [0.874212]}
+Record 28 : {Key: [1] Value: [0.839176]}
+Record 29 : {Key: [0] Value: [0.327578]}
+Record 30 : {Key: [-1] Value: [-0.729605]}
+Record 31 : {Key: [1] Value: [0.824663]}
+Record 32 : {Key: [-1] Value: [-1.015235]}
+Record 33 : {Key: [2] Value: [1.599567]}
+Record 34 : {Key: [0] Value: [0.310575]}
+Record 35 : {Key: [1] Value: [0.674996]}
+Record 36 : {Key: [0] Value: [0.318162]}
+Record 37 : {Key: [0] Value: [0.40792]}
+Record 38 : {Key: [-2] Value: [-1.929918]}
+Record 39 : {Key: [1] Value: [0.641664]}
+Record 40 : {Key: [-3] Value: [-3.315509]}
+Record 41 : {Key: [5] Value: [5.062366]}
+Record 42 : {Key: [1] Value: [1.0111]}
+Record 43 : {Key: [1] Value: [0.631942]}
+Record 44 : {Key: [-4] Value: [-3.991255]}
+Record 45 : {Key: [1] Value: [1.22579]}
+Record 46 : {Key: [-9] Value: [-9.191754]}
+Re
+[... truncated bulk data file ...]

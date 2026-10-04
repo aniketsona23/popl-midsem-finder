@@ -1,0 +1,2 @@
+# source: 05_Code-Examples/Dictionary (2)/Dictionary/Comparison.java
+enum Comparison { PREDECESSOR, MATCHING, SUCCESSOR, INCOMPARABLE }

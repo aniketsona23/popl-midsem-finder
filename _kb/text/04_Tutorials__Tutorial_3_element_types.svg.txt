@@ -1,0 +1,32 @@
+# source: 04_Tutorials/Tutorial_3_element_types.svg
+.box   { fill:#f7f9fc; stroke:#2c3e50; stroke-width:1.6; }
+    .abs   { fill:#fff6e0; stroke:#8a5a00; stroke-width:1.8; }
+    .store { fill:#e9f7ef; stroke:#1e6b3c; stroke-width:1.8; }
+    .sep   { stroke:#2c3e50; stroke-width:1; }
+    .t     { font-weight:700; font-size:14px; fill:#1b2733; }
+    .ti    { font-weight:700; font-size:14px; font-style:italic; fill:#5c3b00; }
+    .m     { fill:#1b2733; font-size:12px; font-family:Consolas, 'Courier New', monospace; }
+    .n     { fill:#44546a; font-size:12px; font-style:italic; }
+    .line  { stroke:#2c3e50; stroke-width:1.6; fill:none; }
+    .tri   { fill:#ffffff; stroke:#2c3e50; stroke-width:1.6; }
+    .title { font-size:16px; font-weight:700; fill:#1b2733; }
+Element types: one List&lt;T&gt;, many element types
+«abstract»  Shape
++ area() const : double = 0
++ name() const : const char* = 0
++ virtual ~Shape()
+Circle
+- r : double
++ area() = πr²
+Rect
+- w, h : double
++ area() = w·h
+List&lt;shared_ptr&lt;Shape&gt;&gt;
+same class template, T = ShapePtr
+pushBack(ShapePtr(new Circle(1)))
+pushBack(ShapePtr(new Rect(2,5)))
+sort([](a,b){ return a-&gt;area()
+&lt; b-&gt;area(); })
+holds 0..*
+area() is chosen at run time (vtbl) for each element
+List&lt;int&gt;, List&lt;std::string&gt;, List&lt;ShapePtr&gt; are all instances of the one template List&lt;T&gt; – the list type is unchanged.

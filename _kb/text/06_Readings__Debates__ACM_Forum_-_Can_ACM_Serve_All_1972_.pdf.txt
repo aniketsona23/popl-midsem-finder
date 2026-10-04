@@ -1,0 +1,168 @@
+# source: 06_Readings/Debates/ACM Forum - Can ACM Serve All (1972).pdf
+# ocr_pages: 
+=== PAGE 1 ===
+acm forum 
+IFor policy on letters, see October 1970 issue] 
+Can ACM Serve All? 
+In his ACM President's Letter in 
+the February 1972 issue of Com- 
+munications, 1 Walter Carlson has by 
+ellipsis misquoted the U.S. Depart- 
+ment of Labor, and so caused Com- 
+puter Science academicians much un- 
+necessary grief. 
+The Department of Labor said ~ 
+"At the present time the computer sci- 
+ences are not generally recognized by 
+colleges and universities as a bona fide 
+academic discipline with standardized li- 
+censing, certification, or registration pro- 
+cedures." (Italics supplied.) 
+By omitting the words italicized 
+above, President Carlson changed 
+the meaning quite significantly. With 
+those words in place, the statement 
+is far more appropriate to the pur- 
+poses of the Department of Labor, 
+and seems quite true, if a bit ungram- 
+matical. 
+Computer Science is not recog- 
+nized as an academic profession, for 
+there is no special disciplinary ac- 
+creditation of Computer Science cur- 
+ricula, as there is for engineering, 
+pharmacy, law, and other profes- 
+sional curricula. In most colleges and 
+universities, Computer Science is a 
+nonprofessional discipline in the 
+School of Arts and Sciences, or in 
+the Graduate School. Left to its own 
+devices, academic Computer Science 
+will undoubtedly opt to remain in 
+the relative freedom of the Arts and 
+Sciences, rather than be constrained 
+to a professional mold, but that is 
+another subject. 
+The spokesman for the Depart- 
+ment of Labor was slightly muddied, 
+in any case, to confuse academic 
+Computer Science with preparation 
+specifically for jobs in programming 
+or systems analysis, but that confu- 
+sion is widely held. A Computer Sci- 
+ence major today, whether at bache- 
+lor or master level, is being prepared 
+not just to program, or to analyze 
+real world problems in preparation 
+for programming, but rather: 
+• 
+to improve the tools that pro- 
+grammers and systems analysts use, 
+• 
+to develop better machine sys- 
+tems, better software systems, better 
+languages for communicating with 
+the machines, and better methods for 
+solving intractable problems, 
+• 
+to manage activities that are 
+strongly computer dependent, 
+• 
+to teach about computers at col- 
+lege level, or 
+• 
+to advance the fundamental 
+theory of digital information proces- 
+SOl-S. 
+Some graduates of Computer Science 
+programs may be programmers or 
+systems analysts, but they will have 
+changed direction, or missed their 
+aim, or simply still be in their learn- 
+ing phase. 
+How then does this affect ACM? 
+The essential question is whether 
+ACM is the Society of the computer 
+scientists, or of the programmers and 
+systems analysts, or of both. To be 
+both is a greater challenge, and has 
+significant financial and operational 
+advantages, but requires a continu- 
+ing recognition on the part of ACM 
+that there are marked differences be- 
+tween the two camps, and that each 
+must be served well if the Associa- 
+tion is to prosper in the future as it 
+has in the past. 
+Howard E. Tompkins 
+Computer Science Department 
+Indiana University of 
+Pennsylvania 
+Indiana, PA 15701 
+Carlson, Walter M., "The Answer Is... 
+Competence, Integrity, and Productivity 
+...What is the Question?", 
+Comm. 
+ACM. 15 (Feb. 1972), 69. 
+= "Relative to Status of Data Processing 
+Employees," Federal Register, Dec. 2, 
+1971; reprinted in relevant parts in 
+Comm. ACM 15 (Feb. 1972), 129. 
+Discuss Impact of Computer on 
+Society at Annual Meetings? 
+On Kent Curtis' point, 1 which 
+seems to be that discussion of the im- 
+plications and consequences of com- 
+puting at ACM annual meetings is not 
+appropriate to a professional society, 
+I would say that this view is very 
+widely, and very unfortunately, held 
+throughout the computing commun- 
+ity and within the ACM itself. It seems 
+to me that if computing is a profes- 
+sion, and if we are professionals, then 
+we must come to grips, through dis- 
+cussions at annual meetings and in 
+official publications and elsewhere, 
+with problems of the impact of the 
+computer on society. It is just this 
+concern which distinguishes the pro- 
+fessional from the technician, and 
+the profession from the trade. In the 
+words of Anthony Wedgwood Benn, 
+sometime [British] Minister of Tech- 
+nology, 
+It is high time cyberneticists and Ph.Ds. 
+in math, and programmers and systems 
+analysts, and hardware and software ex- 
+perts, come out of their secret world. 
+They must.., begin assuming citizenship 
+responsibilities for the consequences of 
+what they are doing. They must also 
+understand the implications of all they 
+are planning for us. For it could be the 
+most revolutionary onslaught ever made 
+by any group of men on any established 
+society. 2 
+If we should have these con- 
+cerns, it seems to me that our profes- 
+sional society should be a focal point 
+for their expression, just as it is in 
+the area of technical concerns. 
+T. D. C. Kuch 
+7554 Spring Lake Drive 
+Bethesda, MD 20034 
+1 Kent K. Curtis, Criticisms of ACM 
+Annual Meetings, Comm. ACM 15 (Jan. 
+1972), 54. 
+2 Anthony Wedgwood Benn, Speech to the 
+British Computer Society, Southampton, 
+Sept. 25, 1967, quoted in Nigel Calder, 
+Technopolis, p. 313 f. (Simon and Schus- 
+ter, 1970). 
+Communications 
+of 
+the ACM 
+April 1972 
+Volume 15 
+Number 4

@@ -1,0 +1,9 @@
+{
+  // .md files open as a rendered preview. To edit one: right-click the tab -> "Reopen Editor With..." -> "Text Editor".
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor"
+  },
+  "markdown.preview.fontSize": 17,
+  "markdown.preview.lineHeight": 1.7,
+  "markdown.preview.breaks": false
+}

@@ -1,0 +1,25 @@
+# source: 05_Code-Examples/Dictionary (2)/img/dictionary-classes.svg
+Final version (Dictionary/Version2.0): who uses whom
+DictionaryApp
+main: reads numbers, then
+random search / remove
+MyDictionary
+array of Records + size + count
+put · get · remove · show
+Record
+holds one key and one value
+AbstractRecord
+compare(): checks the key types
+Comparison (enum)
+PREDECESSOR · MATCHING ·
+ComparableClassNames
+Integer Float Long Double String
+Ordering (enum)
+NONE ASC DESC PRIQ… BST
+stored but never used
+creates, calls
+holds many
+Record extends AbstractRecord
+field, unused
+looks up key type
+returns

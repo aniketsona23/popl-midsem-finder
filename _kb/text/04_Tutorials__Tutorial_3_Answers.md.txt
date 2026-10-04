@@ -1,0 +1,292 @@
+# source: 04_Tutorials/Tutorial_3_Answers.md
+# CS F301 – Principles of Programming Languages
+## Tutorial 3: "Last Year's Data Abstraction and Object Orientation Tutorials" – Question and Exam-Style Answer
+
+### Full question (as given)
+
+This is an assignment that is a follow-up on the first week assignment (a generalization of sorting), moving from procedural to OO proper. Indeed, do go back to your submissions of the first two weeks and review them, in order to do this better.
+
+The concepts and questions for this are based on Chapter 10 of the textbook (the chapter heading is the same as this assignment title, this is Chapter 9 in the Third Edition, 10 in the subsequent two editions.). Attached also is a section of Stroustrup's book, "A Tour of C++" (Addison-Wesley Professional, 2018) on abstract types.
+
+Chapter 10 contains development of a list class and suggestions for its generalization in two directions. One direction is making the data type behaviour (add, delete, update, rearrange – including but not only sorting) flexible and adaptable. Thus, a queue is a FIFO list, a stack is LIFO, and a deque (double-ended queue) allows addition and removal from either end without sequencing. A list also can be arranged in a heap and priority-queue topology. You need not go back to the tome of CLRS DSA textbook to read on these data types. All that you need to master is the design of the abstract type of a list-like container that admits the pertinent logical access methods (add, delete, update, rearrange or position a single element, maintaining the logical property of the chosen extension type) depending on the extension type (queue, stack, deque, priQ, heap as a priQ, etc.).
+
+The other direction is allowing different types of elements, either in the same list or in different list instances without changing the list type.
+
+Taking the code that Scott gives in 10.1 (and redesigning and developing it further) make
+1. A list container as a storage structure with all the flexibilities and capabilities described above
+2. A class hierarchy that implements each of the extensions described above
+
+There will be a quiz on this design and development in due time (during one of the class or tutorial hours in the timetable, in LT1) that is evaluative, with 10% weightage of the total course marks. You have a week for the development and submission.
+
+(Attachment: *Bjarne Stroustrup On Abstract Classes.pdf*)
+
+---
+
+## Answer
+
+### 1. Analysis – what is being asked
+| Requirement | Design response |
+|---|---|
+| A *storage structure* with add / delete / update / rearrange | Concrete class `List<T>`: circular doubly linked list with a header (sentinel) node, as in Scott 10.1 |
+| Queue (FIFO), stack (LIFO), deque, priority queue / heap, each keeping its **logical property** | Class hierarchy under an **abstract type** `Container<T>` (pure virtual `put/get/peek/size`); each subclass restricts the list's freedom so the property cannot be broken |
+| Different element types, same container type | **Generic (template) element type `T`**; plus **polymorphic elements** (a list of base-class handles, e.g. `Shape`) |
+
+### 2. Class hierarchy
+![Class hierarchy: Container<T> with Stack, Queue, Deque, PriorityQueue; Stack/Queue/Deque own a List<T>, PriorityQueue owns a vector heap](Tutorial_3_class_hierarchy.svg)
+
+*(Hollow triangle = inheritance / is-a; filled diamond = composition / has-a. Diagram source: [Tutorial_3_class_hierarchy.svg](Tutorial_3_class_hierarchy.svg).)*
+
+* `Container<T>` is a Stroustrup-style **abstract type**: only an interface, no data, no constructor, a *virtual destructor*, so clients work through `Container<T>&`/`*` and dynamic dispatch (via the vtbl) chooses `Stack::get`, `Queue::get`, ... at run time (polymorphism).
+* `Stack/Queue/Deque` are *implemented in terms of* `List<T>` (composition). Public inheritance from `List` would expose `insertAt`/`removeAt`, letting a client violate LIFO/FIFO – so the list is a **private member**, and only the legal operations are re-exported. This is encapsulation maintaining the logical property.
+* `PriorityQueue` arranges elements as a **binary max-heap** (min-heap with `std::greater`); it can be built from an existing `List` in O(n) (heapify).
+
+### 3. Operations and costs
+| Class | put | get | peek | Property kept by |
+|---|---|---|---|---|
+| `List` | `pushFront/pushBack/insertAt` O(1)/O(1)/O(n) | `popFront/popBack/removeAt` O(1)/O(1)/O(n) | `front/back/at` | – (general; plus `update`, `reverse`, `sort` O(n log n), `swapPositions`, `rotateLeft`) |
+| `Stack` | `pushFront` O(1) | `popFront` O(1) | `front` | add & remove at the same end → LIFO |
+| `Queue` | `pushBack` O(1) | `popFront` O(1) | `front` | add at back, remove at front → FIFO |
+| `Deque` | `putFront/putBack` O(1) | `getFront/getBack` O(1) | both ends | both ends, no insertion in the middle |
+| `PriorityQueue` | sift-up O(log n) | sift-down O(log n) | top O(1) | heap order: parent ≥ children |
+
+### 4. Code (compiled with g++ -std=c++11 -Wall -Wextra and run)
+```cpp
+#include <algorithm>
+#include <cstddef>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <vector>
+
+/* ---------- 1. Abstract interface (pure abstract class) ---------- */
+template <class T>
+class Container {
+public:
+    virtual ~Container() {}
+    virtual void           put(const T& x) = 0;        // add an element
+    virtual T              get() = 0;                  // remove one (which one = discipline)
+    virtual const T&       peek() const = 0;           // look, don't remove
+    virtual std::size_t    size() const = 0;
+    bool empty() const { return size() == 0; }
+};
+
+/* ---------- 2. List: the general storage structure ---------- */
+/* circular doubly linked list with a header (sentinel) node, as in Scott 10.1 */
+template <class T>
+class List {
+    struct Link { Link *prev, *next; };
+    struct Node : Link { T val; Node(const T& v) : val(v) {} };
+
+    Link header_;                       // sentinel: header_.next = first, header_.prev = last
+    std::size_t n_;
+
+    void linkBefore(Link* pos, Link* x) {
+        x->prev = pos->prev; x->next = pos;
+        pos->prev->next = x; pos->prev = x;
+        ++n_;
+    }
+    T unlink(Link* x) {
+        x->prev->next = x->next; x->next->prev = x->prev;
+        Node* nd = static_cast<Node*>(x);
+        T v = nd->val; delete nd; --n_;
+        return v;
+    }
+    Link* nodeAt(std::size_t i) const {
+        if (i >= n_) throw std::out_of_range("List index");
+        Link* p = header_.next;
+        while (i--) p = p->next;
+        return p;
+    }
+public:
+    List() : n_(0) { header_.prev = header_.next = &header_; }
+    ~List() { clear(); }
+    List(const List&) = delete;                 // keep the example short: no copying
+    List& operator=(const List&) = delete;
+
+    std::size_t size() const { return n_; }
+    bool empty() const { return n_ == 0; }
+    void clear() { while (n_) popFront(); }
+
+    // --- add ---
+    void pushFront(const T& v)            { linkBefore(header_.next, new Node(v)); }
+    void pushBack(const T& v)             { linkBefore(&header_, new Node(v)); }
+    void insertAt(std::size_t i, const T& v) {          // i == size() appends
+        linkBefore(i == n_ ? &header_ : nodeAt(i), new Node(v));
+    }
+    // --- delete ---
+    T popFront()                          { if (!n_) throw std::out_of_range("empty"); return unlink(header_.next); }
+    T popBack()                           { if (!n_) throw std::out_of_range("empty"); return unlink(header_.prev); }
+    T removeAt(std::size_t i)             { return unlink(nodeAt(i)); }
+    // --- read / update ---
+    T&       at(std::size_t i)            { return static_cast<Node*>(nodeAt(i))->val; }
+    const T& at(std::size_t i) const      { return static_cast<Node*>(nodeAt(i))->val; }
+    void update(std::size_t i, const T& v){ at(i) = v; }
+    T&       front()                      { return at(0); }
+    T&       back()                       { return at(n_ - 1); }
+    const T& front() const                { return at(0); }
+    const T& back() const                 { return at(n_ - 1); }
+    // --- rearrange ---
+    void reverse() {
+        Link* p = &header_;
+        do { std::swap(p->prev, p->next); p = p->prev; } while (p != &header_);
+    }
+    void swapPositions(std::size_t i, std::size_t j) { std::swap(at(i), at(j)); }
+    void rotateLeft() { if (n_ > 1) pushBack(popFront()); }
+    template <class Cmp>
+    void sort(Cmp cmp) {                                  // stable
+        std::vector<T> tmp;
+        for (Link* p = header_.next; p != &header_; p = p->next) tmp.push_back(static_cast<Node*>(p)->val);
+        std::stable_sort(tmp.begin(), tmp.end(), cmp);
+        Link* p = header_.next;
+        for (std::size_t i = 0; i < tmp.size(); ++i, p = p->next) static_cast<Node*>(p)->val = tmp[i];
+    }
+    void sort() { sort(std::less<T>()); }
+    template <class F> void forEach(F f) const {
+        for (Link* p = header_.next; p != &header_; p = p->next) f(static_cast<Node*>(p)->val);
+    }
+};
+
+/* ---------- 3. Extensions: each restricts / re-interprets the list ---------- */
+template <class T>
+class Stack : public Container<T> {                 // LIFO
+    List<T> items_;
+public:
+    void put(const T& x) override { items_.pushFront(x); }
+    T get() override              { return items_.popFront(); }
+    const T& peek() const override{ return items_.front(); }
+    std::size_t size() const override { return items_.size(); }
+};
+
+template <class T>
+class Queue : public Container<T> {                 // FIFO
+    List<T> items_;
+public:
+    void put(const T& x) override { items_.pushBack(x); }
+    T get() override              { return items_.popFront(); }
+    const T& peek() const override{ return items_.front(); }
+    std::size_t size() const override { return items_.size(); }
+};
+
+template <class T>
+class Deque : public Container<T> {                 // both ends
+    List<T> items_;
+public:
+    void putFront(const T& x) { items_.pushFront(x); }
+    void putBack(const T& x)  { items_.pushBack(x); }
+    T getFront()              { return items_.popFront(); }
+    T getBack()               { return items_.popBack(); }
+    const T& peekFront() const{ return items_.front(); }
+    const T& peekBack() const { return items_.back(); }
+    void put(const T& x) override { putBack(x); }     // as a Container it behaves like a queue
+    T get() override              { return getFront(); }
+    const T& peek() const override{ return peekFront(); }
+    std::size_t size() const override { return items_.size(); }
+};
+
+template <class T, class Less = std::less<T> >      // top = greatest under Less; std::greater<T> gives a min-queue
+class PriorityQueue : public Container<T> {         // binary heap stored in an array
+    std::vector<T> heap_;
+    Less less_;
+    void siftUp(std::size_t i) {
+        while (i > 0 && less_(heap_[(i - 1) / 2], heap_[i])) {
+            std::swap(heap_[i], heap_[(i - 1) / 2]); i = (i - 1) / 2;
+        }
+    }
+    void siftDown(std::size_t i) {
+        for (;;) {
+            std::size_t l = 2 * i + 1, r = l + 1, m = i;
+            if (l < heap_.size() && less_(heap_[m], heap_[l])) m = l;
+            if (r < heap_.size() && less_(heap_[m], heap_[r])) m = r;
+            if (m == i) return;
+            std::swap(heap_[i], heap_[m]); i = m;
+        }
+    }
+public:
+    PriorityQueue() {}
+    explicit PriorityQueue(const List<T>& l) {      // arrange an existing list as a heap: O(n)
+        l.forEach([this](const T& x) { heap_.push_back(x); });
+        for (std::size_t i = heap_.size() / 2; i-- > 0; ) siftDown(i);
+    }
+    void put(const T& x) override { heap_.push_back(x); siftUp(heap_.size() - 1); }
+    T get() override {
+        if (heap_.empty()) throw std::out_of_range("empty");
+        T top = heap_[0]; heap_[0] = heap_.back(); heap_.pop_back();
+        if (!heap_.empty()) siftDown(0);
+        return top;
+    }
+    const T& peek() const override { if (heap_.empty()) throw std::out_of_range("empty"); return heap_[0]; }
+    std::size_t size() const override { return heap_.size(); }
+};
+
+/* ---------- 4. Different element types without changing the container ---------- */
+struct Shape { virtual ~Shape() {} virtual double area() const = 0; virtual const char* name() const = 0; };
+struct Circle : Shape { double r; Circle(double r) : r(r) {} double area() const { return 3.14159 * r * r; } const char* name() const { return "Circle"; } };
+struct Rect   : Shape { double w, h; Rect(double w, double h) : w(w), h(h) {} double area() const { return w * h; } const char* name() const { return "Rect"; } };
+typedef std::shared_ptr<Shape> ShapePtr;
+
+template <class C> void drain(C& c) { while (!c.empty()) std::cout << c.get() << ' '; std::cout << '\n'; }
+
+int main() {
+    Stack<int> s;  Queue<int> q;  PriorityQueue<int> pq;  Deque<int> d;
+    Container<int>* all[] = { &s, &q, &pq };                    // one interface, different behaviour
+    for (int i = 0; i < 3; ++i)
+        for (int v : {5, 1, 9, 3}) all[i]->put(v);
+    std::cout << "stack: ";  drain(s);                          // 3 9 1 5
+    std::cout << "queue: ";  drain(q);                          // 5 1 9 3
+    std::cout << "prio : ";  drain(pq);                         // 9 5 3 1
+    d.putBack(2); d.putBack(3); d.putFront(1);
+    int last = d.getBack(), first = d.getFront(), mid = d.getFront();
+    std::cout << "deque: " << last << ' ' << first << ' ' << mid << '\n';   // 3 1 2
+
+    List<int> l;
+    for (int v : {4, 8, 2, 6}) l.pushBack(v);
+    l.update(1, 7); l.insertAt(2, 100); l.removeAt(0);          // 7 100 2 6
+    l.sort(); l.forEach([](int x) { std::cout << x << ' '; });  // 2 6 7 100
+    l.reverse(); l.forEach([](int x) { std::cout << x << ' '; });// 100 7 6 2
+    std::cout << '\n';
+    PriorityQueue<int, std::greater<int> > minq(l);            // list arranged as min-heap
+    std::cout << "minheap: "; drain(minq);                      // 2 6 7 100
+
+    List<ShapePtr> shapes;                                     // same List, element type = Shape handle
+    shapes.pushBack(ShapePtr(new Circle(1.0)));
+    shapes.pushBack(ShapePtr(new Rect(2.0, 5.0)));
+    shapes.pushBack(ShapePtr(new Rect(1.0, 1.0)));
+    shapes.sort([](const ShapePtr& a, const ShapePtr& b) { return a->area() < b->area(); });
+    shapes.forEach([](const ShapePtr& p) { std::cout << p->name() << '(' << p->area() << ") "; });
+    std::cout << '\n';
+}
+```
+**Output (actual run)**
+```
+stack: 3 9 1 5
+queue: 5 1 9 3
+prio : 9 5 3 1
+deque: 3 1 2
+2 6 7 100 100 7 6 2
+minheap: 2 6 7 100
+Rect(1) Circle(3.14159) Rect(10)
+```
+The same four values `5 1 9 3` are put through the *same* `Container<int>` interface, yet come out in LIFO, FIFO and priority order – dynamic dispatch on the abstract type.
+
+*Exam tip:* the lines marked as extras (`swapPositions`, `rotateLeft`, `forEach`, deleted copy operations, `const` overloads) may be dropped if time is short; the essentials are the abstract `Container`, the sentinel-based `List` (link/unlink, push/pop front/back), and the four small subclasses.
+
+### 5. How the two required directions are met
+**Direction 1 – flexible behaviour (add, delete, update, rearrange) with the logical property kept**
+* `List<T>` supplies *all* mechanisms: add (`pushFront/pushBack/insertAt`), delete (`popFront/popBack/removeAt`), update (`update/at`), rearrange (`reverse`, `sort(cmp)`, `swapPositions`, `rotateLeft`).
+* Each extension class exposes only the subset whose combination preserves its property (LIFO, FIFO, double-ended, heap order). Clients cannot reach the rest because the list is private.
+* Heap / priority queue: same abstract interface, different internal topology (array-based binary heap); `PriorityQueue(const List<T>&)` shows a list being *re-arranged* into a heap.
+
+**Direction 2 – different element types without changing the list type**
+1. *Parametric polymorphism (templates/generics):* `List<int>`, `List<std::string>`, `List<Shape*>` are instances of one class template; the algorithms never inspect `T`. Ordering is injected as a comparator (`sort(cmp)`, `PriorityQueue<T, Less>`), so `T` need not have a built-in `<`.
+2. *Subtype polymorphism:* a `List<ShapePtr>` holds `Circle`s and `Rect`s together; calls like `p->area()` are dispatched virtually. This gives a **heterogeneous list** with one list type.
+
+![Element hierarchy: abstract Shape with Circle and Rect, held by List<shared_ptr<Shape>>](Tutorial_3_element_types.svg)
+
+### 6. Concepts to quote in the exam
+* **Abstract type** – interface only, pure virtual functions (`= 0`), cannot be instantiated; users hold pointers/references (Stroustrup §4.3).
+* **Virtual destructor** – so deleting through `Container<T>*` runs the derived destructor.
+* **Encapsulation / information hiding** – representation (`Link`, `Node`, array) private.
+* **Inheritance vs composition** – use public inheritance only for true *is-a* (Stack *is a* Container); implement-in-terms-of via a private member (Stack *has a* List). Scott's original `queue : public list` is the quicker but leakier alternative.
+* **Dynamic dispatch** – vtbl lookup picks the override at run time.
+* **Java mapping:** `Container<T>` → `interface Container<T>`; `List<T>` → generic class; templates → generics (`<T extends Comparable<T>>` or a `Comparator<T>`); virtual destructor not needed (garbage collection); `private` list field in each subclass gives the same encapsulation.

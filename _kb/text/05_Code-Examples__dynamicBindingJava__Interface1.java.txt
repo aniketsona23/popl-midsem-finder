@@ -1,0 +1,5 @@
+# source: 05_Code-Examples/dynamicBindingJava/Interface1.java
+public interface Interface1<T> {
+  T tell();
+  void listen(T t);
+}

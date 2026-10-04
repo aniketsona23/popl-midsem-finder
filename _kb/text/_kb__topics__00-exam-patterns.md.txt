@@ -1,0 +1,56 @@
+# source: _kb/topics/00-exam-patterns.md
+# How this professor sets and grades questions (read this first, 3 min)
+
+## In plain words
+
+This page is about how the professor marks, not about a subject. He wants you to explain why something happens (a reason), in the words used in class, and in exactly the format the question asks for.
+
+**Example.** if a question says "one line each", write one line each. If it gives a table, fill the table and nothing else.
+
+
+## Short answer
+
+* He rewards first-principles reasoning (compiler, linker, loader, run time), not quotes from standards. *[2024 Mid-Sem key A2]*
+* Follow the answer format exactly: tables, one line each, units. Overwriting or contradictions lose marks. *[2025 Mid-Sem paper]*
+* Do not hunt syntax errors; the questions are about types, modules and procedure activation. *[2024 Mid-Sem paper note]*
+* For assignment questions answer about your own implementation and stay consistent. *[2025 Mid-Sem Q3; Compre 2025 Q2]*
+
+
+Evidence: PoPL2024MidSem1.pdf (+solution), midsem-solutions.pdf = PoPL2025MidSem1 (+solution), PoPL Compre Solutions.pdf (Dec 2024), compre-answer-key.pdf (Dec 2025), quizzes, PoPL-Question-Bank.md.
+
+## Format of past midsems (open book / laptop, 90 min)
+
+| Paper | Marks | Shape |
+|---|---|---|
+| Midsem Oct 2024 | 70 | Two C modules (Module1.c, Module2.c) given on last page; 7 questions all about *those modules*: compile independently? link? sizeof? which lines make imperative code? binding times of every identifier? effect of changing `return 0`→`return 1`? max stack-frame size? |
+| Midsem Oct 2025 | 60 | Q1 five yes/no + **one-line** reasons (C/C++ module independence); Q2 ten-row **Necessary/Sufficient/Harmful** tick table (C++ link of `function(Class2)`); Q3 design essay (base-class vs contain-and-delegate for the list-hierarchy assignment). |
+| Compre Dec 2024 | 80 | Scope of 8 kinds of names in C/C++/Java (numeric scope scale 1–10); exact arithmetic for money; making a method usable only by own-class instances (private, caveats); calling a non-static method without instantiating; reading a lambda at run time; instance-level specialisation in C/C++/Java/Python/Lisp. |
+| Compre Dec 2025 | 70 | Choose paradigm+language per use-case; REPL vs event-loop vs your own assignment; Python quicksort vs C/Java quicksort (5 properties, 1 line each); **draw the procedure activation records** for `fiboDP(5)`. |
+
+## What gets rewarded (quoted from the solution/notes)
+* **First-principles over authority.** 2024 A2: "Those who cited a particular (ISO) standard … may or may not get credit." Reason from *compiler vs linker vs loader vs run time* and *type information (size/layout) vs names*.
+* **Don't hunt syntax errors.** The paper says so: "do not smell a rat there. The questions are about type systems, modular structure and procedure activation." The code looks weird on purpose (`this`, `...`, shadowed `object1`).
+* **Follow the answer format exactly** (tables, "α ↔ n", one line each). "Overwriting, unclear marking … will be interpreted as per the examiners' choices." "Consistency is important: something cannot be necessary yet harmful."
+* **Brevity + precision.** "no more than 2 sentences each", "exactly 1 line each". "Jargon-bubble fables … will entail penalty."
+* **Consistency with your own submission** for assignment-based questions (Q3 2025, Q2 compre 2025): answer about *your* design, say what you actually did.
+* **Both sides of a trade-off.** Design questions: name the property (independence, fragile base class, flexibility), state which design wins *and the condition under which the other would*.
+
+## The recurring ideas (each has a cheat sheet)
+1. **"Many declarations, one unique definition"** – modules compile alone; the linker only matches names → [open this topic](01-modules-linking-independence.md)
+2. **Binding times** compile / preprocessing / linking / loading / procedure-activation / run → [open this topic](02-binding-times-and-names.md)
+3. **Procedure activation records / stack frames** → [open this topic](03-procedure-activation-stack-frames.md)
+4. **Types: size, layout, sizeof, pointers, incomplete types** → [open this topic](04-types-sizeof-layout.md)
+5. **Scope, lifetime, storage classes, allocation** → [open this topic](05-scope-lifetime-storage.md)
+6. **OO design: Parnas information hiding, abstract class, base-class vs contain-and-delegate, Banana-Monkey-Jungle, vtbl** → [open this topic](06-oo-design-java-cpp.md)
+7. **Paradigms and the debates (Dijkstra goto, Böhm–Jacopini, Parnas, structured programming, CLOS/MOP)** → [open this topic](07-paradigms-and-debates.md)
+8. **C/C++ gotchas** (implicit declarations, variadics, shadowing, token rule, mangling) → [open this topic](08-c-cpp-gotchas.md)
+9. Lisp / functional / run-time lambda → [open this topic](09-lisp-functional.md)
+
+## 60-second triage for a *new* question
+1. Is code given? → save it to files and check it with gcc: `gcc -c -Wall A.c B.c`, `nm A.o B.o`, `gcc A.o B.o` (real evidence).
+2. Which idea above? → open that cheat sheet; run `python _kb/search.py <keywords>` for the professor's own wording (slides + solutions).
+3. Write with `_kb/answers/TEMPLATE.md`: *one-line verdict → reason in the course's vocabulary → evidence (tool output / line numbers) → exceptions*.
+4. Re-read the question's **format instruction** before pasting. Count marks vs. effort: 10 marks ≈ 8–10 minutes in a 90-minute/70-mark paper.
+
+## Time budget (90 min, ~70 marks)
+Read all questions 3 min → easy 1-line questions first → code-analysis questions with the tool running in a terminal while you write others → last 5 min: formatting check (tables, line numbers, units: "bytes" or "multiples of sizeof(void*)").

@@ -1,0 +1,14 @@
+# Find below the transcript of how one could examine the modules (in various combinations) in this bundle, and infer kosher and forbidden combinations of modules. The exercise is expected to help you understand the independence of modules. 
+$ gcc -c *.c
+$ gcc structure.o main.o 
+/usr/bin/ld: main.o: in function `f':
+main.c:(.text+0x0): multiple definition of `f'; structure.o:structure.c:(.text+0x0): first defined here
+collect2: error: ld returned 1 exit status
+$ gcc structure.o newmain.o 
+$ ./a.out 
+-1253039104
+$ 
+# Looking at lines 8 and 9 above, that's the output of the program. Answer the following questions (tweaking the codes and module combinations to verify your hunches):
+# 1. Is the output repeatable?
+# 2. Can you change the codes (C code in the modules) such that the value in 9 is 0? Variously, 1? Variously, any specific value asked of you?
+# 3. Declare a type "typedef struct x *y" and use y as the type of the formal parameter to f. Change the body of f accordingly, and make the passed actual parameter in main to be &X, that is, f(&X) should be the call. Then repeat all the above.

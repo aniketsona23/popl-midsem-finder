@@ -1,0 +1,65 @@
+# source: _kb/topics/06-oo-design-java-cpp.md
+# OO design: information hiding, abstract classes, base class vs contain-and-delegate
+
+## In plain words
+
+There are two ways to reuse a class. Inheritance: `class Stack extends List` says a Stack IS a List. Contain-and-delegate: a Stack HAS a List inside it and passes the calls on to it. The professor's reading (Goodbye, OOP) argues inheritance causes trouble and delegation is safer.
+
+**Example.** If Stack inherits from List, a user can call `insertInMiddle()` on a stack, which breaks the idea of a stack. If Stack only contains a List, you choose which operations to show.
+
+
+## Short answer
+
+* Contain-and-delegate gives two-way flexibility: change the storage or the access class without touching the other. *[2025 Q3 (reasoned); Goodbye OOP article]*
+* Inheritance risks: fragile base class, banana-monkey-jungle, exposing the whole base interface. *[Goodbye OOP article; slides p132-135]*
+* Contain-and-delegate costs: forwarding boilerplate and no automatic substitutability. *[Goodbye OOP article; slides p133]*
+* Answer about your own implementation and say when the other design would win. *[2025 Mid-Sem paper Q3]*
+
+
+Slides: PDF p71–74 (what vs how, why encapsulation, **Parnas: procedural-modular vs OO decomposition**), p76–78 (Booch encapsulation; execution vs simulation; Nygaard/Simula), p79–86, p127–136 (OOP in Java: when/when not; Banana-Monkey-Jungle; contain-and-delegate; exercises).
+Readings: `06_Readings/Debates/Scalfani - Goodbye, Object Oriented Programming (2016).pdf` (Scalfani), `Parnas - On the Criteria To Be Used in Decomposing Systems into Modules (1972).pdf` (Parnas 1972), `Bjarne Stroustrup On Abstract Classes.pdf` (Tour of C++ §4.3–4.5), `OO Language Comparison Tut.pdf`.
+Assignment: `midsem-assignment.pdf` (list hierarchy: Queue/Stack/DeQue/PriorityQ over a storage list; quiz questions 1–7 with scoring formulas), `Tasks for OO Module.pdf`, `Tutorial_3_Answers.md` (full worked design, C++ templates), `Quiz 2.pdf`, `POPL Eval Quiz.pdf`.
+Past: **2025 Mid-Sem Q3**, Quiz1 (hidden class), Eval quiz Q2.
+
+## Same idea, different words
+
+The slides cover this as “Procedural to OO” (pages 79–86) and “When not to Java” (pages 132–135). The exam says “base class or member”, “contain-and-delegate” and “two-way flexibility”.
+
+## The two designs (2025 Q3)
+**A. Storage as base class ("Banana–Monkey–Jungle")** `class Stack extends List` – Stack *is-a* list; inherits every list operation.
+**B. Storage as member ("contain-and-delegate")** `class Stack { private Storage s; push(x){ s.addFirst(x);} … }` – Stack *has-a* storage and forwards calls.
+
+### Verdict the course points to: **B (contain-and-delegate) gives the two-way flexibility**
+Two independent axes of variation: (1) **storage implementations** (array, dynamic array, linked list, doubly linked list …) and (2) **access classes** (Queue, Stack, DeQue, PriorityQ, Heap). 
+* With B, an access class depends only on the *interface* of Storage (abstract class/interface). Swap the storage by changing one constructor/injection point; **no access class changes** (assignment score term: "number of classes that need to change when the storage implementation changes" is minimal). New access classes need no new storage subclasses. Combinations = M×N at no extra code.
+* With A, each storage variant needs its own family of subclasses (ArrayStack, LinkedStack, ArrayQueue …: M×N classes) or the base list must change under them; subclasses are tied to the base's *implementation*.
+* A exposes the whole List interface through Stack/Queue (anyone can insert in the middle → breaks LIFO/FIFO invariant); B exposes only push/pop. (encapsulation, "contractual interface" – Booch, slide p76)
+* **Fragile base class** (Scalfani): a base-class change that is "invisible" to its owner breaks subclasses – e.g. `addAll()` rewritten to call the overridable `add()` → the subclass counts elements twice. Inheritance is *white-box* reuse (subclass must know the base's internals); delegation is *black-box* reuse (only the interface).
+* **Banana–Monkey–Jungle**: reuse one class by inheritance and you drag in all ancestors and everything they contain ("you wanted a banana but got the gorilla holding the banana and the entire jungle" – Joe Armstrong). Also the **diamond problem** with multiple inheritance. Both are cured by contain-and-delegate.
+* Cost of B (the slide's "problem with the contain-and-delegate solution", p135): *boilerplate* forwarding methods; languages are designed to make inheritance easy and delegation laborious; no automatic polymorphic substitutability (Stack is not a List, so can't be passed to code expecting a List unless you also implement the interface); extra indirection/allocation. A is justified when there is a true is-a relation, the base is stable and owned by you, and you need substitutability.
+* Compose the answer: *what you did + why + 2 advantages of the chosen + 1 honest disadvantage + when the other wins*. The paper says answer consistently with **your** implementation. Marks 2+5+8: (2) state which you used, (5) why, (8) comparison/justification.
+
+### Eval-quiz Q2 style: "one modularity advantage of Design B over Design A"
+Design A `class MyList extends Storage` vs Design B `class MyList { private Storage storage; }` → B avoids the **fragile base class** coupling: `MyList` depends only on Storage's interface, not its implementation, so Storage can be changed/replaced independently.
+
+## Abstract classes and virtual dispatch (Stroustrup §4.3–4.5)
+* Concrete type: representation is part of its definition (like built-ins). **Abstract type: insulates the user from implementation**; user can't even know the size → objects are accessed via pointers/references and allocated on the free store.
+* `class Container { public: virtual double& operator[](int)=0; virtual int size() const=0; virtual ~Container(){} };` – pure virtual (`=0`) ⇒ abstract; a derived `Vector_container`/`List_container` provides bodies. `use(Container&)` works for all, *and need not be recompiled* when implementations change.
+* **vtbl**: each class with virtual functions has a table of function pointers; each object has one hidden pointer (space overhead = 1 pointer/object + 1 vtbl/class); a virtual call is an indexed indirect call (≈ within 25% of an ordinary call). The caller needs only the vtbl slot index, not the object's size/layout. Always give the base class a **virtual destructor**.
+* Modules in `05_Code-Examples/AbstractClassModules/` (the 2024 exam) hand-build exactly this: `abstractMethod` is a table of function pointers = a hand-written vtbl.
+
+## Information hiding (Parnas 1972) – slide p73
+Two decompositions of a KWIC text processor: (1) *conventional* – modules = processing steps (read, shift, alphabetise, output) sharing a common data layout; (2) *information hiding* – each module hides one design decision likely to change (line storage, circular shifts, alphabetising). The second tolerates change: "it should be possible to make drastic changes to one module without a need to change others". Benefits (Parnas): managerial (parallel development), product flexibility, comprehensibility.
+Slide p72 quote: encapsulation ⇒ *managerial, flexibility, comprehensibility*. Booch: encapsulation separates the contractual interface from its implementation.
+
+## OO vs simulation (slides p77–78)
+Procedural = complete step-by-step break-up of a solution; OO = a system evolving by state transformations of interacting objects (Nygaard/Dahl, Simula 1962–65 simulation language). "Not truly realised" in C++: objects are not the primary program components, modules/global functions are (slide p84).
+
+## Java facts the course highlights
+* Interface/abstract-class/concrete-class dynamic binding demo: `05_Code-Examples/dynamicBindingJava/` (Abstract1, Interface1, Concrete1, Main).
+* Generics (Tutorial_3: `List<T>`, element type any class incl. heterogeneous via common base/Object). Heterogeneous list ⇒ elements share a common base type (Q5–Q6 of the quiz: you can't answer yes to heterogeneity without first answering yes to "classes as type parameters").
+* Cloning/reflection (post-midsem quiz): shallow vs deep copy, `CloneNotSupportedException` arises when `clone()` is called on a class that doesn't implement `Cloneable`.
+* When to Java: interfacing, business logic, library-driven designs. When not: banana-monkey-jungle, contain-and-delegate pains, reusability value, "polymorphism–contracts–flexibility tension-triad" (slides p127–136).
+
+## Trust note
+`Tutorial_3_Answers.md` and `POPL Eval Quiz.pdf` answers are *student/AI-written*, not the professor's. Use for structure and code; prefer slides/solutions for the "official" phrasing.

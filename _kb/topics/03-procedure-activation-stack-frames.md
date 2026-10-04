@@ -1,0 +1,63 @@
+# Procedure activation, activation records, stack frames
+
+## In plain words
+
+Every time a function is called, the computer sets aside a small block of memory for it on the stack. The block holds the function's parameters, the place to return to, and its local variables. This block is called a stack frame (or activation record). When the function returns, the block is thrown away. With recursion, many blocks sit on top of each other.
+
+**Example.** `f(3)` calls `f(2)`, which calls `f(1)`: three blocks are on the stack at the same time. The most stack used is 3 blocks, i.e. 3 times the size of one block.
+
+
+## Short answer
+
+* A call pushes an activation record: parameters, return address, saved base pointer, locals and temporaries. *[slides p119-124]*
+* Maximum stack = deepest chain of calls × frame size. *[2024 key A7]*
+* 2024 answer: n+1 frames, each sizeof(int) + 3·sizeof(void*). *[2024 key A7]*
+* Names become offsets from the frame pointer; static locals are not in the frame. *[slides p100-118]*
+
+
+Slides: PDF **p99** (six features of a subroutine), p100–118 (`euclid.c` → `euclid.s`, gcc -g -S), **p119 "The Stack Frame" (Sethi Fig 5.13)**, p120 (Sethi Fig 5.19 C/C++ activations), p121–124 (Call and Subroutine I–IV), p125 (lessons).
+Files: `Example Program GCD.pdf` (euclid.c), `05_Code-Examples/params/params.c|.s|.pdf` (parameter passing in assembly), `05_Code-Examples/examplesOf23aug2024/recurmain.c`, `printf.c`.
+Past questions: **2024 Mid-Sem Q7**, **Compre 2025 Q4**, qbank Q9–Q11. Search: `search.py -k slides activation record`.
+
+## Same idea, different words
+
+The slides say “procedure activation” and “the stack frame” (pages 99–124). The exam says “activation record”, “stack frame size” and “draw the calls”. It is the same thing.
+
+## "Procedure activation" = a call (Sethi's term). Six features of a subroutine (slide p99)
+1. name & signature (prototype)  2. parameter passing & access (call preparation + callee preamble)  3. allocation/access of local and temporary objects, access to non-locals  4. the imperative-action body (translated code)  5. preparing to return (return value, wind-up e.g. C++ destructors of locals)  6. restoration of program state at return.
+
+## Anatomy of one frame (x86 view; Sethi Fig 5.13)
+```
+ higher addresses
+   | incoming parameters            | pushed by the CALLER before `call`  (x86-64 SysV: first 6 int args in registers, stored by callee at -N(%rbp))
+   | return address                 | pushed by `call`
+   | saved BP (control/access link) | `push %rbp` in the preamble
+   +---- %rbp (frame pointer) of the callee ----
+   | locals + temporaries           | `sub $N,%rsp`
+   | outgoing-argument area         |
+ lower addresses  <- %rsp
+```
+* Preamble: `pushq %rbp ; movq %rsp,%rbp ; subq $N,%rsp`; parameters are copied to `-4(%rbp), -8(%rbp)`; locals are **offsets from %rbp** (so *names vanish*; binding time: compile-time offset, activation-time storage).
+* Epilogue: `leave ; ret`. **The return value is left in the accumulator `%eax`** (slide p123: "after each recursive call the return value is assumed to be there in the expected location"). This is why using the result of a function that *returns void* reads garbage (see gotcha in 08).
+* **`static` locals are not in the frame**: `xstatic` in euclid.s is `.local xstatic.0 / .comm xstatic.0,4,4` (static storage, one copy shared by all recursive activations).
+* Class methods: identical to global functions with **`this` as hidden first parameter**; by-value class parameters copy the whole object into the frame, so size/layout must be known from the *declaration at the call site* (slides p81–82).
+* Java: same mechanism, but object variables hold **references**; objects live on the heap, frames hold primitives + references (qbank Q10).
+* **VLA** `int array[n]` (qbank Q11): automatic (stack) allocation whose size is fixed at *procedure activation time*; the compiler emits code to adjust `%rsp` there (frame size not a compile-time constant).
+* C: `main` may call itself (`recurmain.c`); C++ forbids calling `main` (compilers merely warn).
+
+## Counting stack: the 2024 Q7 recipe
+Question: max total stack-frame size from root call `f(n)` for the mutually recursive `f`,`g` (Module2.c).
+1. **Depth**: along any chain `f(n)→f(n-1)→…→f(0)` (also f/g mixes) the argument drops by ≥1 per call and recursion stops at 0 ⇒ at most **n+1** simultaneous frames of f/g (root + n more).
+2. **Frame size** (same for f and g): one `int` parameter + return address + saved frame/base pointer + saved stack pointer (the key counts "three addresses") ⇒ `sizeof(int) + 3*sizeof(void*)`.
+3. **Official answer**: `(n+1) * (sizeof(int) + 3*sizeof(void*))`, with the sentence "one integer parameter and three addresses (return address, stack pointer, stack frame base pointer)".
+4. Evidence: `gcc -c -fstack-usage Module2.c` writes `Module2.su` with `f 32 static` on this 32-bit MinGW (includes alignment/outgoing area). Quote the *symbolic* formula and mention that padding is compiler-specific.
+
+## Drawing activation records for a recursive call (Compre 2025 Q4, `fiboDP(5)`)
+* Each box = one activation: [param n | return address | saved BP | (return-value slot / sum temporary: optional)].
+* Draw the **call graph with stack snapshots**; mark *total calls* and *max frames live at once*.
+* `static int fib[100]` is **not** in any frame (one shared table); memoisation makes later calls skip subtrees.
+* Use `_kb/tools/trace_template.c` (paste the function, run) to get the real call tree. For `fiboDP(5)` it prints 6 calls (5,3,1,2,0,4) and max 4 frames live (5>3>2>0).
+  **⚠ The official key shows "9 calls, max 4 frames, 17 frames in total"** (snapshots 5-3-1, 5-3-2-0, 5-3-2-1, 5-4-2, 5-4-3). Running the code as printed gives 6 calls. The key's note says: give credit for showing return-value/sum space; "what is important is showing 9 calls with max frames at a time 4". If a similar question comes, draw the trace you verified, label calls, state max depth, and justify from the code semantics.
+
+## Phrases that score
+"A procedure activation (call) pushes an activation record: parameters, return address, saved base pointer (access/control link), locals and temporaries. Names of parameters and locals are compile-time offsets; their storage exists only per activation (procedure-activation-time binding). Recursion gives one record per live call; the maximum stack is the maximum depth times the frame size."

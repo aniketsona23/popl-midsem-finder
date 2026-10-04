@@ -1,0 +1,116 @@
+# Last Year's Quiz for August End — Questions 1, 2, 3 with answers
+
+*The quiz PDFs `Quiz 1-1.pdf`, `Quiz 1-2.pdf`, `Quiz 1-3.pdf` stay in this folder. Files used: `structure.c`, `newmain.c` (and `main.c`, `Explanation.txt`, `compile.sh`).*
+*Everything below was compiled and run on this laptop (gcc 6.3, 32-bit MinGW, `-O0`) — outputs are real. The originals in this folder were not modified; experiments were done on copies.*
+
+## The two modules
+```c
+/* structure.c */
+struct x { int i; float f; };
+int f(struct x X) { return X.i*X.i-((int)X.f); }
+```
+```c
+/* newmain.c */
+#include<stdio.h>
+/* #include "structure.c" */
+struct x { int i; float f; };      /* declared again, independently — same text */
+int f(struct x);                   /* prototype only */
+int main(void) { struct x X; printf("%d\n",f(X));  return 0; }
+```
+Build used for all three questions:
+```
+gcc -c -Wall structure.c newmain.c      # each module compiled on its own
+gcc structure.o newmain.o -o a.exe      # linked
+```
+
+---
+
+## Question 1 — compile and link `structure.c` and `newmain.c`, run 5 times
+
+**Output (5 runs, one section each):**
+```
+0
+
+0
+
+0
+
+0
+
+0
+```
+**Explanation**
+- **Why it builds.** `newmain.c` carries its own copy of `struct x` and a prototype for `f`; `structure.c` carries the definition. Each module is compiled separately (*many declarations, one definition*); the linker sees only the symbol `_f` (`nm`: `T _f` in `structure.o`, `U _f` in `newmain.o`) — it never checks types, so the two declarations of `struct x` are never compared. They agree here, so it works.
+- **What it prints.** `X` is an **automatic variable that is never initialised**: its two fields hold whatever was left on the stack. `f` receives a *copy* (call by value: 8 bytes are pushed onto the stack from `main`'s frame) and returns `X.i*X.i − (int)X.f` of that leftover data. The result is therefore **indeterminate** — not a property of the program text.
+- **Why `0` here.** On a freshly started Windows process the stack area used by `main` has never been written, so it is all zero bits: `i = 0`, `f = 0.0` → `0*0 − 0 = 0`, five times. On Linux the loader and C library run first and leave bytes on the same stack area, so the same program prints garbage that changes from run to run with address randomisation — `Explanation.txt` shows `-1253039104`. **So: the output is not guaranteed repeatable; it is repeatable here only because the stack happens to be clean.**
+- **Proof that the value is the leftover stack data** (same `f`, but `dirty(v)` first fills the stack with the word `v`):
+
+  | stack filled with | printed |
+  |---|---|
+  | 100 | 10000 (= 100·100 − (int)(float-bits-of-100 ≈ 0)) |
+  | 7 | 49 |
+  | 3 000 000 | 2043514880 (3 000 000² overflows `int` and wraps — also undefined behaviour) |
+
+- Related combination (`compile.sh`, `Explanation.txt`): `structure.o + main.o` fails with **multiple definition of `f`**, because `main.c` does `#include "structure.c"` and so contains a second definition of `f` — "declarations may repeat, the definition must be unique".
+
+---
+
+## Question 2 — `main` becomes `{ struct x X; X.f = X.i; printf("%d\n",f(X)); return 0; }`
+
+**Output (5 runs):**
+```
+0
+
+0
+
+0
+
+0
+
+0
+```
+**Explanation of both versions**
+
+| | version 1 (Question 1) | version 2 (this question) |
+|---|---|---|
+| `X.i` | uninitialised (leftover) | uninitialised (leftover) — gcc warns `'X.i' is used uninitialized` |
+| `X.f` | uninitialised, an *unrelated* leftover word read as a float | **`(float)X.i`** — the integer converted to float, so it is *related* to `X.i` |
+| `f(X)` returns | `i*i − (int)f_bits` | `i*i − (int)(float)i`  = **`i*i − i`** for `|i| ≤ 2²⁴` (exactly representable in float) |
+| on a clean stack (here) | `0` | `0` (since `i = 0`: `0·0 − 0`) |
+| with leftover `i = 100` | 10000 | **9900** (100² − 100) |
+| with leftover `i = 7` | 49 | **42** (49 − 7) |
+| with leftover `i = 3 000 000` | 2043514880 | **2040514880** (wrapped square − 3 000 000) |
+
+So the program is still **not deterministic in principle** (it reads an uninitialised `X.i`), but now the *relationship* between the two fields is fixed, and the result is `i² − i` rather than `i²` minus an arbitrary word. The modules are still consistent, so it compiles and links exactly as before.
+
+---
+
+## Question 3 — keep version 2's `main`, and `f` becomes `int f(struct x X) { return X.i-((int)X.f); }`
+
+**Output (5 runs):**
+```
+0
+
+0
+
+0
+
+0
+
+0
+```
+**Explanation of both versions (version 2 → version 3)**
+- Version 2 returned `i² − i`; version 3 returns **`i − (int)(float)i`**, which is **`0` for every `i` that float can represent exactly** (`|i| ≤ 2²⁴ = 16 777 216`). It no longer depends on the leftover value — I tried the stack filled with 100, 7 and 3 000 000 (all printed 0), so the output is now effectively repeatable.
+- **The exception is the part worth noting:** for larger leftovers float loses low bits, so `i − (int)(float)i` is not 0:
+
+  | leftover `i` | printed |
+  |---|---|
+  | 16 777 217 (2²⁴ + 1; rounds to 16 777 216.0) | **1** |
+  | 2 147 483 647 (`INT_MAX`; float rounds up to 2³¹, whose conversion back to `int` overflows → `INT_MIN` on x86) | **−1** |
+
+- Relative to version 2 only the **body** of `f` in `structure.c` changed. Its prototype `int f(struct x)` is the same, so `newmain.o` stays valid and only `structure.c` needs recompiling (module independence).
+
+---
+
+## What to take from the three questions (one paragraph for the answer box)
+All three programs compile and link because C modules are compiled independently and the linker matches only the name `f`; the struct declarations in the two modules happen to agree, which nothing checks. `main` passes an **uninitialised** struct by value, so the printed number is derived from leftover stack contents: version 1 prints `i² − (int)f`, version 2 (with `X.f = X.i`) prints `i² − i`, version 3 prints `i − (int)(float)i`, which is 0 unless `|i| > 2²⁴`. On a clean stack all three print 0 here; on other systems versions 1 and 2 vary between runs, which is why the question asks to run five times.

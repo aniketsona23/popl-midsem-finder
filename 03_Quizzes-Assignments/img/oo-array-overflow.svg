@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 250" font-family="Segoe UI, Arial, sans-serif" font-size="14">
+  <rect width="860" height="250" fill="#ffffff"/>
+  <text x="20" y="26" font-size="17" font-weight="700" fill="#1b1f24">int a[11][3]  is 33 ints in a row; a[12][1] lands at flat index 37</text>
+  <g stroke="#5f6773" stroke-width="1">
+    <rect x="20" y="60" width="396" height="44" fill="#e8eef9"/>
+    <rect x="416" y="60" width="144" height="44" fill="#f9e3e3"/>
+  </g>
+  <g stroke="#9aa0ab" stroke-width="1"><path d="M52 60V104M85 60V104M118 60V104M151 60V104M184 60V104M217 60V104M250 60V104M283 60V104M316 60V104M349 60V104M382 60V104M416 60V104M449 60V104M482 60V104M515 60V104M548 60V104"/></g>
+  <rect x="482" y="60" width="33" height="44" fill="#ffd45e" stroke="#1b1f24" stroke-width="2"/>
+  <text x="494" y="88" font-weight="700" fill="#1b1f24">1</text>
+  <g fill="#1b1f24" font-size="13">
+    <text x="20" y="124">index 0</text><text x="370" y="124">32 (last valid)</text><text x="440" y="124">33 34 35 36</text><text x="478" y="146" font-weight="700">37 = 12·3 + 1</text>
+    <text x="20" y="178">Rows 0…10 are valid. Row 12 = 12·3 = 36 ints from the start, +1 → element 37: four ints past the end.</text>
+    <text x="20" y="200">C / C++: no compile error, undefined behaviour — it silently overwrites whatever sits there (in my test: the 5th int after the array).</text>
+    <text x="20" y="222">Java: the first index is checked against its own length (11) → ArrayIndexOutOfBoundsException at run time.</text>
+  </g>
+  <text x="20" y="50" font-size="13" fill="#5f6773">valid storage (blue)  ·  memory beyond the array (red)</text>
+</svg>
